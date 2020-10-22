@@ -1,13 +1,14 @@
-require('./bootstrap');
 window.Vue = require('vue');
-import Test from './components/test.vue'
-
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-
-Vue.component('test', require('./components/test'));
+import vuetify from '@/plugins/vuetify';
+import Route from '@/js/routes';
+import App from '@/App';
+import store from '@/store';
+// Vue.component('test', require('@/components/test').default);
 
 const app = new Vue({
     el: '#app',
+    vuetify,
+    router: Route,
+    store,
+    render: h => h(App)
 });
