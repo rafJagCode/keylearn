@@ -1,12 +1,6 @@
-require('./bootstrap');
 window.Vue = require('vue');
-import Test from './components/test.vue'
 
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-
-Vue.component('test', require('./components/test'));
+Vue.component('test', require('../components/test').default);
 
 const app = new Vue({
     el: '#app',
