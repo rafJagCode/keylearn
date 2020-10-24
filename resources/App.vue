@@ -1,19 +1,86 @@
 <template>
   <v-app>
-    <v-toolbar>
-        <v-toolbar-title>KeyLearn</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items>
-            <v-btn text to='/'>Home</v-btn>
-            <v-btn text to='/about'>About</v-btn>
-        </v-toolbar-items>
-    </v-toolbar>
-    <router-view></router-view>
+    <navigation :color="color" :flat="flat" />
+    <v-main class="pt-0">
+      <get-started />
+      <about />
+      <contact />
+    </v-main>
+    <v-scale-transition>
+      <v-btn
+        fab
+        v-show="fab"
+        v-scroll="onScroll"
+        dark
+        fixed
+        bottom
+        right
+        color="secondary"
+        @click="toTop"
+      >
+        <v-icon>mdi-arrow-up</v-icon>
+      </v-btn>
+    </v-scale-transition>
+    <vfooter />
   </v-app>
 </template>
 
+<style scoped>
+</style>
+
 <script>
+import navigation from "@/components/Navigation";
+import vfooter from "@/components/Footer";
+import getStarted from "@/components/GetStarted";
+import about from "@/components/AboutSection";
+import contact from "@/components/ContactSection";
+
 export default {
-  name: "Test"
+  name: "App",
+
+  components: {
+    navigation,
+    vfooter,
+    'get-started': getStarted,
+    about,
+    contact,
+  },
+
+  data: () => ({
+    fab: null,
+    color: "",
+    flat: null,
+  }),
+
+  created() {
+    const top = window.pageYOffset || 0;
+    if (top <= 60) {
+      this.color = "transparent";
+      this.flat = true;
+    }
+  },
+
+  watch: {
+    fab(value) {
+      if (value) {
+        this.color = "primary";
+        this.flat = false;
+      } else {
+        this.color = "transparent";
+        this.flat = true;
+      }
+    },
+  },
+
+  methods: {
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 60;
+    },
+    toTop() {
+      this.$vuetify.goTo(0);
+    },
+  },
 };
 </script>
