@@ -16,6 +16,7 @@
         height: calc(var(--size)*1px);
         display:flex;
         flex-direction: column;
+        margin: 0 auto;
     }
     .about-card__caption{
         font-size: 25px;

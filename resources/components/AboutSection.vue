@@ -7,10 +7,10 @@
       <v-row align="center" justify="center">
         <v-col cols="10">
           <v-row align="center" justify="center">
-            <v-col sm="4" class="hidden-xs-only">
+            <v-col sm="5" class="hidden-sm-only">
               <v-img :src="require('@/assets/img/ill2.svg')" class="keyboard-icon d-block ml-auto mr-auto" max-width="350px" />
             </v-col>
-            <v-col cols="12" sm="8" class="white--text text-left">
+            <v-col cols="12" sm="7" class="white--text text-left">
               <h1 class="font-weight-light display-1 mb-2 about__text">KeyLearn - most effective way to learn how to type.</h1>
               <h1 class="font-weight-light about__text">
                 Keep practicing by rewriting sets of words.

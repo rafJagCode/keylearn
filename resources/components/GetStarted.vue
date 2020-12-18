@@ -4,13 +4,11 @@
       <v-row align="center" justify="center">
         <v-col cols="10">
           <v-row align="center" justify="center">
-            <v-col cols="12" md="8" xl="8">
-              <div class="get-started__container">
-                <div class="get-started__text">
-                  <h1 class="display-2 font-weight-bold mb-4">KeyLearn</h1>
-                  <h1 class="font-weight-light">
-                    Easily practice your typing skills <br />
-                    and improve your typing speed! <br />
+            <v-col cols="12" md="4">
+                  <h1 class="get-started__text display-3 font-weight-bold mb-4">KeyLearn</h1>
+                  <h1 class="get-started__text display-1 font-weight-light">
+                    Easily practice your typing skills
+                    and improve your typing speed!
                   </h1>
                   <v-btn
                     rounded
@@ -25,13 +23,10 @@
                     Get Started
                     <v-icon class="ml-2">mdi-arrow-down</v-icon>
                   </v-btn>
-                </div>
-                <div class="get-started__icon">
-                  <typing-machine-icon></typing-machine-icon>
-                </div>
-              </div>
             </v-col>
-            <v-col cols="12" md="4" xl="4" class="hidden-sm-and-down"> </v-col>
+            <v-col cols="12" md="8">
+              <typing-machine-icon></typing-machine-icon>
+            </v-col>
           </v-row>
         </v-col>
       </v-row>
@@ -112,16 +107,12 @@ export default {
 #get-started {
   z-index: 0;
 }
-.get-started__container{
-  display: flex;
+.get-started__text{
+  text-shadow: -0.5px -0.5px 0.5px #0095a6, 0.5px -0.5px 0.5px #0095a6, -0.5px 0.5px 0.5px #0095a6, 0.5px 0.5px 0.5px #0095a6
 }
-.get-started__icon{
-  padding-left:50px;
-}
-</style>
-
-<style>
 section {
   position: relative;
 }
 </style>
+
+
