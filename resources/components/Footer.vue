@@ -15,8 +15,7 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
-        Mauris cursus commodo interdum.
+        If you have any questions about the program, you may reach out to us at email@email.com.
       </v-card-text>
 
       <v-divider></v-divider>

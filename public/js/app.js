@@ -359,10 +359,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -437,7 +433,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -470,6 +465,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_utils_AboutCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/utils/AboutCard */ "./resources/components/utils/AboutCard.vue");
+/* harmony import */ var _components_utils_TypingMachineIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/utils/TypingMachineIcon */ "./resources/components/utils/TypingMachineIcon.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -524,6 +526,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -537,13 +540,22 @@ __webpack_require__.r(__webpack_exports__);
         description: "Start your training. Check how fast and accurate is your typing."
       }, {
         icon: "graph-bar",
-        caption: "practice typing",
-        description: "Start your training. Check how fast and accurate is your typing."
+        caption: "analyze the results",
+        description: "Sign up to check your learning results."
       }]
     };
   },
+  methods: {
+    shakeOn: function shakeOn() {
+      this.$store.dispatch('turnShakingOn');
+    },
+    shakeOff: function shakeOff() {
+      this.$store.dispatch('turnShakingOff');
+    }
+  },
   components: {
-    'about-card': _components_utils_AboutCard__WEBPACK_IMPORTED_MODULE_0__["default"]
+    'about-card': _components_utils_AboutCard__WEBPACK_IMPORTED_MODULE_0__["default"],
+    'typing-machine-icon': _components_utils_TypingMachineIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -827,6 +839,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'TypingMachineIcon'
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/layouts/About.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/layouts/About.vue?vue&type=script&lang=js& ***!
@@ -930,7 +965,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#about[data-v-d4bd8fee] {\n  background-image: url(" + escape(__webpack_require__(/*! @/assets/img/bgAbout.jpg */ "./resources/assets/img/bgAbout.jpg")) + ");\n  background-attachment: fixed;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  height: 500px;\n}\n#about .container[data-v-d4bd8fee],\n#about .row[data-v-d4bd8fee] {\n  height: 100%;\n}\n.wave-rotated[data-v-d4bd8fee]{\n  position: absolute;\n  width:100%;\n}\n.wave-rotated .v-image[data-v-d4bd8fee]{\n  height:400px;\n}\n.keyboard-icon[data-v-d4bd8fee]{\n  height:300px;\n  width:300px;\n}\n", ""]);
+exports.push([module.i, "\n#about[data-v-d4bd8fee] {\n  background-image: linear-gradient(rgba(255, 255, 255, 0.15),\n                     rgba(255, 255, 255, 0.15)),\n                     url(" + escape(__webpack_require__(/*! @/assets/img/bgAbout.jpg */ "./resources/assets/img/bgAbout.jpg")) + ");\n  background-attachment: fixed;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  height: 500px;\n}\n#about .container[data-v-d4bd8fee],\n#about .row[data-v-d4bd8fee] {\n  height: 100%;\n}\n.wave-rotated[data-v-d4bd8fee]{\n  position: absolute;\n  top:0;\n  width:100%;\n  transform: rotate(180deg);\n}\n.wave-rotated .v-image[data-v-d4bd8fee]{\n  height:30px;\n}\n.keyboard-icon[data-v-d4bd8fee]{\n  height:300px;\n  width:300px;\n}\n.about__text[data-v-d4bd8fee]{\n  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,\n                -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;\n}\n", ""]);
 
 // exports
 
@@ -987,7 +1022,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.svg-border-waves .v-image {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  height: 3rem;\n  width: 100%;\n  overflow: hidden;\n}\n#get-started {\n  z-index: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n.svg-border-waves .v-image {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  height: 3rem;\n  width: 100%;\n  overflow: hidden;\n}\n#get-started {\n  z-index: 0;\n}\n.get-started__container{\n  display: flex;\n}\n.get-started__icon{\n  padding-left:50px;\n}\n", ""]);
 
 // exports
 
@@ -1045,6 +1080,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.about-card[data-v-2b5061fe]{\n    position: relative;\n    width: calc(var(--size)*1px);\n    height: calc(var(--size)*1px);\n    display:flex;\n    flex-direction: column;\n}\n.about-card__caption[data-v-2b5061fe]{\n    font-size: 25px;\n    position: absolute;\n    align-self: center;\n    color: #0095a6;\n    text-transform: uppercase;\n    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white,\n                 -1px -1px 5px #0095a6, 1px -1px 5px #0095a6, -1px 1px 5px #0095a6, 1px 1px 5px #0095a6;\n    z-index:3;\n    font-weight: bold;\n}\n.about-card__description[data-v-2b5061fe]{\n    position: absolute;\n    top:0;\n    width: 100%;\n    height: 100%;\n    transform: scaleY(0);\n    transform-origin: top center;\n    transition: all 0.3s linear;\n    overflow: hidden;\n}\n.about-card__description-text[data-v-2b5061fe]{\n    position: absolute;\n    width:90%;\n    top: 50%;\n    right: 50%;\n    transform: translate(50%, -50%);\n    margin: 0 auto;\n    color: white;\n    text-align: center;\n    font-size: 20px;\n    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,\n                -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;\n}\n.about-card__content[data-v-2b5061fe]{\n    align-self: center;\n    margin: auto;\n    position: relative;\n    width: calc(var(--size)*0.8px);\n    height: calc(var(--size)*0.8px);\n    cursor: pointer;\n    z-index:2;\n    transition: all 0.3s linear;\n    border-radius: 50%;\n}\n.about-card__content:hover .about-card__description[data-v-2b5061fe]{\n            animation: dropping-card-data-v-2b5061fe .3s linear 0s 1 normal;\n            animation-fill-mode: forwards;\n}\n.about-card__card-icon[data-v-2b5061fe]{\n    position: absolute;\n    top: 50%;\n    right: 50%;\n    transform: translate(50%, -50%);\n    width: 80%;\n    background-image: var(--iconURL);\n    background-size: contain;\n    z-index: 0;\n}\n@keyframes dropping-card-data-v-2b5061fe{\n0% {\n        transform: scaleY(0);\n}\n25%{\n        transform: scaleY(0.5);\n}\n50%{\n        transform: scaleY(1);\n}\n75%{\n        transform: scaleY(0.5);\n}\n100%{\n        transform: scaleY(1);\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.typing-machine-icon__svg[data-v-7491ca2a]{\r\n    margin: 0 auto;\r\n    width: 250px;\r\n    transform: rotate(-5deg);\n}\n.typing-machine-icon__svg--shaking[data-v-7491ca2a]{\r\n    animation: shake-data-v-7491ca2a 1s cubic-bezier(.36,.07,.19,.97) infinite both;\r\n    transform: translate3d(0, 0, 0);\r\n    backface-visibility: hidden;\r\n    perspective: 1000px;\n}\n@keyframes shake-data-v-7491ca2a {\n10%, 90% {\r\n        transform: translate3d(-1px, 0, 0);\n}\n20%, 80% {\r\n        transform: translate3d(2px, 0, 0);\n}\n30%, 50%, 70% {\r\n        transform: translate3d(-4px, 0, 0);\n}\n40%, 60% {\r\n        transform: translate3d(4px, 0, 0);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -1768,6 +1822,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -2456,7 +2540,11 @@ var render = function() {
       _c(
         "div",
         { staticClass: "wave-rotated" },
-        [_c("v-img", { attrs: { src: __webpack_require__(/*! @/assets/img/wave2.svg */ "./resources/assets/img/wave2.svg") } })],
+        [
+          _c("v-img", {
+            attrs: { src: __webpack_require__(/*! @/assets/img/borderWaves.svg */ "./resources/assets/img/borderWaves.svg") }
+          })
+        ],
         1
       ),
       _vm._v(" "),
@@ -2501,15 +2589,26 @@ var render = function() {
                         [
                           _c(
                             "h1",
-                            { staticClass: "font-weight-light display-2 mb-2" },
-                            [_vm._v("Baixar Demonstração")]
+                            {
+                              staticClass:
+                                "font-weight-light display-1 mb-2 about__text"
+                            },
+                            [
+                              _vm._v(
+                                "KeyLearn - most effective way to learn how to type."
+                              )
+                            ]
                           ),
                           _vm._v(" "),
-                          _c("h1", { staticClass: "font-weight-light" }, [
-                            _vm._v(
-                              "\n              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ex\n              animi quod laboriosam vel blanditiis labore alias, aliquid,\n              tempora repellendus non.\n            "
-                            )
-                          ])
+                          _c(
+                            "h1",
+                            { staticClass: "font-weight-light about__text" },
+                            [
+                              _vm._v(
+                                "\n              Keep practicing by rewriting sets of words.\n              It really doesn't take much to learn, a few minutes a day \n              for one to two weeks. Check your progress by looking into your \n              typing statistics and adjust your test settings to improve \n              your progression.\n            "
+                              )
+                            ]
+                          )
                         ]
                       )
                     ],
@@ -2590,19 +2689,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("h3", { staticClass: "font-weight-light mt-3" }, [
                           _vm._v(
-                            "\n              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste\n              explicabo commodi quisquam asperiores dolore ad enim provident\n              veniam perferendis voluptate, perspiciatis.\n            "
+                            "\n              You have questions, need help or have found a mistake?\n              Then do not hesitate to contact us.\n            "
                           )
                         ]),
                         _vm._v(" "),
                         _c("h3", { staticClass: "font-weight-light mt-3" }, [
                           _vm._v(
-                            "\n              Lorem ipsum dolor sit amet consectetur adipisicing.\n            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h3", { staticClass: "font-weight-light mt-3" }, [
-                          _vm._v(
-                            "\n              Telefone: +xx xxx-xxx-xxx\n            "
+                            "\n              Telephone: +xx xxx-xxx-xxx\n            "
                           )
                         ]),
                         _vm._v(" "),
@@ -2784,7 +2877,7 @@ var render = function() {
           _vm._v(" "),
           _c("v-card-text", { staticClass: "white--text pt-0" }, [
             _vm._v(
-              "\n      Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.\n      Mauris cursus commodo interdum.\n    "
+              "\n      If you have any questions about the program, you may reach out to us at email@email.com.\n    "
             )
           ]),
           _vm._v(" "),
@@ -2849,63 +2942,81 @@ var render = function() {
                     "v-row",
                     { attrs: { align: "center", justify: "center" } },
                     [
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", md: "6", xl: "8" } },
-                        [
+                      _c("v-col", { attrs: { cols: "12", md: "8", xl: "8" } }, [
+                        _c("div", { staticClass: "get-started__container" }, [
                           _c(
-                            "h1",
-                            { staticClass: "display-2 font-weight-bold mb-4" },
-                            [_vm._v("KeyLearn")]
-                          ),
-                          _vm._v(" "),
-                          _c("h1", { staticClass: "font-weight-light" }, [
-                            _vm._v(
-                              "\n              Lorem ipsum dolor sit amet consectetur "
-                            ),
-                            _c("br"),
-                            _vm._v(
-                              "\n              adipisicing elit. Maiores porro voluptatibus "
-                            ),
-                            _c("br"),
-                            _vm._v(
-                              "\n              delectus nam optio harum!\n            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              staticClass: "mt-5",
-                              attrs: {
-                                rounded: "",
-                                outlined: "",
-                                large: "",
-                                dark: ""
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.$vuetify.goTo("#features")
-                                }
-                              }
-                            },
+                            "div",
+                            { staticClass: "get-started__text" },
                             [
-                              _vm._v(
-                                "\n              Get Started\n              "
+                              _c(
+                                "h1",
+                                {
+                                  staticClass: "display-2 font-weight-bold mb-4"
+                                },
+                                [_vm._v("KeyLearn")]
                               ),
-                              _c("v-icon", { staticClass: "ml-2" }, [
-                                _vm._v("mdi-arrow-down")
-                              ])
+                              _vm._v(" "),
+                              _c("h1", { staticClass: "font-weight-light" }, [
+                                _vm._v(
+                                  "\n                  Easily practice your typing skills "
+                                ),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                  and improve your typing speed! "
+                                ),
+                                _c("br")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mt-5",
+                                  attrs: {
+                                    rounded: "",
+                                    outlined: "",
+                                    large: "",
+                                    dark: ""
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$vuetify.goTo("#features")
+                                    }
+                                  },
+                                  nativeOn: {
+                                    mouseenter: function($event) {
+                                      return _vm.shakeOn($event)
+                                    },
+                                    mouseleave: function($event) {
+                                      return _vm.shakeOff($event)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  Get Started\n                  "
+                                  ),
+                                  _c("v-icon", { staticClass: "ml-2" }, [
+                                    _vm._v("mdi-arrow-down")
+                                  ])
+                                ],
+                                1
+                              )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "get-started__icon" },
+                            [_c("typing-machine-icon")],
+                            1
                           )
-                        ],
-                        1
-                      ),
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("v-col", {
                         staticClass: "hidden-sm-and-down",
-                        attrs: { cols: "12", md: "6", xl: "4" }
+                        attrs: { cols: "12", md: "4", xl: "4" }
                       })
                     ],
                     1
@@ -2937,42 +3048,28 @@ var render = function() {
         [
           _c(
             "v-row",
-            { attrs: { align: "center", justify: "center" } },
-            [
-              _c(
+            { attrs: { align: "center", justify: "space-around" } },
+            _vm._l(_vm.cards, function(card, index) {
+              return _c(
                 "v-col",
-                { attrs: { cols: "10" } },
+                {
+                  key: index,
+                  staticClass: "text-center",
+                  attrs: { cols: "12", xs: "12", sm: "6", md: "4" }
+                },
                 [
-                  _c(
-                    "v-row",
-                    { attrs: { align: "center", justify: "space-around" } },
-                    _vm._l(_vm.cards, function(card, index) {
-                      return _c(
-                        "v-col",
-                        {
-                          key: index,
-                          staticClass: "text-center",
-                          attrs: { cols: "12", sm: "4" }
-                        },
-                        [
-                          _c("about-card", {
-                            attrs: {
-                              size: "400",
-                              icon: card.icon,
-                              caption: card.caption,
-                              description: card.description
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    }),
-                    1
-                  )
+                  _c("about-card", {
+                    attrs: {
+                      size: "400",
+                      icon: card.icon,
+                      caption: card.caption,
+                      description: card.description
+                    }
+                  })
                 ],
                 1
               )
-            ],
+            }),
             1
           )
         ],
@@ -3212,6 +3309,41 @@ var render = function() {
         ])
       ])
     ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "typing-machine-icon" }, [
+    _c("img", {
+      staticClass: "typing-machine-icon__svg",
+      class: {
+        "typing-machine-icon__svg--shaking": this.$store.getters.isShaking
+      },
+      attrs: {
+        src: __webpack_require__(/*! @/assets/img/typing-machine-icon.svg */ "./resources/assets/img/typing-machine-icon.svg"),
+        alt: "typing-machine-icon"
+      }
+    })
   ])
 }
 var staticRenderFns = []
@@ -63869,7 +64001,7 @@ module.exports = "/images/sign-up-icon.svg?0e2eb60e876a77f54caea823368eaae8";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/typing-machine-icon.svg?c5626968aa5634ddf2bce5459d2f370b";
+module.exports = "/images/typing-machine-icon.svg?fa35ade038c34f70ba501de97e3eaf7a";
 
 /***/ }),
 
@@ -64430,6 +64562,94 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/components/utils/TypingMachineIcon.vue":
+/*!**********************************************************!*\
+  !*** ./resources/components/utils/TypingMachineIcon.vue ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true&");
+/* harmony import */ var _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=script&lang=js& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "7491ca2a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/components/utils/TypingMachineIcon.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TypingMachineIcon.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -64695,13 +64915,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _modules_count__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/count */ "./resources/store/modules/count.js");
+/* harmony import */ var _modules_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/utils */ "./resources/store/modules/utils.js");
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   modules: {
-    count: _modules_count__WEBPACK_IMPORTED_MODULE_2__["default"]
+    count: _modules_count__WEBPACK_IMPORTED_MODULE_2__["default"],
+    utils: _modules_utils__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
 
@@ -64740,6 +64963,50 @@ var mutations = {
 var getters = {
   count: function count(state) {
     return state.count;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  actions: actions,
+  mutations: mutations,
+  getters: getters
+});
+
+/***/ }),
+
+/***/ "./resources/store/modules/utils.js":
+/*!******************************************!*\
+  !*** ./resources/store/modules/utils.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  isShaking: false
+};
+var actions = {
+  turnShakingOn: function turnShakingOn(_ref) {
+    var commit = _ref.commit;
+    commit('turnShakingOn');
+  },
+  turnShakingOff: function turnShakingOff(_ref2) {
+    var commit = _ref2.commit;
+    commit('turnShakingOff');
+  }
+};
+var mutations = {
+  turnShakingOn: function turnShakingOn(state) {
+    return state.isShaking = true;
+  },
+  turnShakingOff: function turnShakingOff(state) {
+    return state.isShaking = false;
+  }
+};
+var getters = {
+  isShaking: function isShaking(state) {
+    return state.isShaking;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

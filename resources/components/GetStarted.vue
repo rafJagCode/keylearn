@@ -4,26 +4,34 @@
       <v-row align="center" justify="center">
         <v-col cols="10">
           <v-row align="center" justify="center">
-            <v-col cols="12" md="6" xl="8">
-              <h1 class="display-2 font-weight-bold mb-4">KeyLearn</h1>
-              <h1 class="font-weight-light">
-                Lorem ipsum dolor sit amet consectetur <br />
-                adipisicing elit. Maiores porro voluptatibus <br />
-                delectus nam optio harum!
-              </h1>
-              <v-btn
-                rounded
-                outlined
-                large
-                dark
-                @click="$vuetify.goTo('#features')"
-                class="mt-5"
-              >
-                Get Started
-                <v-icon class="ml-2">mdi-arrow-down</v-icon>
-              </v-btn>
+            <v-col cols="12" md="8" xl="8">
+              <div class="get-started__container">
+                <div class="get-started__text">
+                  <h1 class="display-2 font-weight-bold mb-4">KeyLearn</h1>
+                  <h1 class="font-weight-light">
+                    Easily practice your typing skills <br />
+                    and improve your typing speed! <br />
+                  </h1>
+                  <v-btn
+                    rounded
+                    outlined
+                    large
+                    dark
+                    @click="$vuetify.goTo('#features')"
+                    class="mt-5"
+                    @mouseenter.native="shakeOn"
+                    @mouseleave.native="shakeOff"
+                  >
+                    Get Started
+                    <v-icon class="ml-2">mdi-arrow-down</v-icon>
+                  </v-btn>
+                </div>
+                <div class="get-started__icon">
+                  <typing-machine-icon></typing-machine-icon>
+                </div>
+              </div>
             </v-col>
-            <v-col cols="12" md="6" xl="4" class="hidden-sm-and-down"> </v-col>
+            <v-col cols="12" md="4" xl="4" class="hidden-sm-and-down"> </v-col>
           </v-row>
         </v-col>
       </v-row>
@@ -32,12 +40,12 @@
       </div>
     </v-parallax>
     <v-container fluid id="features" class="mt-2">
-      <v-row align="center" justify="center">
-        <v-col cols="10">
           <v-row align="center" justify="space-around">
             <v-col
               cols="12"
-              sm="4"
+              xs="12"
+              sm="6"
+              md="4"
               class="text-center"
               v-for="(card, index) in cards"
               :key="index"
@@ -45,14 +53,13 @@
             <about-card size="400" :icon="card.icon" :caption="card.caption" :description="card.description"></about-card>
             </v-col>
           </v-row>
-        </v-col>
-      </v-row>
     </v-container>
   </section>
 </template>
 
 <script>
 import aboutCard from '@/components/utils/AboutCard';
+import typingMachineIcon from '@/components/utils/TypingMachineIcon';
 export default {
   data() {
     return {
@@ -69,14 +76,23 @@ export default {
         },
         {
           icon: "graph-bar",
-          caption: "practice typing",
-          description: "Start your training. Check how fast and accurate is your typing.",
+          caption: "analyze the results",
+          description: "Sign up to check your learning results.",
         },
       ],
     };
   },
+  methods:{
+    shakeOn(){
+      this.$store.dispatch('turnShakingOn');
+    },
+    shakeOff(){
+      this.$store.dispatch('turnShakingOff');
+    }
+  },
   components: {
-    'about-card': aboutCard
+    'about-card': aboutCard,
+    'typing-machine-icon': typingMachineIcon
   }
 };
 </script>
@@ -96,7 +112,12 @@ export default {
 #get-started {
   z-index: 0;
 }
-
+.get-started__container{
+  display: flex;
+}
+.get-started__icon{
+  padding-left:50px;
+}
 </style>
 
 <style>
