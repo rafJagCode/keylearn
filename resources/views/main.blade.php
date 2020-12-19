@@ -8,7 +8,6 @@
     </head>
     <body>
         <div id="app">
-            <test></test>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
