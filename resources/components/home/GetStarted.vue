@@ -45,7 +45,9 @@
               v-for="(card, index) in cards"
               :key="index"
             >
-            <about-card size="400" :icon="card.icon" :caption="card.caption" :description="card.description"></about-card>
+              <router-link :to="card.cardLink">
+                <about-card size="400" :icon="card.icon" :caption="card.caption" :description="card.description"></about-card>
+              </router-link>
             </v-col>
           </v-row>
     </v-container>
@@ -60,16 +62,19 @@ export default {
     return {
       cards: [
         {
+          cardLink: "register",
           icon: "sign-up-icon",
           caption: "sign up",
           description: "Creating account will allow you to control your learning progress. Sign up to get access to your learning statistics.",
         },
         {
+          cardLink: "login",
           icon: "typing-practice-icon",
           caption: "practice typing",
           description: "Start your training. Check how fast and accurate is your typing.",
         },
         {
+          cardLink: "register",
           icon: "graph-bar",
           caption: "analyze the results",
           description: "Sign up to check your learning results.",
