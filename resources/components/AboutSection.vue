@@ -10,9 +10,9 @@
             <v-col sm="5" class="hidden-sm-only">
               <v-img :src="require('@/assets/img/ill2.svg')" class="keyboard-icon d-block ml-auto mr-auto" max-width="350px" />
             </v-col>
-            <v-col cols="12" sm="7" class="white--text text-left">
-              <h1 class="font-weight-light display-1 mb-2 about__text">KeyLearn - most effective way to learn how to type.</h1>
-              <h1 class="font-weight-light about__text">
+            <v-col cols="12" sm="7" class="white--text text-left about__text">
+              <h1 class="font-weight-light display-1 mb-2">KeyLearn - most effective way to learn how to type.</h1>
+              <h1 class="font-weight-light">
                 Keep practicing by rewriting sets of words.
                 It really doesn't take much to learn, a few minutes a day 
                 for one to two weeks. Check your progress by looking into your 
@@ -39,7 +39,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 500px;
+  height:fit-content;
+  padding-bottom: 10px;
 }
 
 #about .container,
@@ -60,6 +61,7 @@
   width:300px;
 }
 .about__text{
+  
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,
                 -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black; 
 }

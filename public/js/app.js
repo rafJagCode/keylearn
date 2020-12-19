@@ -961,7 +961,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#about[data-v-d4bd8fee] {\n  background-image: linear-gradient(rgba(255, 255, 255, 0.15),\n                     rgba(255, 255, 255, 0.15)),\n                     url(" + escape(__webpack_require__(/*! @/assets/img/bgAbout.jpg */ "./resources/assets/img/bgAbout.jpg")) + ");\n  background-attachment: fixed;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  height: 500px;\n}\n#about .container[data-v-d4bd8fee],\n#about .row[data-v-d4bd8fee] {\n  height: 100%;\n}\n.wave-rotated[data-v-d4bd8fee]{\n  position: absolute;\n  top:0;\n  width:100%;\n  transform: rotate(180deg);\n}\n.wave-rotated .v-image[data-v-d4bd8fee]{\n  height:30px;\n}\n.keyboard-icon[data-v-d4bd8fee]{\n  height:300px;\n  width:300px;\n}\n.about__text[data-v-d4bd8fee]{\n  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,\n                -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;\n}\n", ""]);
+exports.push([module.i, "\n#about[data-v-d4bd8fee] {\n  background-image: linear-gradient(rgba(255, 255, 255, 0.15),\n                     rgba(255, 255, 255, 0.15)),\n                     url(" + escape(__webpack_require__(/*! @/assets/img/bgAbout.jpg */ "./resources/assets/img/bgAbout.jpg")) + ");\n  background-attachment: fixed;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  height:fit-content;\n  padding-bottom: 10px;\n}\n#about .container[data-v-d4bd8fee],\n#about .row[data-v-d4bd8fee] {\n  height: 100%;\n}\n.wave-rotated[data-v-d4bd8fee]{\n  position: absolute;\n  top:0;\n  width:100%;\n  transform: rotate(180deg);\n}\n.wave-rotated .v-image[data-v-d4bd8fee]{\n  height:30px;\n}\n.keyboard-icon[data-v-d4bd8fee]{\n  height:300px;\n  width:300px;\n}\n.about__text[data-v-d4bd8fee]{\n  \n  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,\n                -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;\n}\n", ""]);
 
 // exports
 
@@ -2530,16 +2530,13 @@ var render = function() {
                       _c(
                         "v-col",
                         {
-                          staticClass: "white--text text-left",
+                          staticClass: "white--text text-left about__text",
                           attrs: { cols: "12", sm: "7" }
                         },
                         [
                           _c(
                             "h1",
-                            {
-                              staticClass:
-                                "font-weight-light display-1 mb-2 about__text"
-                            },
+                            { staticClass: "font-weight-light display-1 mb-2" },
                             [
                               _vm._v(
                                 "KeyLearn - most effective way to learn how to type."
@@ -2547,15 +2544,11 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "h1",
-                            { staticClass: "font-weight-light about__text" },
-                            [
-                              _vm._v(
-                                "\n              Keep practicing by rewriting sets of words.\n              It really doesn't take much to learn, a few minutes a day \n              for one to two weeks. Check your progress by looking into your \n              typing statistics and adjust your test settings to improve \n              your progression.\n            "
-                              )
-                            ]
-                          )
+                          _c("h1", { staticClass: "font-weight-light" }, [
+                            _vm._v(
+                              "\n              Keep practicing by rewriting sets of words.\n              It really doesn't take much to learn, a few minutes a day \n              for one to two weeks. Check your progress by looking into your \n              typing statistics and adjust your test settings to improve \n              your progression.\n            "
+                            )
+                          ])
                         ]
                       )
                     ],
@@ -64489,15 +64482,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/components/utils/TypingMachineIcon.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TypingMachineIcon_vue_vue_type_template_id_7491ca2a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=template&id=7491ca2a&scoped=true&");
 /* harmony import */ var _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=script&lang=js& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TypingMachineIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _TypingMachineIcon_vue_vue_type_style_index_0_id_7491ca2a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css& */ "./resources/components/utils/TypingMachineIcon.vue?vue&type=style&index=0&id=7491ca2a&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -64529,7 +64521,7 @@ component.options.__file = "resources/components/utils/TypingMachineIcon.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/components/utils/TypingMachineIcon.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
