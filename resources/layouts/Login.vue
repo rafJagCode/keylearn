@@ -74,13 +74,17 @@ export default {
       ];
       this.passwordRules= [
         v => !!v || 'Password is required',
-        v => (v && v.length >= 5) || 'Password must have 5+ characters'
       ];
       return true;
     },
     async handleSubmit(){
       await this.checkValidation();
       if(!this.$refs.form.validate()) return;
+      Vue.axios.post('api/login', {email:this.email, password:this.password}).then(()=>{
+        this.$router.push({ name: 'dashboard'});
+      }).catch((error)=>{
+        this.errors = error.response.data.errors;
+      });
     },
     focusEmail(){
       this.emailRules=[];

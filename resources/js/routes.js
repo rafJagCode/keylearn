@@ -29,7 +29,14 @@ const router = new VueRouter({
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: Dashboard
+            component: Dashboard,
+            beforeEnter: (to, from, next) =>{
+                Vue.axios.get('api/authenticated').then(()=>{
+                    next()
+                }).catch(()=>{
+                    return next({name: 'login'})
+                })
+            }
         }
     ]
 });

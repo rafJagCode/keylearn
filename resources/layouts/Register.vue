@@ -91,7 +91,11 @@ export default {
     async handleSubmit(){
       await this.checkValidation();
       if(!this.$refs.form.validate()) return;
-      console.log('ok');
+      Vue.axios.post('api/register', {email:this.email, password:this.password}).then(()=>{
+        console.log('ok');
+      }).catch((error)=>{
+        this.errors = error.response.data.errors;
+      });
     },
     focusEmail(){
       this.emailRules=[];
