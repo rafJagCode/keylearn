@@ -9,7 +9,7 @@
             <v-container class="register__label primary">
               <v-row align="center">
                 <router-link to="/" style="text-decoration: none; color: inherit;">
-                  <v-btn class="white--text home-btn ml-4" outlined color="cyan" @click="$vuetify.goTo('home')">
+                  <v-btn class="white--text home-btn ml-4" outlined color="cyan">
                     <v-icon>mdi-home-outline</v-icon>
                   </v-btn>
                 </router-link>
@@ -51,6 +51,19 @@
               >Login</v-btn>
           
             </v-form>
+          </v-card>
+          <v-card class="mt-2 pa-6">
+            <v-row align="center" justify="center">
+              <div class="sign-up-text">
+                Don't have account?
+                <v-icon>mdi-arrow-right</v-icon>
+                <router-link to="/register" style="text-decoration: none; color: inherit;">
+                  <v-btn color='primary'>
+                    <strong>Sign Up</strong>
+                  </v-btn>
+                </router-link>
+              </div>
+            </v-row>
           </v-card>
         </v-flex>
       </v-layout>

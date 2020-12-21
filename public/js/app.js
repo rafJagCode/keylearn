@@ -2392,6 +2392,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2422,7 +2441,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onResize: function onResize() {
-      this.isXs = window.innerWidth < 850;
+      this.isXs = window.innerWidth < 960;
+    },
+    goToLogin: function goToLogin() {
+      this.$router.push({
+        name: 'login'
+      });
     }
   },
   watch: {
@@ -2810,6 +2834,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2967,10 +3004,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       valid: true,
+      isEmailAlreadyUsed: false,
       email: '',
       password: "",
       passwordConfirmation: "",
@@ -3018,8 +3078,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   email: _this.email,
                   password: _this.password
                 }).then(function () {
-                  console.log('ok');
+                  _this.loginAndRedirect();
                 })["catch"](function (error) {
+                  _this.isEmailAlreadyUsed = true;
                   _this.errors = error.response.data.errors;
                 });
 
@@ -3030,6 +3091,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    loginAndRedirect: function loginAndRedirect() {
+      var _this2 = this;
+
+      Vue.axios.post('api/login', {
+        email: this.email,
+        password: this.password
+      }).then(function () {
+        _this2.$router.push({
+          name: 'dashboard'
+        });
+      })["catch"](function (error) {
+        _this2.errors = error.response.data.errors;
+      });
     },
     focusEmail: function focusEmail() {
       this.emailRules = [];
@@ -3182,7 +3257,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-toolbar[data-v-ead6eeba] {\r\n  transition: 0.6s;\n}\n.expand[data-v-ead6eeba] {\r\n  height: 80px !important;\r\n  padding-top: 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-toolbar[data-v-ead6eeba] {\r\n  transition: 0.6s;\n}\n.expand[data-v-ead6eeba] {\r\n  height: 80px !important;\r\n  padding-top: 10px;\n}\n.drawer-logo[data-v-ead6eeba]{\r\n  height:20px;\r\n  width:40px;\r\n  background-size: cover;\n}\r\n", ""]);
 
 // exports
 
@@ -6033,6 +6108,7 @@ var render = function() {
                 [
                   _c("v-list-item-avatar", [
                     _c("img", {
+                      staticClass: "drawer-logo",
                       attrs: {
                         src: __webpack_require__(/*! @/assets/img/logo.png */ "./resources/assets/img/logo.png"),
                         alt: "Logo"
@@ -6044,10 +6120,8 @@ var render = function() {
                     "v-list-item-content",
                     [
                       _c("v-list-item-title", { staticClass: "title" }, [
-                        _vm._v("Calango")
-                      ]),
-                      _vm._v(" "),
-                      _c("v-list-item-subtitle", [_vm._v("WEB")])
+                        _vm._v("Keylearn")
+                      ])
                     ],
                     1
                   )
@@ -6063,18 +6137,14 @@ var render = function() {
           _c(
             "v-list",
             { attrs: { dense: "" } },
-            _vm._l(_vm.items, function(ref, i) {
-              var icon = ref[0]
-              var text = ref[1]
-              var link = ref[2]
-              return _c(
+            [
+              _c(
                 "v-list-item",
                 {
-                  key: i,
-                  attrs: { link: "" },
                   on: {
                     click: function($event) {
-                      return _vm.$vuetify.goTo(link)
+                      $event.preventDefault()
+                      return _vm.goToLogin()
                     }
                   }
                 },
@@ -6082,7 +6152,7 @@ var render = function() {
                   _c(
                     "v-list-item-icon",
                     { staticClass: "justify-center" },
-                    [_c("v-icon", [_vm._v(_vm._s(icon))])],
+                    [_c("v-icon", [_vm._v("mdi-account-outline")])],
                     1
                   ),
                   _vm._v(" "),
@@ -6090,16 +6160,51 @@ var render = function() {
                     "v-list-item-content",
                     [
                       _c("v-list-item-title", { staticClass: "subtitile-1" }, [
-                        _vm._v(_vm._s(text))
+                        _vm._v("\n              Login\n            ")
                       ])
                     ],
                     1
                   )
                 ],
                 1
-              )
-            }),
-            1
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.items, function(item, index) {
+                return _c(
+                  "v-list-item",
+                  {
+                    key: index,
+                    on: {
+                      click: function($event) {
+                        return _vm.$vuetify.goTo(item.link)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "v-list-item-icon",
+                      { staticClass: "justify-center" },
+                      [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-list-item-content",
+                      [
+                        _c(
+                          "v-list-item-title",
+                          { staticClass: "subtitile-1" },
+                          [_vm._v(_vm._s(item.name))]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              })
+            ],
+            2
           )
         ],
         1
@@ -6140,31 +6245,57 @@ var render = function() {
               })
             : _c(
                 "div",
-                _vm._l(_vm.items, function(item, index) {
-                  return _c(
-                    "v-btn",
-                    {
-                      key: index,
-                      attrs: { text: "" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$vuetify.goTo(item.link)
+                [
+                  _vm._l(_vm.items, function(item, index) {
+                    return _c(
+                      "v-btn",
+                      {
+                        key: index,
+                        attrs: { text: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.$vuetify.goTo(item.link)
+                          }
                         }
-                      }
+                      },
+                      [
+                        _c("v-icon", { attrs: { left: "" } }, [
+                          _vm._v(_vm._s(item.icon))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "mr-2" }, [
+                          _vm._v(_vm._s(item.name))
+                        ])
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticStyle: {
+                        "text-decoration": "none",
+                        color: "inherit"
+                      },
+                      attrs: { to: "/login" }
                     },
                     [
-                      _c("v-icon", { attrs: { left: "" } }, [
-                        _vm._v(_vm._s(item.icon))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "mr-2" }, [
-                        _vm._v(_vm._s(item.name))
-                      ])
+                      _c(
+                        "v-btn",
+                        [
+                          _c("v-icon", { attrs: { left: "" } }, [
+                            _vm._v("mdi-account-outline")
+                          ]),
+                          _vm._v("\n          Login\n        ")
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
-                }),
-                1
+                ],
+                2
               )
         ],
         1
@@ -6439,12 +6570,7 @@ var render = function() {
                                 "v-btn",
                                 {
                                   staticClass: "white--text home-btn ml-4",
-                                  attrs: { outlined: "", color: "cyan" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$vuetify.goTo("home")
-                                    }
-                                  }
+                                  attrs: { outlined: "", color: "cyan" }
                                 },
                                 [_c("v-icon", [_vm._v("mdi-home-outline")])],
                                 1
@@ -6540,6 +6666,48 @@ var render = function() {
                   )
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card",
+                { staticClass: "mt-2 pa-6" },
+                [
+                  _c(
+                    "v-row",
+                    { attrs: { align: "center", justify: "center" } },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "sign-up-text" },
+                        [
+                          _vm._v(
+                            "\n            Don't have account?\n            "
+                          ),
+                          _c("v-icon", [_vm._v("mdi-arrow-right")]),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticStyle: {
+                                "text-decoration": "none",
+                                color: "inherit"
+                              },
+                              attrs: { to: "/register" }
+                            },
+                            [
+                              _c("v-btn", { attrs: { color: "primary" } }, [
+                                _c("strong", [_vm._v("Sign Up")])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ],
+                1
               )
             ],
             1
@@ -6611,12 +6779,7 @@ var render = function() {
                                 "v-btn",
                                 {
                                   staticClass: "white--text home-btn ml-4",
-                                  attrs: { outlined: "", color: "cyan" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$vuetify.goTo("home")
-                                    }
-                                  }
+                                  attrs: { outlined: "", color: "cyan" }
                                 },
                                 [_c("v-icon", [_vm._v("mdi-home-outline")])],
                                 1
@@ -6640,6 +6803,21 @@ var render = function() {
                     ],
                     1
                   ),
+                  _vm._v(" "),
+                  _vm.isEmailAlreadyUsed
+                    ? _c(
+                        "v-alert",
+                        { attrs: { prominent: "", type: "error" } },
+                        [
+                          _c("v-row", { attrs: { align: "center" } }, [
+                            _vm._v(
+                              "\n              There is already an account registered to this email\n          "
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "v-form",
@@ -6725,6 +6903,48 @@ var render = function() {
                       )
                     ],
                     1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card",
+                { staticClass: "mt-2 pa-6" },
+                [
+                  _c(
+                    "v-row",
+                    { attrs: { align: "center", justify: "center" } },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "sign-up-text" },
+                        [
+                          _vm._v(
+                            "\n            Already have an account? \n            "
+                          ),
+                          _c("v-icon", [_vm._v("mdi-arrow-right")]),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticStyle: {
+                                "text-decoration": "none",
+                                color: "inherit"
+                              },
+                              attrs: { to: "/login" }
+                            },
+                            [
+                              _c("v-btn", { attrs: { color: "primary" } }, [
+                                _c("strong", [_vm._v("Login")])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
                   )
                 ],
                 1

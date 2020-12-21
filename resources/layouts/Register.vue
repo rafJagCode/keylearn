@@ -9,7 +9,7 @@
             <v-container class="register__label primary">
               <v-row align="center">
                 <router-link to="/" style="text-decoration: none; color: inherit;">
-                  <v-btn class="white--text home-btn ml-4" outlined color="cyan" @click="$vuetify.goTo('home')">
+                  <v-btn class="white--text home-btn ml-4" outlined color="cyan">
                     <v-icon>mdi-home-outline</v-icon>
                   </v-btn>
                 </router-link>
@@ -21,6 +21,15 @@
                 />
               </v-row>
             </v-container>
+            <v-alert
+              prominent
+              type="error"
+              v-if="isEmailAlreadyUsed"
+            >
+              <v-row align="center">
+                  There is already an account registered to this email
+              </v-row>
+            </v-alert>
             <v-form
               class="ma-6"
               ref="form"
@@ -59,6 +68,19 @@
           
             </v-form>
           </v-card>
+          <v-card class="mt-2 pa-6">
+            <v-row align="center" justify="center">
+              <div class="sign-up-text">
+                Already have an account? 
+                <v-icon>mdi-arrow-right</v-icon>
+                <router-link to="/login" style="text-decoration: none; color: inherit;">
+                  <v-btn color='primary'>
+                    <strong>Login</strong>
+                  </v-btn>
+                </router-link>
+              </div>
+            </v-row>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -67,6 +89,7 @@
 export default {
   data: () => ({
     valid: true,
+    isEmailAlreadyUsed: false,
     email: '',
     password: "",
     passwordConfirmation: "",
@@ -92,7 +115,15 @@ export default {
       await this.checkValidation();
       if(!this.$refs.form.validate()) return;
       Vue.axios.post('api/register', {email:this.email, password:this.password}).then(()=>{
-        console.log('ok');
+        this.loginAndRedirect();
+      }).catch((error)=>{
+        this.isEmailAlreadyUsed = true;
+        this.errors = error.response.data.errors;
+      });
+    },
+    loginAndRedirect(){
+      Vue.axios.post('api/login', {email:this.email, password:this.password}).then(()=>{
+        this.$router.push({ name: 'dashboard'});
       }).catch((error)=>{
         this.errors = error.response.data.errors;
       });

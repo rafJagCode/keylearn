@@ -10,30 +10,38 @@
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
-            <img src="@/assets/img/logo.png" alt="Logo" />
+            <img class="drawer-logo" src="@/assets/img/logo.png" alt="Logo" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="title">Calango</v-list-item-title>
-            <v-list-item-subtitle>WEB</v-list-item-subtitle>
+            <v-list-item-title class="title">Keylearn</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
-
       <v-divider />
 
       <v-list dense>
+          <v-list-item @click.prevent="goToLogin()">
+            <v-list-item-icon class="justify-center">
+              <v-icon>mdi-account-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="subtitile-1">
+                Login
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         <v-list-item
-          v-for="([icon, text, link], i) in items"
-          :key="i"
-          link
-          @click="$vuetify.goTo(link)"
+          v-for="(item, index) in items"
+          :key="index"
+
+          @click="$vuetify.goTo(item.link)"
         >
           <v-list-item-icon class="justify-center">
-            <v-icon>{{ icon }}</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title class="subtitile-1">{{
-              text
+              item.name
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -62,6 +70,12 @@
           <v-icon left>{{item.icon}}</v-icon>
           <span class="mr-2">{{item.name}}</span>
         </v-btn>
+        <router-link to="/login" style="text-decoration: none; color: inherit;">
+          <v-btn>
+            <v-icon left>mdi-account-outline</v-icon>
+            Login
+          </v-btn>
+        </router-link>
         <!-- <v-btn text @click="$vuetify.goTo('#features')">
           <span class="mr-2">Get Started</span>
         </v-btn>
@@ -90,6 +104,11 @@
 .expand {
   height: 80px !important;
   padding-top: 10px;
+}
+.drawer-logo{
+  height:20px;
+  width:40px;
+  background-size: cover;
 }
 </style>
 
@@ -127,8 +146,11 @@ export default {
   },
   methods: {
     onResize() {
-      this.isXs = window.innerWidth < 850;
+      this.isXs = window.innerWidth < 960;
     },
+    goToLogin(){
+      this.$router.push({name: 'login'});
+    }
   },
 
   watch: {
