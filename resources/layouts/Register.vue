@@ -23,7 +23,6 @@
             </v-container>
             <v-form
               class="ma-6"
-              v-on:submit.prevent=""
               ref="form"
               v-model="valid"
               lazy-validation
@@ -45,7 +44,7 @@
               <v-text-field
                 v-model="passwordConfirmation"
                 type="password"
-                :rules="[comparePasswords]"
+                :rules="comparePasswords"
                 label="Confirm Password"
                 @focus="focusPasswordConfirmation"
               ></v-text-field>
@@ -55,7 +54,7 @@
               outlined
               rounded
               block
-              @click="handleSubmit()"
+              @click.prevent="handleSubmit()"
               >Sign up</v-btn>
           
             </v-form>
@@ -73,11 +72,11 @@ export default {
     passwordConfirmation: "",
     emailRules: [],
     passwordRules: [],
-    comparePasswords: ""
+    comparePasswords: []
   }),
 
   methods: {
-    handleSubmit(){
+    checkValidation(){
       this.emailRules= [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -86,7 +85,13 @@ export default {
         v => !!v || 'Password is required',
         v => (v && v.length >= 5) || 'Password must have 5+ characters'
       ];
-      this.comparePasswords = this.password !== this.passwordConfirmation ? 'Passwords do not match' : true;
+      this.comparePasswords = [this.password !== this.passwordConfirmation ? 'Passwords do not match' : true];
+      return true;
+    },
+    async handleSubmit(){
+      await this.checkValidation();
+      if(!this.$refs.form.validate()) return;
+      console.log('ok');
     },
     focusEmail(){
       this.emailRules=[];
@@ -97,15 +102,15 @@ export default {
     focusPasswordConfirmation(){
       this.comparePasswords = [];
     },
-    validate () {
-      this.$refs.form.validate()
-    },
-    reset () {
-      this.$refs.form.reset()
-    },
-    resetValidation () {
-      this.$refs.form.resetValidation()
-    },
+    // validate () {
+    //   this.$refs.form.validate()
+    // },
+    // reset () {
+    //   this.$refs.form.reset()
+    // },
+    // resetValidation () {
+    //   this.$refs.form.resetValidation()
+    // },
   }
 }
 </script>

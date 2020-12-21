@@ -23,7 +23,6 @@
             </v-container>
             <v-form
               class="ma-6"
-              v-on:submit.prevent=""
               ref="form"
               v-model="valid"
               lazy-validation
@@ -48,7 +47,7 @@
               outlined
               rounded
               block
-              @click="handleSubmit()"
+              @click.prevent="handleSubmit()"
               >Login</v-btn>
           
             </v-form>
@@ -68,7 +67,7 @@ export default {
   }),
 
   methods: {
-    handleSubmit(){
+    checkValidation(){
       this.emailRules= [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -77,6 +76,11 @@ export default {
         v => !!v || 'Password is required',
         v => (v && v.length >= 5) || 'Password must have 5+ characters'
       ];
+      return true;
+    },
+    async handleSubmit(){
+      await this.checkValidation();
+      if(!this.$refs.form.validate()) return;
     },
     focusEmail(){
       this.emailRules=[];
@@ -86,15 +90,6 @@ export default {
     },
     focusPasswordConfirmation(){
       this.comparePasswords = [];
-    },
-    validate () {
-      this.$refs.form.validate()
-    },
-    reset () {
-      this.$refs.form.reset()
-    },
-    resetValidation () {
-      this.$refs.form.resetValidation()
     },
   }
 }
