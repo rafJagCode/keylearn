@@ -5,6 +5,7 @@ import Home from '@/layouts/Home';
 import Register from '@/layouts/Register';
 import Login from '@/layouts/Login';
 import Dashboard from '@/layouts/Dashboard';
+import Test from '@/layouts/Test';
 
 Vue.use(VueRouter);
 
@@ -37,7 +38,12 @@ const router = new VueRouter({
                     return next({name: 'login'})
                 })
             }
-        }
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: Test
+        },
     ]
 });
 

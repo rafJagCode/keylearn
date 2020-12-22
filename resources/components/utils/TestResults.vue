@@ -1,0 +1,22 @@
+<template>
+    <v-container>
+        <v-sheet
+        color="teal"
+        elevation="4"
+        height="100"
+        width="100"
+        rounded
+        >
+            {{this.$store.getters.finalTime}}
+        </v-sheet>
+        <v-sheet
+        color="teal"
+        elevation="4"
+        height="100"
+        width="100"
+        rounded
+        >
+            {{this.$store.getters.finalTime}}
+        </v-sheet>
+    </v-container>
+</template>

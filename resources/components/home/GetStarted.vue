@@ -68,7 +68,7 @@ export default {
           description: "Creating account will allow you to control your learning progress. Sign up to get access to your learning statistics.",
         },
         {
-          cardLink: "login",
+          cardLink: "test",
           icon: "typing-practice-icon",
           caption: "practice typing",
           description: "Start your training. Check how fast and accurate is your typing.",
