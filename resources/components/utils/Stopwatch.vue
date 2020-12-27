@@ -1,11 +1,6 @@
 <template>
   <div id="stopwatch">
     <span class="time">{{ time }}</span>
-    <div class="btn-container">
-        <a @click="start">Start</a>
-        <a @click="stop">Stop</a>
-        <a @click="reset">Reset</a>
-    </div>
   </div>
 </template>
 
@@ -25,8 +20,9 @@ export default {
       '$store.getters.isClockStarted':function(isClockStarted){
           if(isClockStarted && !this.$store.getters.hasTestEnded) this.start();
           else {
-              this.stop();
-              this.$store.dispatch('setFinalTime', this.time);
+                this.stop();
+                this.$store.dispatch('setFinalTime', this.time);
+                this.$store.dispatch('endTest');
           }
       }
   },
@@ -92,29 +88,7 @@ export default {
     color: rgb(200, 200, 200);
 }
 .time {
-    font-size: 6.5em;
+    font-size: 2em;
 }
 
-.btn-container {
-    display: flex;
-    margin-top: 15px;
-}
-.btn-container a{
-    text-align: center;
-    font-family: 'Share Tech Mono', sans-serif;
-    background: transparent;
-    border: 3px solid rgb(200, 200, 200);
-    border: none;
-    color: rgb(200, 200, 200);
-    padding: 10px 15px;
-    margin: 0 10px;
-    text-transform: uppercase;
-    font-size: 2em;
-    cursor: pointer;
-    flex-grow: 1;
-    transition: color .1s ease-out;
-}
-.btn-container a:hover {
-    color: white;
-}
 </style>

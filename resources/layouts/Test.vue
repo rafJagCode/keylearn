@@ -35,38 +35,50 @@
 
     <v-main>
       <v-container style="max-width: 700px;">
-            <v-row class="justify-center">
-                <stopwatch></stopwatch>
-            </v-row>
             <v-row>
+                <v-progress-linear
+                    :value="progress"
+                    :color="color"
+                    absolute
+                    height="7"
+                    class="mb-12"
+                ></v-progress-linear>
+                <v-text-field
+                    ref="displayedTest"
+                    @blur="activate = false"
+                    @input="startTest()"
+                    height="0px"
+                    style="opacity: 0;"
+                    :disabled="this.$store.getters.hasTestEnded"
+                    v-model="typed"
+                    class="ma-0 pa-0"
+                    >
+                </v-text-field>
+
+            </v-row>
+            <v-row class="justify-center">
+                <stopwatch class="mt-1"></stopwatch>
+            </v-row>
+            <v-row :style="{opacity: !activate ? 0.3 : 1 }">
                 <sign
                 v-for="(sign, index) in signs" 
                 :key="index" :sign="sign" 
                 :state="checkTypedSigns[index]"></sign>
             </v-row>
+            <v-layout justify-center>
+                <v-btn class="mt-2" small @click="activate = true" text v-if="!activate && !this.$store.getters.hasTestEnded" color="#E2DADB">
+                    Click to activate
+                </v-btn>
+            </v-layout>
+            <v-layout :style="{visibility: this.$store.getters.hasTestEnded ? 'visible' : 'hidden'}" class="mt-3" row align-center>
+                <v-btn outlined dark block color="primaryLight">  
+                    Next Test
+                    <v-icon right>mdi-arrow-right-drop-circle</v-icon>
+                </v-btn>
+            </v-layout>
             <v-row>
-                <v-text-field
-                    class="mt-6 white--text"               
-                    label="Click here to start your test"
-                    outlined
-                    loading
-                    dark
-                    placeholder="..."
-                    color="white"
-                    @input="startTest()"
-                    v-model="typed">
-                        <template v-slot:progress>
-                            <v-progress-linear
-                                :value="progress"
-                                :color="color"
-                                absolute
-                                height="7"
-                            ></v-progress-linear>
-                        </template>
-                </v-text-field>
-            </v-row>
-            <v-row>
-                <test-results></test-results>
+                <test-results v-if="this.$store.getters.hasTestEnded"></test-results>
+                <!-- <test-results></test-results> -->
             </v-row>
       </v-container>
     </v-main>
@@ -79,7 +91,8 @@ import sign from '@/components/utils/Sign';
 import testResults from '@/components/utils/TestResults';
 export default {
     data: () =>({
-        text: `Stoi na stacji lokomotywa`,
+        activate: false,
+        text: `Stoi na stacji lokomotywa ciężka, ogromna i pot z niej spływa`,
          states:{
             none: 'none',
             current: 'current',
@@ -98,16 +111,22 @@ export default {
                 icon: 'mdi-home-outline',
                 text: 'Home'
             },
-        ]
-
+        ],
+        errors: 0
         
     }),
     watch:{
         typed:function(typed){
             if(typed.length>=this.text.length){
               this.$store.dispatch('stopClock');
-              this.$store.dispatch('endTest');  
+              this.$store.dispatch('setAmountOfSigns', this.text.length);
+              this.checkErrors();
+              this.$store.dispatch('setErrors', this.errors);
+  
             } 
+        },
+        activate:function(activate){
+            if(activate) this.$refs.displayedTest.focus();
         }
     },
     computed:{
@@ -138,7 +157,14 @@ export default {
             this.$router.push({name: link});
         },
         startTest(){
+            if(this.$store.getters.isClockStarted) return;
             this.$store.dispatch('startClock');
+        },
+        checkErrors(){
+            let typedSigns = this.typed.split("");
+            this.signs.forEach((sign, index)=>{
+                if(sign!==typedSigns[index]) this.errors++;
+            });
         }
     },
     components: {
