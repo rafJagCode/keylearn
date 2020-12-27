@@ -32,14 +32,14 @@
                 v-model="email"
                 :rules="emailRules"
                 label="E-mail"
-                @focus="focusEmail()"
+                validate-on-blur
               ></v-text-field>
               <v-text-field
                 v-model="password"
                 type="password"
                 :rules="passwordRules"
                 label="Password"
-                @focus="focusPassword"
+                validate-on-blur
               ></v-text-field>
               <v-btn 
               class="signup-btn primary--text mt-8"
@@ -75,39 +75,24 @@ export default {
     valid: true,
     email: '',
     password: "",
-    emailRules: [],
-    passwordRules: [],
+    emailRules:[
+      v => !!v || 'E-mail is required',
+      v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+    ],
+    passwordRules: [
+        v => !!v || 'Password is required',
+      ],
   }),
 
   methods: {
-    checkValidation(){
-      this.emailRules= [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ];
-      this.passwordRules= [
-        v => !!v || 'Password is required',
-      ];
-      return true;
-    },
-    async handleSubmit(){
-      await this.checkValidation();
+    handleSubmit(){
       if(!this.$refs.form.validate()) return;
       Vue.axios.post('api/login', {email:this.email, password:this.password}).then(()=>{
         this.$router.push({ name: 'dashboard'});
       }).catch((error)=>{
         this.errors = error.response.data.errors;
       });
-    },
-    focusEmail(){
-      this.emailRules=[];
-    },
-    focusPassword(){
-      this.passwordRules=[];
-    },
-    focusPasswordConfirmation(){
-      this.comparePasswords = [];
-    },
+    }
   }
 }
 </script>

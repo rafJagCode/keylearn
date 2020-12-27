@@ -41,21 +41,21 @@
                 v-model="email"
                 :rules="emailRules"
                 label="E-mail"
-                @focus="focusEmail()"
+                validate-on-blur
               ></v-text-field>
               <v-text-field
                 v-model="password"
                 type="password"
                 :rules="passwordRules"
                 label="Password"
-                @focus="focusPassword"
+                validate-on-blur
               ></v-text-field>
               <v-text-field
                 v-model="passwordConfirmation"
                 type="password"
                 :rules="comparePasswords"
                 label="Confirm Password"
-                @focus="focusPasswordConfirmation"
+                validate-on-blur
               ></v-text-field>
               <v-btn 
               class="signup-btn primary--text mt-8"
@@ -93,26 +93,22 @@ export default {
     email: '',
     password: "",
     passwordConfirmation: "",
-    emailRules: [],
-    passwordRules: [],
-    comparePasswords: []
-  }),
-
-  methods: {
-    checkValidation(){
-      this.emailRules= [
+    emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ];
-      this.passwordRules= [
+      ],
+    passwordRules:[
         v => !!v || 'Password is required',
         v => (v && v.length >= 5) || 'Password must have 5+ characters'
-      ];
-      this.comparePasswords = [this.password !== this.passwordConfirmation ? 'Passwords do not match' : true];
-      return true;
-    },
-    async handleSubmit(){
-      await this.checkValidation();
+      ],
+  }),
+  computed:{
+    comparePasswords(){
+      return [this.password !== this.passwordConfirmation ? 'Passwords do not match' : true];
+    }
+  },
+  methods: {
+    handleSubmit(){
       if(!this.$refs.form.validate()) return;
       Vue.axios.post('api/register', {email:this.email, password:this.password}).then(()=>{
         this.loginAndRedirect();
@@ -128,24 +124,6 @@ export default {
         this.errors = error.response.data.errors;
       });
     },
-    focusEmail(){
-      this.emailRules=[];
-    },
-    focusPassword(){
-      this.passwordRules=[];
-    },
-    focusPasswordConfirmation(){
-      this.comparePasswords = [];
-    },
-    // validate () {
-    //   this.$refs.form.validate()
-    // },
-    // reset () {
-    //   this.$refs.form.reset()
-    // },
-    // resetValidation () {
-    //   this.$refs.form.resetValidation()
-    // },
   }
 }
 </script>
