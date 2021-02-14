@@ -2609,6 +2609,13 @@ __webpack_require__.r(__webpack_exports__);
     state: {
       "default": 'none'
     }
+  },
+  computed: {
+    displayedSign: function displayedSign() {
+      if (this.sign === ' ') return 'mdi-keyboard-space';
+      if (this.sign === '\n') return 'mdi-keyboard-return';
+      return this.sign;
+    }
   }
 });
 
@@ -3333,6 +3340,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3340,6 +3358,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       activate: false,
+      rows: [],
       text: "Stoi na stacji lokomotywa ci\u0119\u017Cka, ogromna i pot z niej sp\u0142ywa",
       states: {
         none: 'none',
@@ -3362,9 +3381,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     typed: function typed(_typed) {
-      if (_typed.length >= this.text.length) {
+      console.log(_typed);
+
+      if (_typed.length >= this.signs.length) {
         this.$store.dispatch('stopClock');
-        this.$store.dispatch('setAmountOfSigns', this.text.length);
+        this.$store.dispatch('setAmountOfSigns', this.signs.length);
         this.checkErrors();
         this.$store.dispatch('setErrors', this.errors);
       }
@@ -3375,7 +3396,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     signs: function signs() {
-      return this.text.replace(/(\r\n|\n|\r)/g, "").split("");
+      var text = '';
+      var signs = [];
+      this.rows.forEach(function (row) {
+        text += row;
+      });
+      signs = text.split("");
+      return signs;
     },
     checkTypedSigns: function checkTypedSigns() {
       var _this = this;
@@ -3385,7 +3412,7 @@ __webpack_require__.r(__webpack_exports__);
       this.signs.forEach(function (sign, index) {
         if (index === typedSigns.length) compare.push(_this.states.current);else if (index > typedSigns.length) compare.push(_this.states.none);else if (sign !== typedSigns[index]) compare.push(_this.states.incorrect);else compare.push(_this.states.correct);
       });
-      compare.push(this.states.current);
+      compare.push(this.states.none);
       return compare;
     },
     progress: function progress() {
@@ -3412,12 +3439,39 @@ __webpack_require__.r(__webpack_exports__);
       this.signs.forEach(function (sign, index) {
         if (sign !== typedSigns[index]) _this2.errors++;
       });
+    },
+    divideToRows: function divideToRows() {
+      var signsInRow = 35;
+      var row = '';
+      var rows = [];
+      var words = this.text.replace(/(\r\n|\n|\r)/g, "").split(" ");
+      var rowLength = 0;
+
+      for (var i = 0; i < words.length; i++) {
+        if (rowLength + words[i].length < signsInRow) {
+          row += words[i] + " ";
+          rowLength += words[i].length + 1;
+        } else {
+          row = row.replace(/.$/, "\n");
+          rows.push(row);
+          row = '';
+          row += words[i] + " ";
+          rowLength = words[i].length + 1;
+        }
+      }
+
+      row = row.replace(/.$/, "\n");
+      rows.push(row);
+      this.rows = rows;
     }
   },
   components: {
     sign: _components_utils_Sign__WEBPACK_IMPORTED_MODULE_1__["default"],
     stopwatch: _components_utils_Stopwatch__WEBPACK_IMPORTED_MODULE_0__["default"],
     'test-results': _components_utils_TestResults__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  mounted: function mounted() {
+    this.divideToRows();
   }
 });
 
@@ -3586,10 +3640,10 @@ exports.push([module.i, "\n.about-card[data-v-2b5061fe]{\n    position: relative
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap);", ""]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=PT+Mono&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n.sign[data-v-ef609ae8]{\r\n        font-size:20px;\r\n        color:#E2DADB;\r\n        font-family: 'Share Tech Mono', monospace;\r\n        border-radius: 10%;\r\n        margin: 0.5px;\r\n        width: 20px;\r\n        height: 30px;\r\n        text-align: center;\r\n        vertical-align: middle;\n}\n.sign--none[data-v-ef609ae8]{\r\n        background-color:  #252C55;\n}\n.sign--current[data-v-ef609ae8]{\r\n        border-bottom: 2px solid #52C6F4;\n}\n.sign--correct[data-v-ef609ae8]{\r\n        background-color: green;\n}\n.sign--incorrect[data-v-ef609ae8]{\r\n        background-color: #CF1259 ;\n}\r\n", ""]);
+exports.push([module.i, "\n.sign[data-v-ef609ae8]{\r\n        font-size:20px;\r\n        color:#E2DADB;\r\n        font-family: 'PT Mono', monospace;\r\n        border-radius: 10%;\r\n        margin: 0.5px;\r\n        width: 20px;\r\n        height: 30px;\r\n        text-align: center;\r\n        vertical-align: middle;\r\n        font-style: normal;\n}\n.sign--none[data-v-ef609ae8]{\r\n        background-color:  #252C55;\n}\n.sign--current[data-v-ef609ae8]{\r\n        border-bottom: 2px solid #52C6F4;\n}\n.sign--correct[data-v-ef609ae8]{\r\n        background-color: green;\n}\n.sign--incorrect[data-v-ef609ae8]{\r\n        background-color: #CF1259 ;\n}\r\n", ""]);
 
 // exports
 
@@ -6098,8 +6152,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sign", class: _vm.states[_vm.state] }, [
-    _vm._v("\n    " + _vm._s(_vm.sign) + "\n")
+  return _c("v-icon", { staticClass: "sign", class: _vm.states[_vm.state] }, [
+    _vm._v("\n    " + _vm._s(_vm.displayedSign) + "\n")
   ])
 }
 var staticRenderFns = []
@@ -7007,7 +7061,7 @@ var render = function() {
         [
           _c(
             "v-container",
-            { staticStyle: { "max-width": "700px" } },
+            { staticStyle: { width: "800px" } },
             [
               _c(
                 "v-row",
@@ -7022,13 +7076,15 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("v-text-field", {
+                  _c("v-textarea", {
                     ref: "displayedTest",
                     staticClass: "ma-0 pa-0",
                     staticStyle: { opacity: "0" },
                     attrs: {
                       height: "0px",
-                      disabled: this.$store.getters.hasTestEnded
+                      disabled: this.$store.getters.hasTestEnded,
+                      autocomplete: "off",
+                      "multi-line": ""
                     },
                     on: {
                       blur: function($event) {
@@ -7058,13 +7114,26 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-row",
-                { style: { opacity: !_vm.activate ? 0.3 : 1 } },
-                _vm._l(_vm.signs, function(sign, index) {
-                  return _c("sign", {
-                    key: index,
-                    attrs: { sign: sign, state: _vm.checkTypedSigns[index] }
-                  })
+                "v-layout",
+                {
+                  style: { opacity: !_vm.activate ? 0.3 : 1 },
+                  attrs: { column: "" }
+                },
+                _vm._l(_vm.rows, function(row, parent_index) {
+                  return _c(
+                    "v-row",
+                    { key: parent_index },
+                    _vm._l(row, function(sign, index) {
+                      return _c("sign", {
+                        key: index,
+                        attrs: {
+                          sign: sign,
+                          state: _vm.checkTypedSigns[parent_index * 34 + index]
+                        }
+                      })
+                    }),
+                    1
+                  )
                 }),
                 1
               ),

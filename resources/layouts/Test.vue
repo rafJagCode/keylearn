@@ -34,7 +34,7 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-container style="max-width: 700px;">
+      <v-container style="width: 800px;">
             <v-row>
                 <v-progress-linear
                     :value="progress"
@@ -43,7 +43,7 @@
                     height="7"
                     class="mb-12"
                 ></v-progress-linear>
-                <v-text-field
+                <v-textarea
                     ref="displayedTest"
                     @blur="activate = false"
                     @input="startTest()"
@@ -52,19 +52,30 @@
                     :disabled="this.$store.getters.hasTestEnded"
                     v-model="typed"
                     class="ma-0 pa-0"
+                    autocomplete="off"
+                    multi-line
                     >
-                </v-text-field>
+                </v-textarea>
 
             </v-row>
             <v-row class="justify-center">
                 <stopwatch class="mt-1"></stopwatch>
             </v-row>
-            <v-row :style="{opacity: !activate ? 0.3 : 1 }">
-                <sign
+            <v-layout column :style="{opacity: !activate ? 0.3 : 1 }">
+                <!-- <sign
                 v-for="(sign, index) in signs" 
                 :key="index" :sign="sign" 
-                :state="checkTypedSigns[index]"></sign>
-            </v-row>
+                :state="checkTypedSigns[index]">
+                </sign> -->
+                <v-row v-for="(row, parent_index) in rows" :key="parent_index">
+                    <sign 
+                    v-for="(sign, index) in row" 
+                    :key="index" 
+                    :sign="sign"
+                    :state="checkTypedSigns[parent_index * 34 + index]">
+                    </sign>
+                </v-row>
+            </v-layout>
             <v-layout justify-center>
                 <v-btn class="mt-2" small @click="activate = true" text v-if="!activate && !this.$store.getters.hasTestEnded" color="#E2DADB">
                     Click to activate
@@ -92,8 +103,9 @@ import testResults from '@/components/utils/TestResults';
 export default {
     data: () =>({
         activate: false,
+        rows: [],
         text: `Stoi na stacji lokomotywa ciężka, ogromna i pot z niej spływa`,
-         states:{
+        states:{
             none: 'none',
             current: 'current',
             correct: 'correct',
@@ -117,9 +129,10 @@ export default {
     }),
     watch:{
         typed:function(typed){
-            if(typed.length>=this.text.length){
+            console.log(typed);
+            if(typed.length>=this.signs.length){
               this.$store.dispatch('stopClock');
-              this.$store.dispatch('setAmountOfSigns', this.text.length);
+              this.$store.dispatch('setAmountOfSigns', this.signs.length);
               this.checkErrors();
               this.$store.dispatch('setErrors', this.errors);
   
@@ -131,7 +144,13 @@ export default {
     },
     computed:{
         signs(){
-            return this.text.replace(/(\r\n|\n|\r)/g,"").split("");
+            let text = '';
+            let signs = [];
+            this.rows.forEach((row)=>{
+                text+=row;
+            });
+            signs = text.split("");
+            return signs;
         },
         checkTypedSigns(){
             let compare = [];
@@ -142,7 +161,7 @@ export default {
                 else if(sign!==typedSigns[index]) compare.push(this.states.incorrect);
                 else compare.push(this.states.correct);
             });
-            compare.push(this.states.current);
+            compare.push(this.states.none);
             return compare;
         },
         progress () {
@@ -165,10 +184,36 @@ export default {
             this.signs.forEach((sign, index)=>{
                 if(sign!==typedSigns[index]) this.errors++;
             });
-        }
+        },
+        divideToRows(){
+            let signsInRow = 35;
+            let row = '';
+            let rows = [];
+            let words = this.text.replace(/(\r\n|\n|\r)/g,"").split(" ");
+            let rowLength = 0;
+            for(let i=0; i<words.length; i++){
+                if(rowLength + words[i].length < signsInRow){
+                    row += words[i] + " ";
+                    rowLength += words[i].length + 1;
+                }
+                else{
+                    row = row.replace(/.$/,"\n");
+                    rows.push(row);
+                    row = '';
+                    row += words[i] + " ";
+                    rowLength = words[i].length + 1;
+                }
+            }
+            row = row.replace(/.$/,"\n");
+            rows.push(row);
+            this.rows = rows;
+        },
     },
     components: {
         sign, stopwatch, 'test-results': testResults
+    },
+    mounted(){
+        this.divideToRows();
     }
 }
 </script>

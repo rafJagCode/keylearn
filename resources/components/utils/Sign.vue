@@ -1,7 +1,7 @@
 <template>
-    <div class="sign" :class="states[state]">
-        {{sign}}
-    </div>
+    <v-icon class="sign" :class="states[state]">
+        {{displayedSign}}
+    </v-icon>
 </template>
 <script>
 export default {
@@ -18,21 +18,29 @@ export default {
         state: {
             default: 'none'
         }
+    },
+    computed:{
+        displayedSign(){
+            if(this.sign === ' ') return 'mdi-keyboard-space';
+            if(this.sign === '\n') return 'mdi-keyboard-return';
+            return this.sign;
+        }
     }
 }
 </script>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
     .sign{
         font-size:20px;
         color:#E2DADB;
-        font-family: 'Share Tech Mono', monospace;
+        font-family: 'PT Mono', monospace;
         border-radius: 10%;
         margin: 0.5px;
         width: 20px;
         height: 30px;
         text-align: center;
         vertical-align: middle;
+        font-style: normal;
     }
     .sign--none{
         background-color:  #252C55;
