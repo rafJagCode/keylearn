@@ -2612,6 +2612,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     displayedSign: function displayedSign() {
+      if (this.sign === '-') return 'mdi-minus';
       if (this.sign === ' ') return 'mdi-keyboard-space';
       if (this.sign === '\n') return 'mdi-keyboard-return';
       return this.sign;
@@ -3358,15 +3359,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       activate: false,
+      typed: '',
+      text: [],
       rows: [],
-      text: "Stoi na stacji lokomotywa ci\u0119\u017Cka, ogromna i pot z niej sp\u0142ywa",
       states: {
         none: 'none',
         current: 'current',
         correct: 'correct',
         incorrect: 'incorrect'
       },
-      typed: '',
       items: [{
         link: 'login',
         icon: 'mdi-account-outline',
@@ -3381,8 +3382,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     typed: function typed(_typed) {
-      console.log(_typed);
-
       if (_typed.length >= this.signs.length) {
         this.$store.dispatch('stopClock');
         this.$store.dispatch('setAmountOfSigns', this.signs.length);
@@ -3396,13 +3395,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     signs: function signs() {
-      var text = '';
-      var signs = [];
+      var text = [];
       this.rows.forEach(function (row) {
-        text += row;
+        row.forEach(function (sign) {
+          text.push(sign.sign);
+        });
       });
-      signs = text.split("");
-      return signs;
+      this.text = text;
+      return text;
     },
     checkTypedSigns: function checkTypedSigns() {
       var _this = this;
@@ -3440,11 +3440,11 @@ __webpack_require__.r(__webpack_exports__);
         if (sign !== typedSigns[index]) _this2.errors++;
       });
     },
-    divideToRows: function divideToRows() {
+    divideToRows: function divideToRows(text) {
       var signsInRow = 35;
       var row = '';
       var rows = [];
-      var words = this.text.replace(/(\r\n|\n|\r)/g, "").split(" ");
+      var words = text.split(" ");
       var rowLength = 0;
 
       for (var i = 0; i < words.length; i++) {
@@ -3462,7 +3462,37 @@ __webpack_require__.r(__webpack_exports__);
 
       row = row.replace(/.$/, "\n");
       rows.push(row);
-      this.rows = rows;
+      var position = 0;
+      var rowsOfSigns = [];
+
+      for (var _i = 0; _i < rows.length; _i++) {
+        var rowOfSigns = [];
+
+        for (var j = 0; j < rows[_i].length; j++) {
+          var _sign = {
+            sign: rows[_i][j],
+            row: _i,
+            position: position
+          };
+          position++;
+          rowOfSigns.push(_sign);
+        }
+
+        rowsOfSigns.push(rowOfSigns);
+      }
+
+      ;
+      this.rows = rowsOfSigns;
+    },
+    nextTest: function nextTest() {
+      var _this3 = this;
+
+      this.typed = '';
+      this.activate = false;
+      this.$store.dispatch('startTest');
+      Vue.axios.post('api/new-test').then(function (res) {
+        _this3.divideToRows(res.data);
+      });
     }
   },
   components: {
@@ -3471,7 +3501,11 @@ __webpack_require__.r(__webpack_exports__);
     'test-results': _components_utils_TestResults__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
-    this.divideToRows();
+    var _this4 = this;
+
+    Vue.axios.post('api/new-test').then(function (res) {
+      _this4.divideToRows(res.data);
+    });
   }
 });
 
@@ -7119,16 +7153,16 @@ var render = function() {
                   style: { opacity: !_vm.activate ? 0.3 : 1 },
                   attrs: { column: "" }
                 },
-                _vm._l(_vm.rows, function(row, parent_index) {
+                _vm._l(_vm.rows, function(row, index) {
                   return _c(
                     "v-row",
-                    { key: parent_index },
-                    _vm._l(row, function(sign, index) {
+                    { key: index },
+                    _vm._l(row, function(sign) {
                       return _c("sign", {
-                        key: index,
+                        key: sign.position,
                         attrs: {
-                          sign: sign,
-                          state: _vm.checkTypedSigns[parent_index * 34 + index]
+                          sign: sign.sign,
+                          state: _vm.checkTypedSigns[sign.position]
                         }
                       })
                     }),
@@ -7185,6 +7219,11 @@ var render = function() {
                         dark: "",
                         block: "",
                         color: "primaryLight"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.nextTest()
+                        }
                       }
                     },
                     [
@@ -69367,12 +69406,19 @@ var state = {
   hasTestEnded: false
 };
 var actions = {
-  endTest: function endTest(_ref) {
+  startTest: function startTest(_ref) {
     var commit = _ref.commit;
+    commit('startTest');
+  },
+  endTest: function endTest(_ref2) {
+    var commit = _ref2.commit;
     commit('endTest');
   }
 };
 var mutations = {
+  startTest: function startTest(state) {
+    return state.hasTestEnded = false;
+  },
   endTest: function endTest(state) {
     return state.hasTestEnded = true;
   }
@@ -69400,10 +69446,21 @@ var getters = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var INITIAL_STATE = {
+  time: '00:00:00.000',
+  testLenght: 0,
+  errors: 0,
+  accuracy: 0,
+  score: 0,
+  wpm: 0
+};
 var state = {
   finalTime: '00:00:00.000',
   amountOfSigns: 0,
-  errors: 0
+  errors: 0,
+  accuracy: 0,
+  score: 0,
+  wpm: 0
 };
 var actions = {
   setFinalTime: function setFinalTime(_ref, payload) {

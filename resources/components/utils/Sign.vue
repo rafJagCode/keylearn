@@ -21,6 +21,7 @@ export default {
     },
     computed:{
         displayedSign(){
+            if(this.sign === '-') return 'mdi-minus';
             if(this.sign === ' ') return 'mdi-keyboard-space';
             if(this.sign === '\n') return 'mdi-keyboard-return';
             return this.sign;

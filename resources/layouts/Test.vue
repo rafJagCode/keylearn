@@ -67,12 +67,12 @@
                 :key="index" :sign="sign" 
                 :state="checkTypedSigns[index]">
                 </sign> -->
-                <v-row v-for="(row, parent_index) in rows" :key="parent_index">
+                <v-row v-for="(row, index) in rows" :key="index">
                     <sign 
-                    v-for="(sign, index) in row" 
-                    :key="index" 
-                    :sign="sign"
-                    :state="checkTypedSigns[parent_index * 34 + index]">
+                    v-for="(sign) in row" 
+                    :key="sign.position" 
+                    :sign="sign.sign"
+                    :state="checkTypedSigns[sign.position]">
                     </sign>
                 </v-row>
             </v-layout>
@@ -82,7 +82,7 @@
                 </v-btn>
             </v-layout>
             <v-layout :style="{visibility: this.$store.getters.hasTestEnded ? 'visible' : 'hidden'}" class="mt-3" row align-center>
-                <v-btn outlined dark block color="primaryLight">  
+                <v-btn @click="nextTest()" outlined dark block color="primaryLight">  
                     Next Test
                     <v-icon right>mdi-arrow-right-drop-circle</v-icon>
                 </v-btn>
@@ -103,15 +103,15 @@ import testResults from '@/components/utils/TestResults';
 export default {
     data: () =>({
         activate: false,
+        typed: '',
+        text: [],
         rows: [],
-        text: `Stoi na stacji lokomotywa ciężka, ogromna i pot z niej spływa`,
         states:{
             none: 'none',
             current: 'current',
             correct: 'correct',
             incorrect: 'incorrect'
         },
-        typed: '',
         items:[
             {
                 link: 'login',
@@ -124,12 +124,11 @@ export default {
                 text: 'Home'
             },
         ],
-        errors: 0
+        errors: 0,
         
     }),
     watch:{
         typed:function(typed){
-            console.log(typed);
             if(typed.length>=this.signs.length){
               this.$store.dispatch('stopClock');
               this.$store.dispatch('setAmountOfSigns', this.signs.length);
@@ -144,13 +143,14 @@ export default {
     },
     computed:{
         signs(){
-            let text = '';
-            let signs = [];
+            let text = [];
             this.rows.forEach((row)=>{
-                text+=row;
+                row.forEach((sign)=>{
+                    text.push(sign.sign);
+                });
             });
-            signs = text.split("");
-            return signs;
+            this.text = text;
+            return text;
         },
         checkTypedSigns(){
             let compare = [];
@@ -185,11 +185,11 @@ export default {
                 if(sign!==typedSigns[index]) this.errors++;
             });
         },
-        divideToRows(){
+        divideToRows(text){
             let signsInRow = 35;
             let row = '';
             let rows = [];
-            let words = this.text.replace(/(\r\n|\n|\r)/g,"").split(" ");
+            let words = text.split(" ");
             let rowLength = 0;
             for(let i=0; i<words.length; i++){
                 if(rowLength + words[i].length < signsInRow){
@@ -206,14 +206,41 @@ export default {
             }
             row = row.replace(/.$/,"\n");
             rows.push(row);
-            this.rows = rows;
+            let position = 0;
+            let rowsOfSigns= [];
+            for(let i = 0; i<rows.length; i++){
+                let rowOfSigns = [];
+                for(let j = 0; j<rows[i].length; j++){
+                    let sign = {
+                        sign: rows[i][j],
+                        row: i,
+                        position: position,
+                    }
+                    position++;
+                    rowOfSigns.push(sign);
+                }
+                rowsOfSigns.push(rowOfSigns);
+            };
+            this.rows = rowsOfSigns;
         },
+        nextTest(){
+            this.typed = '';
+            this.activate = false;
+            this.$store.dispatch('startTest');
+            Vue.axios.post('api/new-test')
+            .then((res)=>{
+                this.divideToRows(res.data);
+            });
+        }
     },
     components: {
         sign, stopwatch, 'test-results': testResults
     },
     mounted(){
-        this.divideToRows();
+        Vue.axios.post('api/new-test')
+        .then((res)=>{
+            this.divideToRows(res.data);
+        });
     }
 }
 </script>

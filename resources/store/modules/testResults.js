@@ -1,7 +1,18 @@
+const INITIAL_STATE = {
+    time : '00:00:00.000',
+    testLenght : 0,
+    errors : 0,
+    accuracy: 0,
+    score: 0,
+    wpm: 0,
+};
 const state = {
     finalTime : '00:00:00.000',
     amountOfSigns : 0,
     errors : 0,
+    accuracy: 0,
+    score: 0,
+    wpm: 0,
 };
 const actions = {
     setFinalTime({commit}, payload){
