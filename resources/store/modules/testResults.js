@@ -7,34 +7,27 @@ const INITIAL_STATE = {
     wpm: 0,
 };
 const state = {
-    finalTime : '00:00:00.000',
-    amountOfSigns : 0,
+    time : '00:00:00.000',
+    testLenght : 0,
     errors : 0,
     accuracy: 0,
     score: 0,
     wpm: 0,
 };
 const actions = {
-    setFinalTime({commit}, payload){
-        commit('setFinalTime', payload);
+    resetTestResults({commit}){
+        commit('resetTestResults');
     },
-    setAmountOfSigns({commit}, payload){
-        commit('setAmountOfSigns', payload);
-    },
-    setErrors({commit}, payload){
-        commit('setErrors', payload);
-    },
+    saveTestResults({commit}, testResults){
+        commit('saveTestResults', testResults);
+    }
 };
 const mutations = {
-    setFinalTime: (state, payload) => (state.finalTime=payload),
-    setAmountOfSigns: (state, payload) =>(state.amountOfSigns=payload),
-    setErrors: (state, payload) =>(state.errors=payload),
-
+    resetTestResults: (state) => (state = INITIAL_STATE),
+    saveTestResults: (state, testResults) =>(state=testResults)
 };
 const getters = {
-    finalTime: (state) => state.finalTime,
-    amountOfSigns: (state) => state.amountOfSigns,
-    errors: (state) => state.errors,
+    testResults: (state) => state
 };
 
 export default {

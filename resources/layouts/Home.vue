@@ -41,7 +41,7 @@ export default {
   components: {
     navigation,
     vfooter,
-    'get-started': getStarted,
+    "get-started": getStarted,
     about,
     contact,
   },

@@ -15,7 +15,8 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
-        If you have any questions about the program, you may reach out to us at email@email.com.
+        If you have any questions about the program, you may reach out to us at
+        email@email.com.
       </v-card-text>
 
       <v-divider></v-divider>

@@ -20,20 +20,17 @@
       <v-divider />
 
       <v-list dense>
-          <v-list-item @click.prevent="goToLogin()">
-            <v-list-item-icon class="justify-center">
-              <v-icon>mdi-account-outline</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title class="subtitile-1">
-                Login
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+        <v-list-item @click.prevent="goToLogin()">
+          <v-list-item-icon class="justify-center">
+            <v-icon>mdi-account-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="subtitile-1"> Login </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
-
           @click="$vuetify.goTo(item.link)"
         >
           <v-list-item-icon class="justify-center">
@@ -66,11 +63,16 @@
         v-if="isXs"
       />
       <div v-else>
-        <v-btn v-for="(item, index) in items" :key="index" text @click="$vuetify.goTo(item.link)">
-          <v-icon left>{{item.icon}}</v-icon>
-          <span class="mr-2">{{item.name}}</span>
+        <v-btn
+          v-for="(item, index) in items"
+          :key="index"
+          text
+          @click="$vuetify.goTo(item.link)"
+        >
+          <v-icon left>{{ item.icon }}</v-icon>
+          <span class="mr-2">{{ item.name }}</span>
         </v-btn>
-        <router-link to="/login" style="text-decoration: none; color: inherit;">
+        <router-link to="/login" style="text-decoration: none; color: inherit">
           <v-btn>
             <v-icon left>mdi-account-outline</v-icon>
             Login
@@ -105,9 +107,9 @@
   height: 80px !important;
   padding-top: 10px;
 }
-.drawer-logo{
-  height:20px;
-  width:40px;
+.drawer-logo {
+  height: 20px;
+  width: 40px;
   background-size: cover;
 }
 </style>
@@ -119,24 +121,24 @@ export default {
     isXs: false,
     items: [
       {
-        icon:"mdi-home-outline",
-        name:"Home",
-        link:"#get-started"
+        icon: "mdi-home-outline",
+        name: "Home",
+        link: "#get-started",
       },
       {
-        icon:"mdi-rocket-launch-outline",
-        name:"Get Started",
-        link:"#features"
+        icon: "mdi-rocket-launch-outline",
+        name: "Get Started",
+        link: "#features",
       },
       {
-        icon:"mdi-information-outline",
-        name:"About",
-        link:"#about"
+        icon: "mdi-information-outline",
+        name: "About",
+        link: "#about",
       },
       {
-        icon:"mdi-email-outline",
-        name:"Contact",
-        link:"#contact"
+        icon: "mdi-email-outline",
+        name: "Contact",
+        link: "#contact",
       },
     ],
   }),
@@ -148,9 +150,9 @@ export default {
     onResize() {
       this.isXs = window.innerWidth < 960;
     },
-    goToLogin(){
-      this.$router.push({name: 'login'});
-    }
+    goToLogin() {
+      this.$router.push({ name: "login" });
+    },
   },
 
   watch: {

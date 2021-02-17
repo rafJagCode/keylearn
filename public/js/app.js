@@ -2069,11 +2069,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2113,6 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2237,6 +2233,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2257,20 +2262,21 @@ __webpack_require__.r(__webpack_exports__);
         icon: "graph-bar",
         caption: "analyze the results",
         description: "Sign up to check your learning results."
-      }]
+      }],
+      isIconShaking: false
     };
   },
   methods: {
     shakeOn: function shakeOn() {
-      this.$store.dispatch('turnShakingOn');
+      this.isIconShaking = true;
     },
     shakeOff: function shakeOff() {
-      this.$store.dispatch('turnShakingOff');
+      this.isIconShaking = false;
     }
   },
   components: {
-    'about-card': _components_utils_AboutCard__WEBPACK_IMPORTED_MODULE_0__["default"],
-    'typing-machine-icon': _components_utils_TypingMachineIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
+    "about-card": _components_utils_AboutCard__WEBPACK_IMPORTED_MODULE_0__["default"],
+    "typing-machine-icon": _components_utils_TypingMachineIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -2285,6 +2291,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2433,7 +2441,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     goToLogin: function goToLogin() {
       this.$router.push({
-        name: 'login'
+        name: "login"
       });
     }
   },
@@ -2562,13 +2570,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AboutCard",
-  props: ['size', 'icon', 'caption', 'description'],
+  props: ["size", "icon", "caption", "description"],
   computed: {
     scssVars: function scssVars() {
       return {
-        '--size': this.size
+        "--size": this.size
       };
     },
     iconPath: function iconPath() {
@@ -2597,24 +2607,24 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       states: {
-        none: 'sign--none',
-        current: 'sign--current',
-        correct: 'sign--correct',
-        incorrect: 'sign--incorrect'
+        none: "sign--none",
+        current: "sign--current",
+        correct: "sign--correct",
+        incorrect: "sign--incorrect"
       }
     };
   },
   props: {
-    sign: '',
+    sign: "",
     state: {
-      "default": 'none'
+      "default": "none"
     }
   },
   computed: {
     displayedSign: function displayedSign() {
-      if (this.sign === '-') return 'mdi-minus';
-      if (this.sign === ' ') return 'mdi-keyboard-space';
-      if (this.sign === '\n') return 'mdi-keyboard-return';
+      if (this.sign === "-") return "mdi-minus";
+      if (this.sign === " ") return "mdi-keyboard-space";
+      if (this.sign === "\n") return "mdi-keyboard-return";
       return this.sign;
     }
   }
@@ -2647,15 +2657,6 @@ __webpack_require__.r(__webpack_exports__);
       started: null,
       running: false
     };
-  },
-  watch: {
-    '$store.getters.isClockStarted': function $storeGettersIsClockStarted(isClockStarted) {
-      if (isClockStarted && !this.$store.getters.hasTestEnded) this.start();else {
-        this.stop();
-        this.$store.dispatch('setFinalTime', this.time);
-        this.$store.dispatch('endTest');
-      }
-    }
   },
   methods: {
     start: function start() {
@@ -2752,51 +2753,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      testResults: []
+      testResultsData: []
     };
   },
-  mounted: function mounted() {
-    var seconds = this.textToSeconds(this.$store.getters.finalTime);
-    var cpm = this.$store.getters.amountOfSigns * 60 / seconds;
-    var wpm = cpm / 5;
-    var accuracy = (this.$store.getters.amountOfSigns - this.$store.getters.errors) / this.$store.getters.amountOfSigns * 100;
-    this.testResults = [{
-      title: 'Time',
-      value: this.$store.getters.finalTime,
-      icon: 'mdi-clock-time-four-outline'
-    }, {
-      title: 'Test Lenght',
-      value: this.$store.getters.amountOfSigns,
-      icon: 'mdi-ruler'
-    }, {
-      title: 'Errors',
-      value: this.$store.getters.errors,
-      icon: 'mdi-alert-outline'
-    }, {
-      title: 'CPM',
-      value: Math.round(cpm),
-      icon: 'mdi-speedometer'
-    }, {
-      title: 'WPM',
-      value: Math.round(wpm),
-      icon: 'mdi-speedometer'
-    }, {
-      title: 'Accuracy',
-      value: Math.round(accuracy) + '%',
-      icon: 'mdi-bullseye-arrow'
-    }];
+  props: {
+    testResults: null
   },
-  methods: {
-    textToSeconds: function textToSeconds(text) {
-      var textDivided = text.split(':');
-      var seconds = parseFloat(textDivided[0]) * 3600 + parseFloat(textDivided[1]) * 60 + parseFloat(textDivided[2]);
-      return seconds;
-    }
+  mounted: function mounted() {
+    this.testResultsData = [{
+      title: "Time",
+      value: this.testResults.time,
+      icon: "mdi-clock-time-four-outline"
+    }, {
+      title: "Test Length",
+      value: this.testResults.testLength,
+      icon: "mdi-ruler"
+    }, {
+      title: "Errors",
+      value: "(all/uncorrected)" + "\n" + this.testResults.allErrors + "/" + this.testResults.uncorrectedErrors,
+      icon: "mdi-alert-outline"
+    }, {
+      title: "Score",
+      value: this.testResults.score,
+      icon: "mdi-medal"
+    }, {
+      title: "WPM",
+      value: this.testResults.wpm,
+      icon: "mdi-speedometer"
+    }, {
+      title: "Accuracy",
+      value: this.testResults.accuracy,
+      icon: "mdi-bullseye-arrow"
+    }];
   }
 });
 
@@ -2819,8 +2810,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'TypingMachineIcon'
+  name: "TypingMachineIcon",
+  props: {
+    isIconShaking: false
+  }
 });
 
 /***/ }),
@@ -2850,7 +2846,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    Vue.axios.get('/api/user').then(function (res) {
+    Vue.axios.get("/api/user").then(function (res) {
       console.log(res.data);
       _this.user = res.data;
     })["catch"](function (error) {
@@ -2861,9 +2857,9 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this2 = this;
 
-      Vue.axios.post('/api/logout').then(function () {
+      Vue.axios.post("/api/logout").then(function () {
         _this2.$router.push({
-          name: 'home'
+          name: "home"
         });
       });
     }
@@ -2926,7 +2922,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     navigation: _components_home_Navigation__WEBPACK_IMPORTED_MODULE_0__["default"],
     vfooter: _components_home_Footer__WEBPACK_IMPORTED_MODULE_1__["default"],
-    'get-started': _components_home_GetStarted__WEBPACK_IMPORTED_MODULE_2__["default"],
+    "get-started": _components_home_GetStarted__WEBPACK_IMPORTED_MODULE_2__["default"],
     about: _components_home_AboutSection__WEBPACK_IMPORTED_MODULE_3__["default"],
     contact: _components_home_ContactSection__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
@@ -3044,25 +3040,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       valid: true,
-      email: '',
+      email: "",
       password: "",
       emailRules: [function (v) {
-        return !!v || 'E-mail is required';
+        return !!v || "E-mail is required";
       }, function (v) {
-        return /.+@.+\..+/.test(v) || 'E-mail must be valid';
+        return /.+@.+\..+/.test(v) || "E-mail must be valid";
       }],
       passwordRules: [function (v) {
-        return !!v || 'Password is required';
+        return !!v || "Password is required";
       }]
     };
   },
@@ -3071,12 +3061,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (!this.$refs.form.validate()) return;
-      Vue.axios.post('api/login', {
+      Vue.axios.post("api/login", {
         email: this.email,
         password: this.password
       }).then(function () {
         _this.$router.push({
-          name: 'dashboard'
+          name: "dashboard"
         });
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
@@ -3352,41 +3342,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      items: [{
+        link: "login",
+        icon: "mdi-account-outline",
+        text: "Login"
+      }, {
+        link: "home",
+        icon: "mdi-home-outline",
+        text: "Home"
+      }],
       activate: false,
-      typed: '',
+      hasTestEnded: false,
+      beforeKeyPress: "",
+      typed: "",
       text: [],
       rows: [],
-      states: {
-        none: 'none',
-        current: 'current',
-        correct: 'correct',
-        incorrect: 'incorrect'
-      },
-      items: [{
-        link: 'login',
-        icon: 'mdi-account-outline',
-        text: 'Login'
-      }, {
-        link: 'home',
-        icon: 'mdi-home-outline',
-        text: 'Home'
-      }],
-      errors: 0
+      testResults: {
+        time: "00:00:00.000",
+        testLength: 0,
+        wpm: 0,
+        uncorrectedErrors: 0,
+        allErrors: 0,
+        accuracy: 0,
+        score: 0
+      }
     };
   },
   watch: {
     typed: function typed(_typed) {
       if (_typed.length >= this.signs.length) {
-        this.$store.dispatch('stopClock');
-        this.$store.dispatch('setAmountOfSigns', this.signs.length);
-        this.checkErrors();
-        this.$store.dispatch('setErrors', this.errors);
+        this.hasTestEnded = true;
+        this.stopClock();
+        this.calculateTestResults();
       }
     },
     activate: function activate(_activate) {
@@ -3405,21 +3415,19 @@ __webpack_require__.r(__webpack_exports__);
       return text;
     },
     checkTypedSigns: function checkTypedSigns() {
-      var _this = this;
-
       var compare = [];
       var typedSigns = this.typed.split("");
       this.signs.forEach(function (sign, index) {
-        if (index === typedSigns.length) compare.push(_this.states.current);else if (index > typedSigns.length) compare.push(_this.states.none);else if (sign !== typedSigns[index]) compare.push(_this.states.incorrect);else compare.push(_this.states.correct);
+        if (index === typedSigns.length) compare.push("current");else if (index > typedSigns.length) compare.push("none");else if (sign !== typedSigns[index]) compare.push("incorrect");else compare.push("correct");
       });
-      compare.push(this.states.none);
+      compare.push("none");
       return compare;
     },
     progress: function progress() {
       return this.typed.length / this.text.length * 100;
     },
     color: function color() {
-      return ['error', 'warning', 'success'][Math.floor(this.progress / 40)];
+      return ["error", "warning", "success"][Math.floor(this.progress / 40)];
     }
   },
   methods: {
@@ -3428,21 +3436,21 @@ __webpack_require__.r(__webpack_exports__);
         name: link
       });
     },
-    startTest: function startTest() {
-      if (this.$store.getters.isClockStarted) return;
-      this.$store.dispatch('startClock');
+    resetData: function resetData() {
+      this.activate = false;
+      this.hasTestEnded = false;
+      this.beforeKeyPress = "";
+      this.typed = "";
     },
-    checkErrors: function checkErrors() {
-      var _this2 = this;
-
-      var typedSigns = this.typed.split("");
-      this.signs.forEach(function (sign, index) {
-        if (sign !== typedSigns[index]) _this2.errors++;
-      });
+    resetTestResults: function resetTestResults() {
+      this.$store.dispatch("resetTestResults");
+    },
+    resetClock: function resetClock() {
+      this.$refs.stopwatch.reset();
     },
     divideToRows: function divideToRows(text) {
       var signsInRow = 35;
-      var row = '';
+      var row = "";
       var rows = [];
       var words = text.split(" ");
       var rowLength = 0;
@@ -3454,7 +3462,7 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           row = row.replace(/.$/, "\n");
           rows.push(row);
-          row = '';
+          row = "";
           row += words[i] + " ";
           rowLength = words[i].length + 1;
         }
@@ -3481,31 +3489,84 @@ __webpack_require__.r(__webpack_exports__);
         rowsOfSigns.push(rowOfSigns);
       }
 
-      ;
       this.rows = rowsOfSigns;
     },
-    nextTest: function nextTest() {
-      var _this3 = this;
+    getNewTest: function getNewTest() {
+      var _this = this;
 
-      this.typed = '';
-      this.activate = false;
-      this.$store.dispatch('startTest');
-      Vue.axios.post('api/new-test').then(function (res) {
-        _this3.divideToRows(res.data);
+      Vue.axios.post("api/new-test").then(function (res) {
+        _this.divideToRows(res.data);
       });
+    },
+    startClock: function startClock() {
+      if (this.$refs.stopwatch.running) return;
+      this.$refs.stopwatch.start();
+    },
+    wasBackspaceClicked: function wasBackspaceClicked() {
+      if (this.beforeKeyPress.length + 1 > this.typed.length) return true;
+      return false;
+    },
+    //Tu skończyłem prace z wykrywaniem błędów w czasie pisania
+    checkInput: function checkInput() {
+      if (this.wasBackspaceClicked()) {
+        this.beforeKeyPress = this.typed;
+        return;
+      } //check
+
+
+      if (this.typed.slice(-1) !== this.signs[this.typed.length - 1]) this.testResults.allErrors++;
+      this.beforeKeyPress = this.typed;
+    },
+    stopClock: function stopClock() {
+      this.$refs.stopwatch.stop();
+    },
+    textToSeconds: function textToSeconds(text) {
+      var textDivided = text.split(":");
+      var seconds = parseFloat(textDivided[0]) * 3600 + parseFloat(textDivided[1]) * 60 + parseFloat(textDivided[2]);
+      return seconds;
+    },
+    uncorrectedErrors: function uncorrectedErrors() {
+      var errors = 0;
+      var typedSigns = this.typed.split("");
+      this.signs.forEach(function (sign, index) {
+        if (sign !== typedSigns[index]) errors++;
+      });
+      return errors;
+    },
+    calculateTestResults: function calculateTestResults() {
+      var uncorrectedErrors = this.uncorrectedErrors();
+      var time = this.$refs.stopwatch.time;
+      var seconds = this.textToSeconds(time);
+      var minutes = seconds / 60;
+      var testLength = this.signs.length;
+      var cpmGross = testLength / minutes;
+      var wpmGross = cpmGross / 5;
+      var wpmNet = wpmGross - uncorrectedErrors / minutes;
+      var allErrors = this.testResults.allErrors;
+      this.testResults.time = time;
+      this.testResults.testLength = testLength;
+      this.testResults.wpm = Math.round(wpmNet);
+      this.testResults.uncorrectedErrors = uncorrectedErrors;
+      this.testResults.accuracy = Math.round((testLength - uncorrectedErrors) / testLength * 100) + "%"; //score
+
+      var wpmWeight = 100;
+      var lenghtWeight = 1;
+      var errorsWeight = 10;
+      this.testResults.score = Math.round((wpmWeight * wpmNet + lenghtWeight * testLength - errorsWeight * allErrors) / (wpmWeight + lenghtWeight + errorsWeight));
+    },
+    nextTest: function nextTest() {
+      this.resetData();
+      this.resetClock();
+      this.getNewTest();
     }
   },
   components: {
     sign: _components_utils_Sign__WEBPACK_IMPORTED_MODULE_1__["default"],
     stopwatch: _components_utils_Stopwatch__WEBPACK_IMPORTED_MODULE_0__["default"],
-    'test-results': _components_utils_TestResults__WEBPACK_IMPORTED_MODULE_2__["default"]
+    "test-results": _components_utils_TestResults__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
-    var _this4 = this;
-
-    Vue.axios.post('api/new-test').then(function (res) {
-      _this4.divideToRows(res.data);
-    });
+    this.getNewTest();
   }
 });
 
@@ -3563,7 +3624,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#about[data-v-00f84567] {\r\n  background-image: linear-gradient(rgba(255, 255, 255, 0.15),\r\n                     rgba(255, 255, 255, 0.15)),\r\n                     url(" + escape(__webpack_require__(/*! @/assets/img/bgAbout.jpg */ "./resources/assets/img/bgAbout.jpg")) + ");\r\n  background-attachment: fixed;\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\r\n  background-position: center;\r\n  height:fit-content;\r\n  padding-bottom: 10px;\n}\n#about .container[data-v-00f84567],\r\n#about .row[data-v-00f84567] {\r\n  height: 100%;\n}\n.wave-rotated[data-v-00f84567]{\r\n  position: absolute;\r\n  top:0;\r\n  width:100%;\r\n  transform: rotate(180deg);\n}\n.wave-rotated .v-image[data-v-00f84567]{\r\n  height:30px;\n}\n.keyboard-icon[data-v-00f84567]{\r\n  height:300px;\r\n  width:300px;\n}\n.about__text[data-v-00f84567]{\r\n  \r\n  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,\r\n                -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;\n}\r\n", ""]);
+exports.push([module.i, "\n#about[data-v-00f84567] {\r\n  background-image: linear-gradient(\r\n      rgba(255, 255, 255, 0.15),\r\n      rgba(255, 255, 255, 0.15)\r\n    ),\r\n    url(" + escape(__webpack_require__(/*! @/assets/img/bgAbout.jpg */ "./resources/assets/img/bgAbout.jpg")) + ");\r\n  background-attachment: fixed;\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\r\n  background-position: center;\r\n  height: fit-content;\r\n  padding-bottom: 10px;\n}\n#about .container[data-v-00f84567],\r\n#about .row[data-v-00f84567] {\r\n  height: 100%;\n}\n.wave-rotated[data-v-00f84567] {\r\n  position: absolute;\r\n  top: 0;\r\n  width: 100%;\r\n  transform: rotate(180deg);\n}\n.wave-rotated .v-image[data-v-00f84567] {\r\n  height: 30px;\n}\n.keyboard-icon[data-v-00f84567] {\r\n  height: 300px;\r\n  width: 300px;\n}\n.about__text[data-v-00f84567] {\r\n  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,\r\n    1px 1px 0 black, -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black,\r\n    1px 1px 5px black;\n}\r\n", ""]);
 
 // exports
 
@@ -3582,7 +3643,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#contact[data-v-10f7ed98] {\r\n  background-color: white;\n}\n.svg-border-waves .v-image[data-v-10f7ed98] {\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 0;\r\n  height: 3rem;\r\n  width: 100%;\r\n  overflow: hidden;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#contact[data-v-10f7ed98] {\r\n  background-color: white;\n}\n.svg-border-waves .v-image[data-v-10f7ed98] {\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 0;\r\n  height: 3rem;\r\n  width: 100%;\r\n  overflow: hidden;\n}\r\n", ""]);
 
 // exports
 
@@ -3620,7 +3681,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.svg-border-waves .v-image {\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 0;\r\n  height: 3rem;\r\n  width: 100%;\r\n  overflow: hidden;\n}\n#get-started {\r\n  z-index: 0;\n}\n.get-started__text{\r\n  text-shadow: -0.5px -0.5px 0.5px #0095a6, 0.5px -0.5px 0.5px #0095a6, -0.5px 0.5px 0.5px #0095a6, 0.5px 0.5px 0.5px #0095a6\n}\nsection {\r\n  position: relative;\n}\r\n", ""]);
+exports.push([module.i, "\n.svg-border-waves .v-image {\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 0;\r\n  height: 3rem;\r\n  width: 100%;\r\n  overflow: hidden;\n}\n#get-started {\r\n  z-index: 0;\n}\n.get-started__text {\r\n  text-shadow: -0.5px -0.5px 0.5px #0095a6, 0.5px -0.5px 0.5px #0095a6,\r\n    -0.5px 0.5px 0.5px #0095a6, 0.5px 0.5px 0.5px #0095a6;\n}\nsection {\r\n  position: relative;\n}\r\n", ""]);
 
 // exports
 
@@ -3639,7 +3700,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-toolbar[data-v-ead6eeba] {\r\n  transition: 0.6s;\n}\n.expand[data-v-ead6eeba] {\r\n  height: 80px !important;\r\n  padding-top: 10px;\n}\n.drawer-logo[data-v-ead6eeba]{\r\n  height:20px;\r\n  width:40px;\r\n  background-size: cover;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-toolbar[data-v-ead6eeba] {\r\n  transition: 0.6s;\n}\n.expand[data-v-ead6eeba] {\r\n  height: 80px !important;\r\n  padding-top: 10px;\n}\n.drawer-logo[data-v-ead6eeba] {\r\n  height: 20px;\r\n  width: 40px;\r\n  background-size: cover;\n}\r\n", ""]);
 
 // exports
 
@@ -3658,7 +3719,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.about-card[data-v-2b5061fe]{\n    position: relative;\n    width: calc(var(--size)*1px);\n    height: calc(var(--size)*1px);\n    display:flex;\n    flex-direction: column;\n    margin: 0 auto;\n}\n.about-card__caption[data-v-2b5061fe]{\n    font-size: 25px;\n    position: absolute;\n    align-self: center;\n    color: #0095a6;\n    text-transform: uppercase;\n    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white,\n                 -1px -1px 5px #0095a6, 1px -1px 5px #0095a6, -1px 1px 5px #0095a6, 1px 1px 5px #0095a6;\n    z-index:3;\n    font-weight: bold;\n}\n.about-card__description[data-v-2b5061fe]{\n    position: absolute;\n    top:0;\n    width: 100%;\n    height: 100%;\n    transform: scaleY(0);\n    transform-origin: top center;\n    transition: all 0.3s linear;\n    overflow: hidden;\n}\n.about-card__description-text[data-v-2b5061fe]{\n    position: absolute;\n    width:90%;\n    top: 50%;\n    right: 50%;\n    transform: translate(50%, -50%);\n    margin: 0 auto;\n    color: white;\n    text-align: center;\n    font-size: 20px;\n    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black,\n                -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;\n}\n.about-card__content[data-v-2b5061fe]{\n    align-self: center;\n    margin: auto;\n    position: relative;\n    width: calc(var(--size)*0.8px);\n    height: calc(var(--size)*0.8px);\n    cursor: pointer;\n    z-index:2;\n    transition: all 0.3s linear;\n    border-radius: 50%;\n}\n.about-card__content:hover .about-card__description[data-v-2b5061fe]{\n            animation: dropping-card-data-v-2b5061fe .3s linear 0s 1 normal;\n            animation-fill-mode: forwards;\n}\n.about-card__card-icon[data-v-2b5061fe]{\n    position: absolute;\n    top: 50%;\n    right: 50%;\n    transform: translate(50%, -50%);\n    width: 80%;\n    background-image: var(--iconURL);\n    background-size: contain;\n    z-index: 0;\n}\n@keyframes dropping-card-data-v-2b5061fe{\n0% {\n        transform: scaleY(0);\n}\n25%{\n        transform: scaleY(0.5);\n}\n50%{\n        transform: scaleY(1);\n}\n75%{\n        transform: scaleY(0.5);\n}\n100%{\n        transform: scaleY(1);\n}\n}\n", ""]);
+exports.push([module.i, "\n.about-card[data-v-2b5061fe] {\r\n  position: relative;\r\n  width: calc(var(--size) * 1px);\r\n  height: calc(var(--size) * 1px);\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin: 0 auto;\n}\n.about-card__caption[data-v-2b5061fe] {\r\n  font-size: 25px;\r\n  position: absolute;\r\n  align-self: center;\r\n  color: #0095a6;\r\n  text-transform: uppercase;\r\n  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,\r\n    1px 1px 0 white, -1px -1px 5px #0095a6, 1px -1px 5px #0095a6,\r\n    -1px 1px 5px #0095a6, 1px 1px 5px #0095a6;\r\n  z-index: 3;\r\n  font-weight: bold;\n}\n.about-card__description[data-v-2b5061fe] {\r\n  position: absolute;\r\n  top: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  transform: scaleY(0);\r\n  transform-origin: top center;\r\n  transition: all 0.3s linear;\r\n  overflow: hidden;\n}\n.about-card__description-text[data-v-2b5061fe] {\r\n  position: absolute;\r\n  width: 90%;\r\n  top: 50%;\r\n  right: 50%;\r\n  transform: translate(50%, -50%);\r\n  margin: 0 auto;\r\n  color: white;\r\n  text-align: center;\r\n  font-size: 20px;\r\n  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,\r\n    1px 1px 0 black, -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black,\r\n    1px 1px 5px black;\n}\n.about-card__content[data-v-2b5061fe] {\r\n  align-self: center;\r\n  margin: auto;\r\n  position: relative;\r\n  width: calc(var(--size) * 0.8px);\r\n  height: calc(var(--size) * 0.8px);\r\n  cursor: pointer;\r\n  z-index: 2;\r\n  transition: all 0.3s linear;\r\n  border-radius: 50%;\n}\n.about-card__content:hover .about-card__description[data-v-2b5061fe] {\r\n  animation: dropping-card-data-v-2b5061fe 0.3s linear 0s 1 normal;\r\n  animation-fill-mode: forwards;\n}\n.about-card__card-icon[data-v-2b5061fe] {\r\n  position: absolute;\r\n  top: 50%;\r\n  right: 50%;\r\n  transform: translate(50%, -50%);\r\n  width: 80%;\r\n  background-image: var(--iconURL);\r\n  background-size: contain;\r\n  z-index: 0;\n}\n@keyframes dropping-card-data-v-2b5061fe {\n0% {\r\n    transform: scaleY(0);\n}\n25% {\r\n    transform: scaleY(0.5);\n}\n50% {\r\n    transform: scaleY(1);\n}\n75% {\r\n    transform: scaleY(0.5);\n}\n100% {\r\n    transform: scaleY(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -3677,7 +3738,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=PT+Mono&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n.sign[data-v-ef609ae8]{\r\n        font-size:20px;\r\n        color:#E2DADB;\r\n        font-family: 'PT Mono', monospace;\r\n        border-radius: 10%;\r\n        margin: 0.5px;\r\n        width: 20px;\r\n        height: 30px;\r\n        text-align: center;\r\n        vertical-align: middle;\r\n        font-style: normal;\n}\n.sign--none[data-v-ef609ae8]{\r\n        background-color:  #252C55;\n}\n.sign--current[data-v-ef609ae8]{\r\n        border-bottom: 2px solid #52C6F4;\n}\n.sign--correct[data-v-ef609ae8]{\r\n        background-color: green;\n}\n.sign--incorrect[data-v-ef609ae8]{\r\n        background-color: #CF1259 ;\n}\r\n", ""]);
+exports.push([module.i, "\n.sign[data-v-ef609ae8] {\r\n  font-size: 20px;\r\n  color: #e2dadb;\r\n  font-family: \"PT Mono\", monospace;\r\n  border-radius: 10%;\r\n  margin: 0.5px;\r\n  width: 20px;\r\n  height: 30px;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  font-style: normal;\n}\n.sign--none[data-v-ef609ae8] {\r\n  background-color: #252c55;\n}\n.sign--current[data-v-ef609ae8] {\r\n  border-bottom: 2px solid #52c6f4;\n}\n.sign--correct[data-v-ef609ae8] {\r\n  background-color: green;\n}\n.sign--incorrect[data-v-ef609ae8] {\r\n  background-color: #cf1259;\n}\r\n", ""]);
 
 // exports
 
@@ -3715,7 +3776,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n.icon[data-v-0a2c0305]{\r\n    position: relative;\r\n    top:-20px;\r\n    left:20px;\n}\n.name[data-v-0a2c0305]{\r\n    font-family: 'Luckiest Guy', cursive;\n}\n.value[data-v-0a2c0305]{\r\n    font-family: 'Luckiest Guy', cursive;\r\n    font-size: 15px;\n}\r\n", ""]);
+exports.push([module.i, "\n.icon[data-v-0a2c0305] {\r\n  position: relative;\r\n  top: -20px;\r\n  left: 20px;\n}\n.name[data-v-0a2c0305] {\r\n  font-family: \"Luckiest Guy\", cursive;\r\n  font-size: 18px;\n}\n.value[data-v-0a2c0305] {\r\n  text-align: center;\r\n  white-space: pre-line;\r\n  font-family: \"Luckiest Guy\", cursive;\r\n  font-size: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -3734,7 +3795,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.typing-machine-icon__svg[data-v-7491ca2a]{\r\n    margin: 0 auto;\r\n    width: 250px;\r\n    transform: rotate(-5deg);\n}\n.typing-machine-icon__svg--shaking[data-v-7491ca2a]{\r\n    animation: shake-data-v-7491ca2a 1s cubic-bezier(.36,.07,.19,.97) infinite both;\r\n    transform: translate3d(0, 0, 0);\r\n    backface-visibility: hidden;\r\n    perspective: 1000px;\n}\n@keyframes shake-data-v-7491ca2a {\n10%, 90% {\r\n        transform: translate3d(-1px, 0, 0);\n}\n20%, 80% {\r\n        transform: translate3d(2px, 0, 0);\n}\n30%, 50%, 70% {\r\n        transform: translate3d(-4px, 0, 0);\n}\n40%, 60% {\r\n        transform: translate3d(4px, 0, 0);\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.typing-machine-icon__svg[data-v-7491ca2a] {\r\n  margin: 0 auto;\r\n  width: 250px;\r\n  transform: rotate(-5deg);\n}\n.typing-machine-icon__svg--shaking[data-v-7491ca2a] {\r\n  animation: shake-data-v-7491ca2a 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite both;\r\n  transform: translate3d(0, 0, 0);\r\n  backface-visibility: hidden;\r\n  perspective: 1000px;\n}\n@keyframes shake-data-v-7491ca2a {\n10%,\r\n  90% {\r\n    transform: translate3d(-1px, 0, 0);\n}\n20%,\r\n  80% {\r\n    transform: translate3d(2px, 0, 0);\n}\n30%,\r\n  50%,\r\n  70% {\r\n    transform: translate3d(-4px, 0, 0);\n}\n40%,\r\n  60% {\r\n    transform: translate3d(4px, 0, 0);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -3754,7 +3815,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.register[data-v-88f06b8a]{\r\n    background-image: url(" + escape(__webpack_require__(/*! @/assets/img/bg-keyboard.jpg */ "./resources/assets/img/bg-keyboard.jpg")) + ");\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\n}\n.register__label[data-v-88f06b8a]{\r\n  height:80px;\n}\n.register__logo[data-v-88f06b8a]{\r\n  margin-right:20px;\r\n  height:50px;\r\n  background-size:cover;\n}\n.home-btn[data-v-88f06b8a]:hover{\r\n  background-color: #1f7192;\r\n  transition: 0.3s;\n}\n.signup-btn[data-v-88f06b8a]{\r\n  background-color: #effaff;\r\n  transition: 0.3s;\n}\n.signup-btn[data-v-88f06b8a]:hover{\r\n  color: #effaff!important;\r\n  background-color: #07506e;\r\n  transition: 0.3s;\n}\r\n", ""]);
+exports.push([module.i, "\n.register[data-v-88f06b8a] {\r\n  background-image: url(" + escape(__webpack_require__(/*! @/assets/img/bg-keyboard.jpg */ "./resources/assets/img/bg-keyboard.jpg")) + ");\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\n}\n.register__label[data-v-88f06b8a] {\r\n  height: 80px;\n}\n.register__logo[data-v-88f06b8a] {\r\n  margin-right: 20px;\r\n  height: 50px;\r\n  background-size: cover;\n}\n.home-btn[data-v-88f06b8a]:hover {\r\n  background-color: #1f7192;\r\n  transition: 0.3s;\n}\n.signup-btn[data-v-88f06b8a] {\r\n  background-color: #effaff;\r\n  transition: 0.3s;\n}\n.signup-btn[data-v-88f06b8a]:hover {\r\n  color: #effaff !important;\r\n  background-color: #07506e;\r\n  transition: 0.3s;\n}\r\n", ""]);
 
 // exports
 
@@ -3793,7 +3854,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#test[data-v-4910da30]{\n    background-color: #252C55;\n}\n.list--hover[data-v-4910da30]{\n    background-color: #323C71;\n}\n", ""]);
+exports.push([module.i, "\n#test[data-v-4910da30] {\r\n  background-color: #252c55;\n}\n.list--hover[data-v-4910da30] {\r\n  background-color: #323c71;\n}\r\n", ""]);
 
 // exports
 
@@ -5395,14 +5456,14 @@ var render = function() {
                             { staticClass: "font-weight-light display-1 mb-2" },
                             [
                               _vm._v(
-                                "KeyLearn - most effective way to learn how to type."
+                                "\n              KeyLearn - most effective way to learn how to type.\n            "
                               )
                             ]
                           ),
                           _vm._v(" "),
                           _c("h1", { staticClass: "font-weight-light" }, [
                             _vm._v(
-                              "\n              Keep practicing by rewriting sets of words.\n              It really doesn't take much to learn, a few minutes a day \n              for one to two weeks. Check your progress by looking into your \n              typing statistics and adjust your test settings to improve \n              your progression.\n            "
+                              "\n              Keep practicing by rewriting sets of words. It really doesn't\n              take much to learn, a few minutes a day for one to two weeks.\n              Check your progress by looking into your typing statistics and\n              adjust your test settings to improve your progression.\n            "
                             )
                           ])
                         ]
@@ -5485,20 +5546,16 @@ var render = function() {
                         _vm._v(" "),
                         _c("h3", { staticClass: "font-weight-light mt-3" }, [
                           _vm._v(
-                            "\n              You have questions, need help or have found a mistake?\n              Then do not hesitate to contact us.\n            "
+                            "\n              You have questions, need help or have found a mistake? Then do\n              not hesitate to contact us.\n            "
                           )
                         ]),
                         _vm._v(" "),
                         _c("h3", { staticClass: "font-weight-light mt-3" }, [
-                          _vm._v(
-                            "\n              Telephone: +xx xxx-xxx-xxx\n            "
-                          )
+                          _vm._v("Telephone: +xx xxx-xxx-xxx")
                         ]),
                         _vm._v(" "),
                         _c("h3", { staticClass: "font-weight-light" }, [
-                          _vm._v(
-                            "\n              Email: email@email.com\n            "
-                          )
+                          _vm._v("Email: email@email.com")
                         ])
                       ]),
                       _vm._v(" "),
@@ -5673,7 +5730,7 @@ var render = function() {
           _vm._v(" "),
           _c("v-card-text", { staticClass: "white--text pt-0" }, [
             _vm._v(
-              "\n      If you have any questions about the program, you may reach out to us at email@email.com.\n    "
+              "\n      If you have any questions about the program, you may reach out to us at\n      email@email.com.\n    "
             )
           ]),
           _vm._v(" "),
@@ -5748,7 +5805,7 @@ var render = function() {
                               staticClass:
                                 "get-started__text display-3 font-weight-bold mb-4"
                             },
-                            [_vm._v("KeyLearn")]
+                            [_vm._v("\n              KeyLearn\n            ")]
                           ),
                           _vm._v(" "),
                           _c(
@@ -5759,7 +5816,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                  Easily practice your typing skills\n                  and improve your typing speed!\n                "
+                                "\n              Easily practice your typing skills and improve your typing\n              speed!\n            "
                               )
                             ]
                           ),
@@ -5790,7 +5847,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                  Get Started\n                  "
+                                "\n              Get Started\n              "
                               ),
                               _c("v-icon", { staticClass: "ml-2" }, [
                                 _vm._v("mdi-arrow-down")
@@ -5805,7 +5862,11 @@ var render = function() {
                       _c(
                         "v-col",
                         { attrs: { cols: "12", md: "8" } },
-                        [_c("typing-machine-icon")],
+                        [
+                          _c("typing-machine-icon", {
+                            attrs: { isIconShaking: _vm.isIconShaking }
+                          })
+                        ],
                         1
                       )
                     ],
@@ -5979,7 +6040,7 @@ var render = function() {
                     "v-list-item-content",
                     [
                       _c("v-list-item-title", { staticClass: "subtitile-1" }, [
-                        _vm._v("\n              Login\n            ")
+                        _vm._v(" Login ")
                       ])
                     ],
                     1
@@ -6187,7 +6248,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("v-icon", { staticClass: "sign", class: _vm.states[_vm.state] }, [
-    _vm._v("\n    " + _vm._s(_vm.displayedSign) + "\n")
+    _vm._v("\n  " + _vm._s(_vm.displayedSign) + "\n")
   ])
 }
 var staticRenderFns = []
@@ -6244,14 +6305,14 @@ var render = function() {
       _c(
         "v-layout",
         { attrs: { row: "" } },
-        _vm._l(_vm.testResults, function(result, index) {
+        _vm._l(_vm.testResultsData, function(result, index) {
           return _c(
             "v-col",
             { key: index, staticClass: "my-4", attrs: { cols: "6", sm: "4" } },
             [
               _c(
                 "v-card",
-                { attrs: { height: "80", width: "200", color: "#D4D8EC" } },
+                { attrs: { height: "80", width: "350", color: "#D4D8EC" } },
                 [
                   _c(
                     "v-layout",
@@ -6350,9 +6411,7 @@ var render = function() {
   return _c("div", { staticClass: "typing-machine-icon" }, [
     _c("img", {
       staticClass: "typing-machine-icon__svg",
-      class: {
-        "typing-machine-icon__svg--shaking": this.$store.getters.isShaking
-      },
+      class: { "typing-machine-icon__svg--shaking": _vm.isIconShaking },
       attrs: {
         src: __webpack_require__(/*! @/assets/img/typing-machine-icon.svg */ "./resources/assets/img/typing-machine-icon.svg"),
         alt: "typing-machine-icon"
@@ -6386,9 +6445,9 @@ var render = function() {
     "div",
     { staticClass: "dashboard" },
     [
-      _vm._v("\n    Dashboard "),
+      _vm._v("\n  Dashboard "),
       _c("br"),
-      _vm._v("\n    Email: " + _vm._s(_vm.user.email)),
+      _vm._v("\n  Email: " + _vm._s(_vm.user.email)),
       _c("br"),
       _c("br"),
       _vm._v(" "),
@@ -6995,11 +7054,7 @@ var render = function() {
                   _c(
                     "v-list-item-title",
                     { staticClass: "primaryLight--text font-weight-bold" },
-                    [
-                      _vm._v(
-                        "\n                  Not logged in\n              "
-                      )
-                    ]
+                    [_vm._v("\n          Not logged in\n        ")]
                   )
                 ],
                 1
@@ -7063,9 +7118,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                          " +
+                                        "\n              " +
                                           _vm._s(item.text) +
-                                          "\n                      "
+                                          "\n            "
                                       )
                                     ]
                                   )
@@ -7125,7 +7180,8 @@ var render = function() {
                         _vm.activate = false
                       },
                       input: function($event) {
-                        return _vm.startTest()
+                        _vm.startClock()
+                        _vm.checkInput()
                       }
                     },
                     model: {
@@ -7143,7 +7199,7 @@ var render = function() {
               _c(
                 "v-row",
                 { staticClass: "justify-center" },
-                [_c("stopwatch", { staticClass: "mt-1" })],
+                [_c("stopwatch", { ref: "stopwatch", staticClass: "mt-1" })],
                 1
               ),
               _vm._v(" "),
@@ -7176,7 +7232,7 @@ var render = function() {
                 "v-layout",
                 { attrs: { "justify-center": "" } },
                 [
-                  !_vm.activate && !this.$store.getters.hasTestEnded
+                  !_vm.activate && !_vm.hasTestEnded
                     ? _c(
                         "v-btn",
                         {
@@ -7188,11 +7244,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                  Click to activate\n              "
-                          )
-                        ]
+                        [_vm._v("\n          Click to activate\n        ")]
                       )
                     : _vm._e()
                 ],
@@ -7204,9 +7256,7 @@ var render = function() {
                 {
                   staticClass: "mt-3",
                   style: {
-                    visibility: this.$store.getters.hasTestEnded
-                      ? "visible"
-                      : "hidden"
+                    visibility: _vm.hasTestEnded ? "visible" : "hidden"
                   },
                   attrs: { row: "", "align-center": "" }
                 },
@@ -7227,9 +7277,7 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v(
-                        "  \n                  Next Test\n                  "
-                      ),
+                      _vm._v("\n          Next Test\n          "),
                       _c("v-icon", { attrs: { right: "" } }, [
                         _vm._v("mdi-arrow-right-drop-circle")
                       ])
@@ -7243,8 +7291,10 @@ var render = function() {
               _c(
                 "v-row",
                 [
-                  this.$store.getters.hasTestEnded
-                    ? _c("test-results")
+                  _vm.hasTestEnded
+                    ? _c("test-results", {
+                        attrs: { testResults: _vm.testResults }
+                      })
                     : _vm._e()
                 ],
                 1
@@ -69280,160 +69330,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _modules_count__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/count */ "./resources/store/modules/count.js");
-/* harmony import */ var _modules_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/utils */ "./resources/store/modules/utils.js");
-/* harmony import */ var _modules_stopwatch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/stopwatch */ "./resources/store/modules/stopwatch.js");
-/* harmony import */ var _modules_test__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/test */ "./resources/store/modules/test.js");
-/* harmony import */ var _modules_testResults__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/testResults */ "./resources/store/modules/testResults.js");
-
-
-
-
+/* harmony import */ var _modules_testResults__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/testResults */ "./resources/store/modules/testResults.js");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   modules: {
-    count: _modules_count__WEBPACK_IMPORTED_MODULE_2__["default"],
-    utils: _modules_utils__WEBPACK_IMPORTED_MODULE_3__["default"],
-    stopwatch: _modules_stopwatch__WEBPACK_IMPORTED_MODULE_4__["default"],
-    test: _modules_test__WEBPACK_IMPORTED_MODULE_5__["default"],
-    testResults: _modules_testResults__WEBPACK_IMPORTED_MODULE_6__["default"]
+    testResults: _modules_testResults__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }));
-
-/***/ }),
-
-/***/ "./resources/store/modules/count.js":
-/*!******************************************!*\
-  !*** ./resources/store/modules/count.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var state = {
-  count: 0
-};
-var actions = {
-  incrementCount: function incrementCount(_ref) {
-    var commit = _ref.commit;
-    commit('incrementCount', 1);
-  },
-  decrementCount: function decrementCount(_ref2) {
-    var commit = _ref2.commit;
-    commit('decrementCont', 1);
-  }
-};
-var mutations = {
-  incrementCount: function incrementCount(state, amount) {
-    return state.count += amount;
-  },
-  decrementCont: function decrementCont(state, amount) {
-    return state.count -= amount;
-  }
-};
-var getters = {
-  count: function count(state) {
-    return state.count;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-});
-
-/***/ }),
-
-/***/ "./resources/store/modules/stopwatch.js":
-/*!**********************************************!*\
-  !*** ./resources/store/modules/stopwatch.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var state = {
-  isClockStarted: false
-};
-var actions = {
-  startClock: function startClock(_ref) {
-    var commit = _ref.commit;
-    commit('startClock');
-  },
-  stopClock: function stopClock(_ref2) {
-    var commit = _ref2.commit;
-    commit('stopClock');
-  }
-};
-var mutations = {
-  startClock: function startClock(state) {
-    return state.isClockStarted = true;
-  },
-  stopClock: function stopClock(state) {
-    return state.isClockStarted = false;
-  }
-};
-var getters = {
-  isClockStarted: function isClockStarted(state) {
-    return state.isClockStarted;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-});
-
-/***/ }),
-
-/***/ "./resources/store/modules/test.js":
-/*!*****************************************!*\
-  !*** ./resources/store/modules/test.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var state = {
-  hasTestEnded: false
-};
-var actions = {
-  startTest: function startTest(_ref) {
-    var commit = _ref.commit;
-    commit('startTest');
-  },
-  endTest: function endTest(_ref2) {
-    var commit = _ref2.commit;
-    commit('endTest');
-  }
-};
-var mutations = {
-  startTest: function startTest(state) {
-    return state.hasTestEnded = false;
-  },
-  endTest: function endTest(state) {
-    return state.hasTestEnded = true;
-  }
-};
-var getters = {
-  hasTestEnded: function hasTestEnded(state) {
-    return state.hasTestEnded;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-});
 
 /***/ }),
 
@@ -69455,91 +69361,34 @@ var INITIAL_STATE = {
   wpm: 0
 };
 var state = {
-  finalTime: '00:00:00.000',
-  amountOfSigns: 0,
+  time: '00:00:00.000',
+  testLenght: 0,
   errors: 0,
   accuracy: 0,
   score: 0,
   wpm: 0
 };
 var actions = {
-  setFinalTime: function setFinalTime(_ref, payload) {
+  resetTestResults: function resetTestResults(_ref) {
     var commit = _ref.commit;
-    commit('setFinalTime', payload);
+    commit('resetTestResults');
   },
-  setAmountOfSigns: function setAmountOfSigns(_ref2, payload) {
+  saveTestResults: function saveTestResults(_ref2, testResults) {
     var commit = _ref2.commit;
-    commit('setAmountOfSigns', payload);
-  },
-  setErrors: function setErrors(_ref3, payload) {
-    var commit = _ref3.commit;
-    commit('setErrors', payload);
+    commit('saveTestResults', testResults);
   }
 };
 var mutations = {
-  setFinalTime: function setFinalTime(state, payload) {
-    return state.finalTime = payload;
+  resetTestResults: function resetTestResults(state) {
+    return state = INITIAL_STATE;
   },
-  setAmountOfSigns: function setAmountOfSigns(state, payload) {
-    return state.amountOfSigns = payload;
-  },
-  setErrors: function setErrors(state, payload) {
-    return state.errors = payload;
+  saveTestResults: function saveTestResults(state, testResults) {
+    return state = testResults;
   }
 };
 var getters = {
-  finalTime: function finalTime(state) {
-    return state.finalTime;
-  },
-  amountOfSigns: function amountOfSigns(state) {
-    return state.amountOfSigns;
-  },
-  errors: function errors(state) {
-    return state.errors;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  actions: actions,
-  mutations: mutations,
-  getters: getters
-});
-
-/***/ }),
-
-/***/ "./resources/store/modules/utils.js":
-/*!******************************************!*\
-  !*** ./resources/store/modules/utils.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var state = {
-  isShaking: false
-};
-var actions = {
-  turnShakingOn: function turnShakingOn(_ref) {
-    var commit = _ref.commit;
-    commit('turnShakingOn');
-  },
-  turnShakingOff: function turnShakingOff(_ref2) {
-    var commit = _ref2.commit;
-    commit('turnShakingOff');
-  }
-};
-var mutations = {
-  turnShakingOn: function turnShakingOn(state) {
-    return state.isShaking = true;
-  },
-  turnShakingOff: function turnShakingOff(state) {
-    return state.isShaking = false;
-  }
-};
-var getters = {
-  isShaking: function isShaking(state) {
-    return state.isShaking;
+  testResults: function testResults(state) {
+    return state;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

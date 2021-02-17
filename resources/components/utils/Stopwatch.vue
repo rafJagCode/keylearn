@@ -16,16 +16,6 @@ export default {
         running : false
     };
   },
-  watch:{
-      '$store.getters.isClockStarted':function(isClockStarted){
-          if(isClockStarted && !this.$store.getters.hasTestEnded) this.start();
-          else {
-                this.stop();
-                this.$store.dispatch('setFinalTime', this.time);
-                this.$store.dispatch('endTest');
-          }
-      }
-  },
   methods: {
     start() {
         if(this.running) return;

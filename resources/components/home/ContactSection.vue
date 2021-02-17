@@ -7,15 +7,11 @@
             <v-col cols="12" sm="5">
               <h1 class="font-weight-light display-1">Contact Us</h1>
               <h3 class="font-weight-light mt-3">
-                You have questions, need help or have found a mistake?
-                Then do not hesitate to contact us.
+                You have questions, need help or have found a mistake? Then do
+                not hesitate to contact us.
               </h3>
-              <h3 class="font-weight-light mt-3">
-                Telephone: +xx xxx-xxx-xxx
-              </h3>
-              <h3 class="font-weight-light">
-                Email: email@email.com
-              </h3>
+              <h3 class="font-weight-light mt-3">Telephone: +xx xxx-xxx-xxx</h3>
+              <h3 class="font-weight-light">Email: email@email.com</h3>
             </v-col>
             <v-col cols="12" sm="7">
               <v-form ref="form" v-model="valid" :lazy-validation="lazy">
@@ -76,7 +72,6 @@
   width: 100%;
   overflow: hidden;
 }
-
 </style>
 
 <script>
