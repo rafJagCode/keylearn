@@ -2,6 +2,7 @@
   <v-container>
     <v-row align="center" justify="center">
       <v-progress-circular
+        class="mb-8"
         v-if="testLoading"
         :size="50"
         color="primary"
