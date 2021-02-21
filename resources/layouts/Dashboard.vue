@@ -1,29 +1,23 @@
 <template>
   <div class="dashboard">
     Dashboard <br />
-    Email: {{ user.email }}<br /><br />
+    Email: {{ email }}<br /><br />
     <v-btn @click.prevent="logout()">Logout</v-btn>
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 export default {
-  data: () => ({
-    user: null,
-  }),
-  mounted() {
-    Vue.axios
-      .get("/api/user")
-      .then((res) => {
-        console.log(res.data);
-        this.user = res.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  computed:{
+    ...mapGetters(['user']),
+    email(){
+      if(this.user===null) return '';
+      return this.user.email;
+    }
   },
   methods: {
     logout() {
-      Vue.axios.post("/api/logout").then(() => {
+      this.$store.dispatch('signOut').then(() => {
         this.$router.push({ name: "home" });
       });
     },

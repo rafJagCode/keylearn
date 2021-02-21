@@ -1,7 +1,16 @@
 <template>
   <v-app id="test" color="primary">
-    <Keypress key-event="keyup" :key-code="13" @success="handleEnterKeypress()" />
-    <Keypress key-event="keyup" :key-code="32" :modifiers="['shiftKey']" @success="handleShiftSpaceKeypress()" />
+    <Keypress
+      key-event="keyup"
+      :key-code="13"
+      @success="handleEnterKeypress()"
+    />
+    <Keypress
+      key-event="keyup"
+      :key-code="32"
+      :modifiers="['shiftKey']"
+      @success="handleShiftSpaceKeypress()"
+    />
     <navigation-drawer></navigation-drawer>
     <v-main>
       <v-container style="width: 800px">
@@ -78,7 +87,7 @@ export default {
       if (this.isTestActivated) return;
       this.activateTest();
     },
-    handleShiftSpaceKeypress(){
+    handleShiftSpaceKeypress() {
       this.nextTest();
     },
     activateTest() {

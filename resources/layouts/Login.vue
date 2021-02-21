@@ -79,8 +79,16 @@ export default {
   methods: {
     handleSubmit() {
       if (!this.$refs.form.validate()) return;
-      Vue.axios
-        .post("api/login", { email: this.email, password: this.password })
+      // Vue.axios
+      //   .post("api/login", { email: this.email, password: this.password })
+      //   .then(() => {
+      //     this.$router.push({ name: "dashboard" });
+      //   })
+      //   .catch((error) => {
+      //     this.errors = error.response.data.errors;
+      //   });
+      this.$store
+        .dispatch("signIn", { email: this.email, password: this.password })
         .then(() => {
           this.$router.push({ name: "dashboard" });
         })

@@ -6,6 +6,7 @@ import Register from '@/layouts/Register';
 import Login from '@/layouts/Login';
 import Dashboard from '@/layouts/Dashboard';
 import Test from '@/layouts/Test';
+import Statistics from '@/layouts/Statistics';
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,11 @@ const router = new VueRouter({
             name: 'test',
             component: Test
         },
+        {
+            path: '/statistics',
+            name: 'statistics',
+            component: Statistics
+        }
     ]
 });
 
