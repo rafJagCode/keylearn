@@ -9,12 +9,11 @@
     ></v-progress-linear>
     <v-textarea
       ref="userInput"
-      v-model="input"
+      v-model="typed"
       @blur="deactivate()"
       @input="
         (e) => {
           typingStarted();
-          updateTyped();
           checkInput();
         }
       "
@@ -35,7 +34,6 @@ export default {
     return {
       allErrors: 0,
       beforeKeyPress: "",
-      input: "",
     };
   },
   watch: {
@@ -49,7 +47,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isTestActivated", "isTestRunning", "typed", "signs"]),
+    ...mapGetters(["isTestActivated", "isTestRunning", "signs"]),
+    typed:{
+      get(){
+        return this.$store.getters.typed;
+      },
+      set(typed){
+        this.$store.commit('updateTyped', typed);
+      }
+    },
     progress() {
       return (this.typed.length / this.signs.length) * 100;
     },
@@ -63,9 +69,6 @@ export default {
     },
     typingStarted() {
       this.$emit("typingStarted");
-    },
-    updateTyped() {
-      this.$store.dispatch("updateTyped", this.input);
     },
     endTest() {
       this.$store.dispatch("testEnded");

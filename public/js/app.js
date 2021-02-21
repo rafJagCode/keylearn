@@ -3031,14 +3031,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       allErrors: 0,
-      beforeKeyPress: "",
-      input: ""
+      beforeKeyPress: ""
     };
   },
   watch: {
@@ -3051,7 +3049,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (_isTestActivated) this.$refs.userInput.focus();
     }
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isTestActivated", "isTestRunning", "typed", "signs"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isTestActivated", "isTestRunning", "signs"])), {}, {
+    typed: {
+      get: function get() {
+        return this.$store.getters.typed;
+      },
+      set: function set(typed) {
+        this.$store.commit('updateTyped', typed);
+      }
+    },
     progress: function progress() {
       return this.typed.length / this.signs.length * 100;
     },
@@ -3065,9 +3071,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     typingStarted: function typingStarted() {
       this.$emit("typingStarted");
-    },
-    updateTyped: function updateTyped() {
-      this.$store.dispatch("updateTyped", this.input);
     },
     endTest: function endTest() {
       this.$store.dispatch("testEnded");
@@ -3720,6 +3723,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3734,11 +3752,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errorWhileLoading: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(["isTestRunning", "isTestActivated", "typed", "text"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(["isTestRunning", "isTestActivated", "text"])),
   methods: {
-    handleKeypress: function handleKeypress() {
+    handleEnterKeypress: function handleEnterKeypress() {
       if (this.isTestActivated) return;
       this.activateTest();
+    },
+    handleShiftSpaceKeypress: function handleShiftSpaceKeypress() {
+      this.nextTest();
     },
     activateTest: function activateTest() {
       if (this.errorWhileLoading) return;
@@ -3753,7 +3774,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     resetData: function resetData() {
       this.$store.dispatch("resetTestData");
       this.$refs.userInput.beforeKeyPress = "";
-      this.$refs.userInput.input = "";
       this.$refs.userInput.allErrors = 0;
     },
     resetClock: function resetClock() {
@@ -6732,16 +6752,15 @@ var render = function() {
           },
           input: function(e) {
             _vm.typingStarted()
-            _vm.updateTyped()
             _vm.checkInput()
           }
         },
         model: {
-          value: _vm.input,
+          value: _vm.typed,
           callback: function($$v) {
-            _vm.input = $$v
+            _vm.typed = $$v
           },
-          expression: "input"
+          expression: "typed"
         }
       })
     ],
@@ -7429,7 +7448,20 @@ var render = function() {
         attrs: { "key-event": "keyup", "key-code": 13 },
         on: {
           success: function($event) {
-            return _vm.handleKeypress()
+            return _vm.handleEnterKeypress()
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("Keypress", {
+        attrs: {
+          "key-event": "keyup",
+          "key-code": 32,
+          modifiers: ["shiftKey"]
+        },
+        on: {
+          success: function($event) {
+            return _vm.handleShiftSpaceKeypress()
           }
         }
       }),
@@ -7501,12 +7533,10 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v("\n          Next Test\n          "),
-                      _c("v-icon", { attrs: { right: "" } }, [
-                        _vm._v("mdi-arrow-right-drop-circle")
-                      ])
-                    ],
-                    1
+                      _vm._v(
+                        "\n          Press SHIFT + SPACE to load NEXT TEST\n        "
+                      )
+                    ]
                   )
                 ],
                 1

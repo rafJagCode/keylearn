@@ -1,6 +1,7 @@
 <template>
   <v-app id="test" color="primary">
-    <Keypress key-event="keyup" :key-code="13" @success="handleKeypress()" />
+    <Keypress key-event="keyup" :key-code="13" @success="handleEnterKeypress()" />
+    <Keypress key-event="keyup" :key-code="32" :modifiers="['shiftKey']" @success="handleShiftSpaceKeypress()" />
     <navigation-drawer></navigation-drawer>
     <v-main>
       <v-container style="width: 800px">
@@ -14,7 +15,10 @@
             class="ma-0 creamy--text"
             :style="{
               visibility:
-                !isTestActivated && isTestRunning && !testLoading && !errorWhileLoading
+                !isTestActivated &&
+                isTestRunning &&
+                !testLoading &&
+                !errorWhileLoading
                   ? 'visible'
                   : 'hidden',
             }"
@@ -22,12 +26,23 @@
             Press ENTER to activate
           </span>
         </v-row>
-        <test-loading-error-alert v-if="errorWhileLoading"></test-loading-error-alert>
-        <test-displayer :testLoading="testLoading" v-if='!errorWhileLoading'></test-displayer>
+        <test-loading-error-alert
+          v-if="errorWhileLoading"
+        ></test-loading-error-alert>
+        <test-displayer
+          :testLoading="testLoading"
+          v-if="!errorWhileLoading"
+        ></test-displayer>
         <v-row>
-          <v-btn @click="nextTest()" outlined dark block color="primaryLight" class="mt-8">
-            Next Test
-            <v-icon right>mdi-arrow-right-drop-circle</v-icon>
+          <v-btn
+            @click="nextTest()"
+            outlined
+            dark
+            block
+            color="primaryLight"
+            class="mt-8"
+          >
+            Press SHIFT + SPACE to load NEXT TEST
           </v-btn>
         </v-row>
         <test-results
@@ -56,15 +71,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isTestRunning", "isTestActivated", "typed", "text"]),
+    ...mapGetters(["isTestRunning", "isTestActivated", "text"]),
   },
   methods: {
-    handleKeypress() {
+    handleEnterKeypress() {
       if (this.isTestActivated) return;
       this.activateTest();
     },
+    handleShiftSpaceKeypress(){
+      this.nextTest();
+    },
     activateTest() {
-      if(this.errorWhileLoading) return;
+      if (this.errorWhileLoading) return;
       this.$store.dispatch("activateTest");
     },
     startClock() {
@@ -76,7 +94,6 @@ export default {
     resetData() {
       this.$store.dispatch("resetTestData");
       this.$refs.userInput.beforeKeyPress = "";
-      this.$refs.userInput.input = "";
       this.$refs.userInput.allErrors = 0;
     },
     resetClock() {
@@ -112,7 +129,7 @@ export default {
     UserInput,
     TestDisplayer,
     Keypress: () => import("vue-keypress"),
-    TestLoadingErrorAlert
+    TestLoadingErrorAlert,
   },
   mounted() {
     this.getNewTest();
