@@ -46,11 +46,10 @@ export default {
     },
   }),
   props: {
-    allErrors: 0,
     time: "",
   },
   computed: {
-    ...mapGetters(["typed", "signs"]),
+    ...mapGetters(["typed", "signs", 'errorCounter']),
   },
   methods: {
     textToSeconds(text) {
@@ -78,14 +77,14 @@ export default {
       let cpmGross = testLength / minutes;
       let wpmGross = cpmGross / 5;
       let wpmNet = wpmGross - uncorrectedErrors / minutes;
-      let allErrors = this.allErrors;
+      let allErrors = this.errorCounter;
       this.testResults.time = time;
       this.testResults.testLength = testLength;
       this.testResults.wpm = Math.round(wpmNet);
       this.testResults.uncorrectedErrors = uncorrectedErrors;
       this.testResults.allErrors = allErrors;
       this.testResults.accuracy =
-        Math.round(((testLength - uncorrectedErrors) / testLength) * 100) + "%";
+        Math.round(((testLength - uncorrectedErrors) / testLength) * 100);
 
       //score
       let wpmWeight = 100;
@@ -101,6 +100,7 @@ export default {
   },
   mounted() {
     this.calculateTestResults();
+    this.$store.dispatch('saveTestResultsInStore', this.testResults);
     this.testResultsData = [
       {
         title: "Time",
@@ -134,7 +134,7 @@ export default {
       },
       {
         title: "Accuracy",
-        value: this.testResults.accuracy,
+        value: this.testResults.accuracy + "%",
         icon: "mdi-bullseye-arrow",
       },
     ];

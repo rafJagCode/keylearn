@@ -16,7 +16,8 @@ export default new Vuetify({
                 secondary: "171b34",
                 secondaryLight: "252C55",
                 accent: "3D87E4",
-                creamy: "E2DADB"
+                creamy: "E2DADB",
+                primaryRed: "cf1259"
             }
         }
     }

@@ -26,12 +26,18 @@
         <v-icon left>{{ item.icon }}</v-icon>
         <span class="mr-2">{{ item.name }}</span>
       </v-btn>
-      <router-link to="/login" style="text-decoration: none; color: inherit">
-        <v-btn>
+      <router-link to="/login" style="text-decoration: none; color: inherit" v-if="!isUserAuthenticated">
+        <v-btn class="white--text ml-2" color="primaryLight" light>
           <v-icon left>mdi-account-outline</v-icon>
           Login
         </v-btn>
       </router-link>
+      <v-btn text height="fit-content" class="ml-2" @click="function(){$router.push({ name: 'dashboard' })}">
+        <v-layout justify-center align-center v-if="isUserAuthenticated">
+          <v-img width="30px" :src="require('@/assets/img/parrot.svg')"></v-img>
+          <span class="ml-2">{{user.email}}</span>
+        </v-layout>
+      </v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -47,6 +53,7 @@
 </style>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   data: () => ({
     smallWidth: false,
@@ -84,6 +91,9 @@ export default {
     onResize() {
       this.smallWidth = window.innerWidth < 960;
     },
+  },
+  computed:{
+    ...mapGetters(['isUserAuthenticated', 'user'])
   },
   mounted() {
     this.onResize();

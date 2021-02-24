@@ -1,63 +1,21 @@
 <template>
   <v-app id="test" color="primary">
-    <Keypress
-      key-event="keyup"
-      :key-code="13"
-      @success="handleEnterKeypress()"
-    />
-    <Keypress
-      key-event="keyup"
-      :key-code="32"
-      :modifiers="['shiftKey']"
-      @success="handleShiftSpaceKeypress()"
-    />
     <navigation-drawer></navigation-drawer>
     <v-main>
       <v-container style="width: 800px">
         <user-input
-          ref="userInput"
           @typingStarted="typingStarted()"
         ></user-input>
         <stopwatch ref="stopwatch" class="mt-1"></stopwatch>
-        <v-row justify="center">
-          <span
-            class="ma-0 creamy--text"
-            :style="{
-              visibility:
-                !isTestActivated &&
-                isTestRunning &&
-                !testLoading &&
-                !errorWhileLoading
-                  ? 'visible'
-                  : 'hidden',
-            }"
-          >
-            Press ENTER to activate
-          </span>
-        </v-row>
-        <test-loading-error-alert
-          v-if="errorWhileLoading"
-        ></test-loading-error-alert>
-        <test-displayer
-          :testLoading="testLoading"
-          v-if="!errorWhileLoading"
-        ></test-displayer>
-        <v-row>
-          <v-btn
-            @click="nextTest()"
-            outlined
-            dark
-            block
-            color="primaryLight"
-            class="mt-8"
-          >
-            Press SHIFT + SPACE to load NEXT TEST
-          </v-btn>
+        <test-activator></test-activator>
+        <test-displayer></test-displayer>
+        <v-row justify="space-between" align="center" class="my-8">
+          <saving-controller></saving-controller>
+          <next-test-controller @nextTest="nextTest()"></next-test-controller>
         </v-row>
         <test-results
           v-if="!isTestRunning"
           :time="$refs.stopwatch.time"
-          :allErrors="$refs.userInput.allErrors"
         ></test-results>
       </v-container>
     </v-main>
@@ -70,30 +28,20 @@ import TestResults from "@/components/test/TestResults";
 import NavigationDrawer from "@/components/test/NavigationDrawer";
 import UserInput from "@/components/test/UserInput";
 import TestDisplayer from "@/components/test/TestDisplayer";
-import TestLoadingErrorAlert from "@/components/test/TestLoadingErrorAlert";
+import SavingController from "@/components/test/SavingController";
+import NextTestController from "@/components/test/NextTestController";
+import TestActivator from "@/components/test/TestActivator";
 import { mapGetters } from "vuex";
 export default {
-  data: function () {
-    return {
-      testLoading: false,
-      errorWhileLoading: false,
-    };
-  },
   computed: {
-    ...mapGetters(["isTestRunning", "isTestActivated", "text"]),
+    ...mapGetters([
+      "isTestRunning",
+      "isTestActivated",
+      "text",
+      "errorWhileLoading",
+    ]),
   },
   methods: {
-    handleEnterKeypress() {
-      if (this.isTestActivated) return;
-      this.activateTest();
-    },
-    handleShiftSpaceKeypress() {
-      this.nextTest();
-    },
-    activateTest() {
-      if (this.errorWhileLoading) return;
-      this.$store.dispatch("activateTest");
-    },
     startClock() {
       this.$refs.stopwatch.start();
     },
@@ -102,24 +50,22 @@ export default {
     },
     resetData() {
       this.$store.dispatch("resetTestData");
-      this.$refs.userInput.beforeKeyPress = "";
-      this.$refs.userInput.allErrors = 0;
     },
     resetClock() {
       this.$refs.stopwatch.reset();
     },
     getNewTest() {
-      this.errorWhileLoading = false;
-      this.testLoading = true;
+      this.$store.dispatch('updateErrorWhileLoadingStatus', false);
+      this.$store.dispatch('updateTestLoadingStatus', true);
       Vue.axios
         .post("api/new-test")
         .then((res) => {
           this.$store.dispatch("updateText", res.data);
-          this.testLoading = false;
+          this.$store.dispatch('updateTestLoadingStatus', false);
         })
         .catch(() => {
-          this.testLoading = false;
-          this.errorWhileLoading = true;
+          this.$store.dispatch('updateTestLoadingStatus', false);
+          this.$store.dispatch('updateErrorWhileLoadingStatus', true);
         });
     },
     nextTest() {
@@ -137,8 +83,9 @@ export default {
     NavigationDrawer,
     UserInput,
     TestDisplayer,
-    Keypress: () => import("vue-keypress"),
-    TestLoadingErrorAlert,
+    SavingController,
+    NextTestController,
+    TestActivator
   },
   mounted() {
     this.getNewTest();

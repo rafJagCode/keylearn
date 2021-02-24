@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Test;
+use App\Models\User;
 
 class TestController extends Controller
 {
@@ -16,5 +18,32 @@ class TestController extends Controller
             else $text .= $item['word'] . ' ';
         }
         return $text;
+    }
+
+    public function saveTestResults(Request $request)
+    {
+        $test = Test::create([
+            'time' => $request->time,
+            'test_length' => $request->testLength,
+            'wpm' => $request->wpm,
+            'uncorrected_errors' => $request->uncorrectedErrors,
+            'all_errors' => $request->allErrors,
+            'accuracy' => $request->accuracy,
+            'score' => $request->score,
+            'user_id' => $request->user_id
+        ]);
+        return response()->json($test);
+    }
+
+    public function deleteTestResults(Request $request)
+    {
+        Test::findOrFail($request->id)->delete();
+    }
+
+    public function getUserResults(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        $tests = $user->tests()->get();
+        return response()->json($tests);
     }
 }

@@ -25,3 +25,6 @@ Route::post('register', 'RegisterController@register');
 Route::post('login', 'LoginController@login');
 Route::post('logout', 'LoginController@logout');
 Route::post('new-test', 'TestController@getNewTest');
+Route::post('save-test-results', 'TestController@saveTestResults');
+Route::post('get-user-results', 'TestController@getUserResults');
+Route::post('delete-test-results', 'TestController@deleteTestResults');

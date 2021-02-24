@@ -12,7 +12,7 @@
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title class="primaryLight--text font-weight-bold">
-          Not logged in
+          {{userName}}
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -38,6 +38,7 @@
   </v-navigation-drawer>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -54,6 +55,13 @@ export default {
         },
       ],
     };
+  },
+  computed:{
+    ...mapGetters(['isUserAuthenticated', 'user']),
+    userName(){
+      if(!this.isUserAuthenticated) return "Not logged in";
+      return this.user.email;
+    }
   },
   methods: {
     goTo(link) {

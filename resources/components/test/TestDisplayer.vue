@@ -1,42 +1,45 @@
 <template>
-  <v-container>
-    <v-row align="center" justify="center">
-      <v-progress-circular
-        class="mb-8"
-        v-if="testLoading"
-        :size="50"
-        color="primary"
-        indeterminate
-      ></v-progress-circular>
-    </v-row>
-    <v-layout
-      v-show="!testLoading"
-      column
-      :style="{ opacity: !isTestActivated ? 0.3 : 1 }"
-    >
-      <v-row v-for="(row, index) in rows" :key="index">
-        <sign
-          v-for="sign in row"
-          :key="sign.position"
-          :sign="sign.sign"
-          :state="checkTypedSigns[sign.position]"
-        >
-        </sign>
+  <v-layout align-center class="test-displayer">
+    <test-loading-error-alert
+      v-if="errorWhileLoading"
+    ></test-loading-error-alert>
+    <v-container v-if="!errorWhileLoading">
+      <v-row align="center" justify="center">
+        <v-progress-circular
+          class="mb-8"
+          v-if="testLoading"
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
       </v-row>
-    </v-layout>
-  </v-container>
+      <v-layout
+        v-show="!testLoading"
+        column
+        :style="{ opacity: !isTestActivated ? 0.3 : 1 }"
+      >
+        <v-row v-for="(row, index) in rows" :key="index">
+          <sign
+            v-for="sign in row"
+            :key="sign.position"
+            :sign="sign.sign"
+            :state="checkTypedSigns[sign.position]"
+          >
+          </sign>
+        </v-row>
+      </v-layout>
+    </v-container>
+  </v-layout>
 </template>
 <script>
+import TestLoadingErrorAlert from "@/components/test/TestLoadingErrorAlert";
 import Sign from "@/components/test/Sign";
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       rows: [],
     };
-  },
-  props: {
-    testLoading: false,
   },
   watch: {
     text: function (text) {
@@ -45,7 +48,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['isTestActivated', 'text', 'typed', 'signs']),
+    ...mapGetters(["isTestActivated", "text", "typed", "signs", "testLoading", "errorWhileLoading"]),
     checkTypedSigns() {
       let compare = [];
       let typedSigns = this.typed.split("");
@@ -61,7 +64,7 @@ export default {
   },
   methods: {
     divideToRows(text) {
-      let signsInRow = 35;
+      let signsInRow = 36;
       let row = "";
       let rows = [];
       let words = text.split(" ");
@@ -104,11 +107,17 @@ export default {
           signs.push(sign.sign);
         });
       });
-      this.$store.dispatch('updateSigns', signs);
+      this.$store.dispatch("updateSigns", signs);
     },
   },
   components: {
     Sign,
+    TestLoadingErrorAlert,
   },
 };
 </script>
+<style scoped>
+.test-displayer{
+  height: 200px;
+}
+</style>

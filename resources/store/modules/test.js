@@ -3,60 +3,88 @@ const INITIAL_STATE = () => {
         isTestRunning: true,
         isTestActivated: false,
         text: '',
+        beforeKeyPress: '',
         typed: '',
         signs: [],
+        testLoading: false,
+        errorWhileLoading: false,
+        errorCounter: 0,
     }
 };
 const state = {
     isTestRunning: true,
     isTestActivated: false,
     text: '',
+    beforeKeyPress: '',
     typed: '',
     signs: [],
+    testLoading: false,
+    errorWhileLoading: false,
+    errorCounter: 0,
 };
 const actions = {
     testEnded({commit}){
-        commit('testEnded');
+        commit('TEST_ENDED');
     },
     testStarted({commit}){
-        commit('testStarted');
+        commit('TEST_STARTED');
     },
     activateTest({commit}){
-        commit('activateTest');
+        commit('ACTIVATE_TEST');
     },
     deactivateTest({commit}){
-        commit('deactivateTest');
+        commit('DEACTIVATE_TEST');
     },
     resetTestData({commit}){
-        commit('resetTestData');
+        commit('RESET_TEST_DATA');
+    },
+    updateBeforeKeyPress({commit}, value){
+        commit('UPDATE_BEFORE_KEY_PRESS', value);
     },
     updateTyped({commit}, typed){
-        commit('updateTyped', typed);
+        commit('UPDATE_TYPED', typed);
     },
     updateText({commit}, text){
-        commit('updateText', text);
+        commit('UPDATE_TEXT', text);
     },
     updateSigns({commit}, signs){
-        commit('updateSigns', signs);
+        commit('UPDATE_SIGNS', signs);
+    },
+    updateTestLoadingStatus({commit}, status){
+        commit('UPDATE_TEST_LOADIN_STATUS', status);
+    },
+    updateErrorWhileLoadingStatus({commit}, status){
+        commit('UPDATE_ERROR_WHILE_LOADING_STATUS', status);
+    },
+    incrementErrorCounter({commit}){
+        commit('INCREMENT_ERROR_COUNTER')
     },
 
 };
 const mutations = {
-    testEnded: (state) => (state.isTestRunning = false),
-    testStarted: (state) => (state.isTestRunning = true),
-    activateTest: (state) => (state.isTestActivated = true),
-    deactivateTest: (state) => (state.isTestActivated = false),
-    resetTestData: (state) => (Object.assign(state, INITIAL_STATE())),
-    updateTyped: (state, typed) => (state.typed = typed),
-    updateText: (state, text) => (state.text = text),
-    updateSigns: (state, signs) => (state.signs = signs),
+    TEST_ENDED: (state) => (state.isTestRunning = false),
+    TEST_STARTED: (state) => (state.isTestRunning = true),
+    ACTIVATE_TEST: (state) => (state.isTestActivated = true),
+    DEACTIVATE_TEST: (state) => (state.isTestActivated = false),
+    RESET_TEST_DATA: (state) => (Object.assign(state, INITIAL_STATE())),
+    UPDATE_BEFORE_KEY_PRESS: (state, value) => (state.beforeKeyPress = value),
+    UPDATE_TYPED: (state, typed) => (state.typed = typed),
+    UPDATE_TEXT: (state, text) => (state.text = text),
+    UPDATE_SIGNS: (state, signs) => (state.signs = signs),
+    UPDATE_TEST_LOADIN_STATUS: (state, status) => (state.testLoading = status),
+    UPDATE_ERROR_WHILE_LOADING_STATUS: (state, status) => (state.errorWhileLoading = status),
+    INCREMENT_ERROR_COUNTER: (state) => (state.errorCounter++),
 };
 const getters = {
     isTestRunning: (state) => state.isTestRunning,
     isTestActivated: (state) => state.isTestActivated,
+    beforeKeyPress: (state) => state.beforeKeyPress,
     typed: (state) => state.typed,
     text: (state) => state.text,
     signs: (state) => state.signs,
+    testLoading: (state) => state.testLoading,
+    errorWhileLoading: (state) => state.errorWhileLoading,
+    errorCounter: (state) => state.errorCounter,
 };
 
 export default {

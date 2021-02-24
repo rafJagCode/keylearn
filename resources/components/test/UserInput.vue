@@ -10,19 +10,12 @@
     <v-textarea
       ref="userInput"
       v-model="typed"
-      @blur="deactivate()"
-      @input="
-        (e) => {
-          typingStarted();
-          checkInput();
-        }
-      "
-      height="0px"
-      style="opacity: 0"
       :disabled="!isTestRunning"
-      class="ma-0 pa-0"
+      class="user-input"
       autocomplete="off"
       multi-line
+      @blur="deactivate()"
+      @input="typingStarted(); checkInput();"
     >
     </v-textarea>
   </v-row>
@@ -30,12 +23,6 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      allErrors: 0,
-      beforeKeyPress: "",
-    };
-  },
   watch: {
     typed: function (typed) {
       if (typed.length !== 0 && typed.length >= this.signs.length) {
@@ -44,17 +31,26 @@ export default {
     },
     isTestActivated: function (isTestActivated) {
       if (isTestActivated) this.$refs.userInput.focus();
+      if (!isTestActivated) this.$refs.userInput.blur();
     },
   },
   computed: {
     ...mapGetters(["isTestActivated", "isTestRunning", "signs"]),
-    typed:{
-      get(){
+    typed: {
+      get() {
         return this.$store.getters.typed;
       },
-      set(typed){
-        this.$store.commit('updateTyped', typed);
-      }
+      set(typed) {
+        this.$store.dispatch("updateTyped", typed);
+      },
+    },
+    beforeKeyPress: {
+      get() {
+        return this.$store.getters.beforeKeyPress;
+      },
+      set(beforeKeyPress) {
+        this.$store.dispatch("updateBeforeKeyPress", beforeKeyPress);
+      },
     },
     progress() {
       return (this.typed.length / this.signs.length) * 100;
@@ -85,9 +81,16 @@ export default {
       }
       //check
       if (this.typed.slice(-1) !== this.signs[this.typed.length - 1])
-        this.allErrors++;
+        this.$store.dispatch("incrementErrorCounter");
       this.beforeKeyPress = this.typed;
     },
   },
 };
 </script>
+<style scoped>
+.user-input{
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+</style>
