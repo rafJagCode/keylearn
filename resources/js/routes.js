@@ -6,7 +6,7 @@ import Register from '@/layouts/Register';
 import Login from '@/layouts/Login';
 import Dashboard from '@/layouts/Dashboard';
 import Test from '@/layouts/Test';
-import Statistics from '@/layouts/Statistics';
+import Statistics from '@/components/dashboard/statistics/Statistics';
 
 Vue.use(VueRouter);
 
