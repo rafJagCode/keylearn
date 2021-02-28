@@ -1,12 +1,12 @@
 <template>
   <div class="dashboard">
-    Dashboard <br />
-    Email: {{ email }}<br /><br />
-    <v-btn @click.prevent="logout()">Logout</v-btn>
+    <navigation-drawer></navigation-drawer>
+    <router-view class="ma-2 ml-16"></router-view>
   </div>
 </template>
 <script>
 import {mapGetters} from 'vuex';
+import NavigationDrawer from '@/components/utils/NavigationDrawer'
 export default {
   computed:{
     ...mapGetters(['user']),
@@ -22,5 +22,13 @@ export default {
       });
     },
   },
+  components: {
+    NavigationDrawer
+  }
 };
 </script>
+<style scoped>
+ .dashboard{
+   background-color: #252C55;
+ }
+</style>

@@ -12,8 +12,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     mode: 'history',
-    routes: [
-        {
+    routes: [{
             path: '/',
             name: 'home',
             component: Home
@@ -32,24 +31,25 @@ const router = new VueRouter({
             path: '/dashboard',
             name: 'dashboard',
             component: Dashboard,
-            beforeEnter: (to, from, next) =>{
-                Vue.axios.get('api/authenticated').then(()=>{
+            beforeEnter: (to, from, next) => {
+                Vue.axios.get('api/authenticated').then(() => {
                     next()
-                }).catch(()=>{
-                    return next({name: 'login'})
+                }).catch(() => {
+                    return next({
+                        name: 'login'
+                    })
                 })
-            }
+            },
+            children: [{
+                path: 'statistics',
+                component: Statistics
+            }]
         },
         {
             path: '/test',
             name: 'test',
             component: Test
         },
-        {
-            path: '/statistics',
-            name: 'statistics',
-            component: Statistics
-        }
     ]
 });
 

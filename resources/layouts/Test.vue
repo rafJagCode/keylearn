@@ -25,7 +25,7 @@
 <script>
 import Stopwatch from "@/components/test/Stopwatch";
 import TestResults from "@/components/test/TestResults";
-import NavigationDrawer from "@/components/test/NavigationDrawer";
+import NavigationDrawer from "@/components/utils/NavigationDrawer";
 import UserInput from "@/components/test/UserInput";
 import TestDisplayer from "@/components/test/TestDisplayer";
 import SavingController from "@/components/test/SavingController";

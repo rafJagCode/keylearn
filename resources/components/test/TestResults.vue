@@ -76,7 +76,7 @@ export default {
       let testLength = this.signs.length;
       let cpmGross = testLength / minutes;
       let wpmGross = cpmGross / 5;
-      let wpmNet = wpmGross - uncorrectedErrors / minutes;
+      let wpmNet = wpmGross - (uncorrectedErrors / minutes);
       let allErrors = this.errorCounter;
       this.testResults.time = time;
       this.testResults.testLength = testLength;

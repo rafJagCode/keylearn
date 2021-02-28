@@ -1,14 +1,14 @@
 <template>
-  <v-container>
+  <div class="statistics">
         <v-card>
       <v-toolbar
         flat
-        color="primary"
+        color="primaryLight"
         dark
       >
         <v-toolbar-title>Statistics</v-toolbar-title>
       </v-toolbar>
-      <v-tabs vertical>
+      <v-tabs vertical color="primaryLight">
         <v-tab>
           <v-icon left>
             mdi-history
@@ -19,7 +19,7 @@
           <v-icon left>
             mdi-chart-line
           </v-icon>
-          Tests Analisis
+          Tests Analysis
         </v-tab>
         <v-tab>
           <v-icon left>
@@ -29,25 +29,25 @@
         </v-tab>
 
         <v-tab-item>
-          <user-results></user-results>
+          <tests-history></tests-history>
         </v-tab-item>
         <v-tab-item>
-          <typing-speed-chart></typing-speed-chart>
+          <tests-analysis></tests-analysis>
         </v-tab-item>
         <v-tab-item>
           <span>Lubie placki 2</span>
         </v-tab-item>
       </v-tabs>
     </v-card>
-  </v-container>
+  </div>
 </template>
 <script>
-import UserResults from '@/components/dashboard/statistics/UserResults';
-import TypingSpeedChart from '@/components/dashboard/statistics/TypingSpeedChart';
+import TestsHistory from '@/components/dashboard/statistics/TestsHistory';
+import TestsAnalysis from '@/components/dashboard/statistics/TestsAnalysis';
 export default {
     components:{
-        UserResults,
-        TypingSpeedChart
+        TestsHistory,
+        TestsAnalysis
     }
 
 }

@@ -3,6 +3,8 @@
     <v-card-title class="text-subtitle-1">
       <span class="font-weight-bold text-caption">DATE:</span>
       <span class="ml-2 text-caption">{{ testDate }}</span>
+      <v-spacer></v-spacer>
+      <v-icon @click="removeTestResults(test.id)" class="delete-button pa-1" color="red">mdi-delete-forever</v-icon>
     </v-card-title>
     <v-card-text>
       <v-row v-for="(option, name) in options" :key="name">
@@ -72,5 +74,15 @@ export default {
       return day + " " + month + " " + year + " " + hours + ":" + minutes;
     },
   },
+  methods:{
+    removeTestResults(testId){
+      this.$emit('removeTestResults',testId);
+    }
+  }
 };
 </script>
+<style scoped>
+  .delete-button{
+    cursor: pointer;
+  }
+</style>
