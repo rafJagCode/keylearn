@@ -4,6 +4,7 @@ import testResults from './modules/testResults';
 import test from './modules/test';
 import auth from './modules/auth';
 import statistics from './modules/statistics';
+import stopwatch from './modules/stopwatch';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         testResults,
         test,
         auth,
-        statistics
+        statistics,
+        stopwatch
     }
 })

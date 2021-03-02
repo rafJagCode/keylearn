@@ -9,19 +9,11 @@ const INITIAL_STATE = () => {
         testLoading: false,
         errorWhileLoading: false,
         errorCounter: 0,
+        signsTimeFlags: {},
+        errorsPositions: [],
     }
 };
-const state = {
-    isTestRunning: true,
-    isTestActivated: false,
-    text: '',
-    beforeKeyPress: '',
-    typed: '',
-    signs: [],
-    testLoading: false,
-    errorWhileLoading: false,
-    errorCounter: 0,
-};
+const state = INITIAL_STATE();
 const actions = {
     testEnded({commit}){
         commit('TEST_ENDED');
@@ -59,6 +51,12 @@ const actions = {
     incrementErrorCounter({commit}){
         commit('INCREMENT_ERROR_COUNTER')
     },
+    setSignsTimeFlags({commit}, signsTimeFlags){
+        commit('SET_SIGNS_TIME_FLAGS', signsTimeFlags)
+    },
+    setErrorsPositions({commit}, errorsPositions){
+        commit('SET_ERRORS_POSITIONS', errorsPositions);
+    }
 
 };
 const mutations = {
@@ -74,6 +72,8 @@ const mutations = {
     UPDATE_TEST_LOADIN_STATUS: (state, status) => (state.testLoading = status),
     UPDATE_ERROR_WHILE_LOADING_STATUS: (state, status) => (state.errorWhileLoading = status),
     INCREMENT_ERROR_COUNTER: (state) => (state.errorCounter++),
+    SET_SIGNS_TIME_FLAGS: (state, signsTimeFlags) => (state.signsTimeFlags = signsTimeFlags),
+    SET_ERRORS_POSITIONS: (state, errorsPositions) => (state.errorsPositions = errorsPositions),
 };
 const getters = {
     isTestRunning: (state) => state.isTestRunning,
@@ -85,6 +85,8 @@ const getters = {
     testLoading: (state) => state.testLoading,
     errorWhileLoading: (state) => state.errorWhileLoading,
     errorCounter: (state) => state.errorCounter,
+    signsTimeFlags: (state) => state.signsTimeFlags,
+    errorsPositions: (state) => state.errorsPositions,
 };
 
 export default {

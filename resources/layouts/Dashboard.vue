@@ -27,8 +27,3 @@ export default {
   }
 };
 </script>
-<style scoped>
- .dashboard{
-   background-color: #252C55;
- }
-</style>

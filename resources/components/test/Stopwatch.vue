@@ -26,9 +26,20 @@ export default {
     isTestActivated: function (isTestActivated) {
       if (!isTestActivated) this.stop();
     },
+    time: function(time){
+      this.stopwatchTime = time;
+    }
   },
   computed: {
     ...mapGetters(["isTestRunning", "isTestActivated"]),
+    stopwatchTime: {
+      get() {
+        return this.$store.getters.stopwatchTime;
+      },
+      set(time) {
+        this.$store.dispatch("setStopwatchTime", time);
+      },
+    }
   },
   methods: {
     start() {

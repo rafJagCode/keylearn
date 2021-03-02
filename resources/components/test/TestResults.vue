@@ -34,6 +34,7 @@
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
+    charsTypingTimes:{},
     testResultsData: [],
     testResults: {
       time: "00:00:00.000",
@@ -49,9 +50,71 @@ export default {
     time: "",
   },
   computed: {
-    ...mapGetters(["typed", "signs", 'errorCounter']),
+    ...mapGetters(["typed", "signs", 'errorCounter', 'signsTimeFlags', 'errorsPositions']),
   },
   methods: {
+    getCalculatedSignsTypingTimes(){
+      const length = Object.keys(this.signsTimeFlags).length;
+      let signsTypingTimes = [];
+      signsTypingTimes.push(this.textToSeconds(this.signsTimeFlags[0]));
+      for (let i = 1; i < length; i++){
+        let time = this.textToSeconds(this.signsTimeFlags[i]) - this.textToSeconds(this.signsTimeFlags[i-1]);
+        signsTypingTimes.push(time);
+      }
+      return signsTypingTimes;
+    },
+    getAssignedCharTypingTimes(){
+      let times = this.getCalculatedSignsTypingTimes();
+        let charTypingTimes = [];
+        for (let i = 0; i < times.length; i++){
+          let charTypingTime = { [this.signs[i]] : times[i] };
+          charTypingTimes.push(charTypingTime);
+        }
+        return charTypingTimes;
+    },
+    getErrorsFilteredSignsTypingTimes(){
+      let charTimes = this.getAssignedCharTypingTimes();
+      let withoutErrors = charTimes.filter((value, index) => {
+        return !this.errorsPositions.includes(index);
+      });
+      return withoutErrors;
+    },
+    getPositionsOfWordsWithErrors(){
+      let positions = [];
+      let position = 0;
+      for (let i =0; i<this.signs.length; i++){
+        if(this.errorsPositions.includes(i) && !positions.includes(position)) positions.push(position);
+        if(this.signs[i]===' ' || this.signs[i]==='\n') position++;
+      }
+      return positions;
+    },
+    getCalculatedWordsTypingTimes(){
+      let calculatedWordsTypingTimes = [];
+      let signs = this.signs;
+      let times = this.getCalculatedSignsTypingTimes();
+      let word ='';
+      let time = 0;
+      for (let i = 0; i < signs.length; i++){
+        if(signs[i]!==' ' && signs[i]!=='\n'){
+          word+=signs[i];
+          time+=times[i];
+        }
+        else {
+          calculatedWordsTypingTimes.push({[word]:time/word.length});
+          word='';
+          time = 0;
+        }
+      }
+      return calculatedWordsTypingTimes;
+    },
+    getErrorsFilteredWordsTypingTimes(){
+      let errorsPositions = this.getPositionsOfWordsWithErrors();
+      let wordTypingTimes = this.getCalculatedWordsTypingTimes();
+      let filtered = wordTypingTimes.filter((value, index) => {
+        return !errorsPositions.includes(index);
+      });
+      return filtered;
+    },
     textToSeconds(text) {
       let textDivided = text.split(":");
       let seconds =
@@ -101,6 +164,7 @@ export default {
   mounted() {
     this.calculateTestResults();
     this.$store.dispatch('saveTestResultsInStore', this.testResults);
+    console.log(this.getErrorsFilteredWordsTypingTimes());
     this.testResultsData = [
       {
         title: "Time",

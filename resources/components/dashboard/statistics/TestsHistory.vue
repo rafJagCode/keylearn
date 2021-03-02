@@ -12,7 +12,7 @@
       </v-row>
     </v-container>
     <v-row>
-      <v-col v-for="test in tests" :key="test.id">
+      <v-col cols=4 v-for="test in tests" :key="test.id">
         <v-row justify="center">
           <result
             :test="test"

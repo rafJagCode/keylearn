@@ -25,6 +25,7 @@ import { mapGetters } from "vuex";
 export default {
   watch: {
     typed: function (typed) {
+      if(typed.length!==0) this.signsTimeFlags = {...this.signsTimeFlags, [typed.length-1]: this.stopwatchTime};
       if (typed.length !== 0 && typed.length >= this.signs.length) {
         this.endTest();
       }
@@ -35,7 +36,23 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isTestActivated", "isTestRunning", "signs"]),
+    ...mapGetters(["isTestActivated", "isTestRunning", "signs", 'stopwatchTime']),
+    signsTimeFlags:{
+      get(){
+        return this.$store.getters.signsTimeFlags;
+      },
+      set(signsTimeFlags){
+        this.$store.dispatch('setSignsTimeFlags', signsTimeFlags);
+      }
+    },
+    errorsPositions:{
+      get(){
+        return this.$store.getters.errorsPositions;
+      },
+      set(errorsPositions){
+        this.$store.dispatch('setErrorsPositions', errorsPositions)
+      }
+    },
     typed: {
       get() {
         return this.$store.getters.typed;
@@ -80,8 +97,10 @@ export default {
         return;
       }
       //check
-      if (this.typed.slice(-1) !== this.signs[this.typed.length - 1])
+      if (this.typed.slice(-1) !== this.signs[this.typed.length - 1]){
         this.$store.dispatch("incrementErrorCounter");
+        this.errorsPositions.push(this.typed.length-1);
+      }
       this.beforeKeyPress = this.typed;
     },
   },
