@@ -2,10 +2,7 @@
   <v-card width="100%" class="ma-2 pa-2">
     <v-row justify="center" align="center">
       <div class="chart-container">
-        <chart
-          :chart-data="datacollection"
-          :options="options"
-        ></chart>
+        <chart :chart-data="datacollection" :options="options"></chart>
       </div>
     </v-row>
   </v-card>
@@ -23,12 +20,20 @@ export default {
       minInResults: 0,
       maxInResults: 0,
       datacollection: {},
-      options: {}
+      options: {},
     };
   },
-    props: {
-      results: null,
+  props: {
+    results: null,
+  },
+  watch: {
+    results: function () {
+      this.minInResults = Math.min(...this.results);
+      this.maxInResults = Math.max(...this.results);
+      this.fillOptions();
+      this.fillData();
     },
+  },
   mounted() {
     this.minInResults = Math.min(...this.results);
     this.maxInResults = Math.max(...this.results);
@@ -36,7 +41,7 @@ export default {
     this.fillData();
   },
   methods: {
-    fillOptions(){
+    fillOptions() {
       this.options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -73,7 +78,7 @@ export default {
             radius: 2,
           },
         },
-      }
+      };
     },
     fillData() {
       this.datacollection = {
@@ -82,7 +87,7 @@ export default {
           {
             data: this.results,
             showLine: false,
-            pointBackgroundColor: 'red',
+            pointBackgroundColor: "red",
           },
         ],
       };

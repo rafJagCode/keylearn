@@ -60,7 +60,6 @@ export default {
           value: "testLength",
         },
       ],
-      tests: null,
       selected: [
         "time",
         "wpm",
@@ -73,15 +72,17 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["user"]),
+    ...mapGetters(["user", 'watchedProfile', 'tests']),
   },
-  mounted() {
-    this.setResults();
+  watch:{
+    watchedProfile: function(watchedProfile){
+      if(watchedProfile !== null) this.setResults();
+    }
   },
   methods: {
     setResults() {
-      this.$store.dispatch("setResults").then(() => {
-        this.tests = this.$store.getters.tests;
+      this.$store.dispatch("setResults", this.watchedProfile.id).then(() => {
+
       });
     },
     removeTestResults(testId) {

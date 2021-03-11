@@ -34,7 +34,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-hover>
-      <v-hover v-slot="{ hover }">
+      <v-hover v-slot="{ hover }" v-if="isUserAuthenticated">
         <v-list-item
           class="px-2"
           :class="{ 'list--hover': hover }"
@@ -59,17 +59,57 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      items: [],
+      availableItems: {
+        test: {
+          link: "test",
+          icon: "mdi-keyboard-outline",
+          text: "Practice Typing",
+        },
+        login: {
+          link: "login",
+          icon: "mdi-account-outline",
+          text: "Login",
+        },
+        home: {
+          link: "home",
+          icon: "mdi-home-outline",
+          text: "Home",
+        },
+        statistics: {
+          link: "statistics",
+          icon: "mdi-chart-line",
+          text: "Statistics",
+        },
+        settings: {
+          link: "settings",
+          icon: "mdi-cog-outline",
+          text: "Settings",
+        },
+      },
     };
-  },
-  mounted() {
-    this.setItems();
   },
   computed: {
     ...mapGetters(["isUserAuthenticated", "user"]),
     userName() {
       if (!this.isUserAuthenticated) return "Not logged in";
       return this.user.email;
+    },
+    items() {
+      let items = [];
+      if (this.isUserAuthenticated) {
+        items = [
+          this.availableItems.home,
+          this.availableItems.statistics,
+          this.availableItems.settings,
+        ];
+      }
+      if (!this.isUserAuthenticated) {
+        items = [this.availableItems.login, this.availableItems.home];
+      }
+      if (this.$route.name !== "test") {
+        items.unshift(this.availableItems.test);
+      }
+      return items;
     },
   },
   methods: {
@@ -78,47 +118,6 @@ export default {
     },
     signOut() {
       this.$store.dispatch("signOut");
-    },
-    setItems() {
-      if (this.$route.name !== "test") {
-        this.items.push({
-          link: "test",
-          icon: "mdi-keyboard-outline",
-          text: "Practice Typing",
-        });
-      }
-      if (this.isUserAuthenticated) {
-        this.items.push(
-          {
-            link: "home",
-            icon: "mdi-home-outline",
-            text: "Home",
-          },
-          {
-            link: "statistics",
-            icon: "mdi-chart-line",
-            text: "Statistics",
-          },
-          {
-            link: "settings",
-            icon: "mdi-cog-outline",
-            text: "Settings",
-          },
-        );
-      } else {
-        this.items = [
-          {
-            link: "login",
-            icon: "mdi-account-outline",
-            text: "Login",
-          },
-          {
-            link: "home",
-            icon: "mdi-home-outline",
-            text: "Home",
-          },
-        ];
-      }
     },
   },
 };

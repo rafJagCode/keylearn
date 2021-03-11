@@ -21,6 +21,12 @@ export default {
         this.$router.push({ name: "home" });
       });
     },
+    setProfiles(){
+      this.$store.dispatch('setProfiles');
+    }
+  },
+  mounted(){
+    this.setProfiles();
   },
   components: {
     NavigationDrawer

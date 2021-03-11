@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Test;
-use App\Models\User;
+use App\Models\Profile;
 
 class TestController extends Controller
 {
@@ -30,7 +30,7 @@ class TestController extends Controller
             'all_errors' => $request->allErrors,
             'accuracy' => $request->accuracy,
             'score' => $request->score,
-            'user_id' => $request->user_id
+            'profile_id' => $request->profile_id
         ]);
         return response()->json($test);
     }
@@ -40,10 +40,10 @@ class TestController extends Controller
         Test::findOrFail($request->id)->delete();
     }
 
-    public function getUserResults(Request $request)
+    public function getProfileResults(Request $request)
     {
-        $user = User::findOrFail($request->id);
-        $tests = $user->tests()->get();
+        $profile = Profile::findOrFail($request->profile_id);
+        $tests = $profile->tests()->get();
         return response()->json($tests);
     }
 }

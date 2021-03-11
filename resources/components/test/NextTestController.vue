@@ -3,12 +3,12 @@
     <Keypress
       key-event="keyup"
       :key-code="32"
-      :modifiers="['shiftKey']"
-      @success="handleShiftSpaceKeypress()"
+      :modifiers="['ctrlKey', 'shiftKey']"
+      @success="handleCtrlShiftSpaceKeypress()"
     />
     <v-row justify="center">
     <v-layout column justify-center align-center class="primaryLight--text text-caption">
-      <span> PRESS SHIFT + SPACE </span>
+      <span> PRESS CTRL + SHIFT + SPACE </span>
       <span> TO LOAD NEXT TEST </span>
     </v-layout>
     <v-icon x-large class="ml-4" color="creamy">mdi-arrow-right-bold-box</v-icon>
@@ -21,7 +21,7 @@ export default {
     Keypress: () => import("vue-keypress"),
   },
   methods: {
-    handleShiftSpaceKeypress() {
+    handleCtrlShiftSpaceKeypress() {
       this.$emit("nextTest");
     },
   },

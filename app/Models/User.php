@@ -37,8 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tests()
+
+    public function profiles()
     {
-        return $this->hasMany(Test::class);
+        return $this->hasMany(Profile::class);
+    }
+    public function selectedProfile()
+    {
+        return $this->belongsTo(Profile::class, 'selected_profile_id');
     }
 }

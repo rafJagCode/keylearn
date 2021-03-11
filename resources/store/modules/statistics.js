@@ -7,10 +7,9 @@ const state = {
 const actions = {
     async setResults({
         dispatch,
-        commit,
-        rootGetters
-    }) {
-        await axios.post("/api/get-user-results", rootGetters.user).then((res) => {
+        commit
+    }, profileId) {
+        await axios.post("/api/get-profile-results", {'profile_id': profileId}).then((res) => {
             commit('SET_TESTS', res.data);
         });
         dispatch('setSpeeds');

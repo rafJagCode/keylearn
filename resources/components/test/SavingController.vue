@@ -32,7 +32,7 @@
       >
         <v-row class="saving-result creamy--text" v-if="savedSuccessfully" justify="center" align="center" @click="undoSave()">
           <v-icon left color="creamy">mdi-undo</v-icon>
-          <span>Undo Save</span> 
+          <span>Undo Save</span>
         </v-row>
         <v-row class="saving-result saving-result--unsuccsessfull primaryRed--text" v-if="savedUnsuccessfully" justify="center" align="center" @click="saveTestResults()">
           <v-icon left color="primaryRed">mdi-refresh</v-icon>
@@ -101,7 +101,7 @@ export default {
       Vue.axios
         .post("/api/save-test-results", {
           ...this.testResults,
-          user_id: this.user.id,
+          profile_id: this.user.selected_profile_id,
         })
         .then((res) => {
           this.isSavingInProgress = false;
