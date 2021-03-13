@@ -18,7 +18,13 @@ class ProfileController extends Controller
     }
     public function deleteProfile(Request $request)
     {
-        $profile = Profile::findOrFail($request->id)->delete();
+        $user = $request->user();
+        $profile = Profile::findOrFail($request->id);
+        if($profile->id === $user->selected_profile_id){
+            $startingProfile = $user->profiles()->where('name', 'Starting Profile')->firstOrFail();
+            $user->selectedProfile()->associate($startingProfile)->save();
+        };
+        $profile->delete();
         return response()->json($profile);
     }
     public function getProfiles(Request $request)
@@ -31,6 +37,12 @@ class ProfileController extends Controller
         $profile = Profile::findOrFail($request->id);
         $profile->name = $request->name;
         $profile->save();
+        return response()->json($profile);
+    }
+    public function useProfile(Request $request)
+    {
+        $profile = Profile::findOrFail($request->id);
+        $request->user()->selectedProfile()->associate($profile)->save();
         return response()->json($profile);
     }
 }

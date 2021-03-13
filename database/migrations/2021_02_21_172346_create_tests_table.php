@@ -23,7 +23,7 @@ class CreateTestsTable extends Migration
             $table->integer('all_errors');
             $table->integer('accuracy');
             $table->integer('score');
-            $table->bigInteger('profile_id')->unsigned();
+            $table->foreignId('profile_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -22,6 +22,7 @@ class TestController extends Controller
 
     public function saveTestResults(Request $request)
     {
+        $user = $request->user();
         $test = Test::create([
             'time' => $request->time,
             'test_length' => $request->testLength,
@@ -30,7 +31,7 @@ class TestController extends Controller
             'all_errors' => $request->allErrors,
             'accuracy' => $request->accuracy,
             'score' => $request->score,
-            'profile_id' => $request->profile_id
+            'profile_id' => $user->selected_profile_id,
         ]);
         return response()->json($test);
     }

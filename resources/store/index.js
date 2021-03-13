@@ -10,12 +10,12 @@ import profiles from './modules/profiles';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules:{
-        testResults,
-        test,
-        auth,
-        statistics,
-        stopwatch,
-        profiles
-    }
-})
+	modules: {
+		testResults,
+		test,
+		auth,
+		statistics,
+		stopwatch,
+		profiles,
+	},
+});
