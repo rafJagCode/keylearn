@@ -72,9 +72,7 @@ export default {
 		},
 		clockRunning() {
 			let currentTime = new Date(),
-				timeElapsed = new Date(
-					currentTime - this.timeBegan - this.stoppedDuration,
-				),
+				timeElapsed = new Date(currentTime - this.timeBegan - this.stoppedDuration),
 				hour = timeElapsed.getUTCHours(),
 				min = timeElapsed.getUTCMinutes(),
 				sec = timeElapsed.getUTCSeconds(),

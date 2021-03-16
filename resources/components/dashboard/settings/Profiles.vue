@@ -15,14 +15,11 @@ export default {
 	data() {
 		return {
 			profileName: '',
-			rules: [
-				(value) => !!value || 'Required.',
-				(value) => (value || '').length <= 20 || 'Max 20 characters',
-			],
+			rules: [(value) => !!value || 'Required.', (value) => (value || '').length <= 20 || 'Max 20 characters'],
 		};
 	},
 	computed: {
-		...mapGetters(['user', 'selectedProfile']),
+		...mapGetters(['user', 'watchedProfile']),
 	},
 	methods: {
 		createProfile() {
@@ -37,15 +34,14 @@ export default {
 				});
 		},
 		deleteProfile() {
-			Vue.axios
-				.post('/api/delete-profile', this.selectedProfile)
-				.then((res) => {
-					this.$store.dispatch('setProfiles');
-					console.log(res.data);
-				});
+			Vue.axios.post('/api/delete-profile', this.watchedProfile).then((res) => {
+				this.$store.dispatch('setProfiles');
+				console.log(res.data);
+			});
 		},
 		useProfile() {
-			Vue.axios.post('/api/use-profile', this.selectedProfile).then((res) => {
+			Vue.axios.post('/api/use-profile', this.watchedProfile).then((res) => {
+				this.$store.dispatch('setProfiles');
 				console.log(res.data);
 			});
 		},

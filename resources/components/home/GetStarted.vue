@@ -5,12 +5,9 @@
 				<v-col cols="10">
 					<v-row align="center" justify="center">
 						<v-col cols="12" md="4">
-							<h1 class="get-started__text display-3 font-weight-bold mb-4">
-								KeyLearn
-							</h1>
+							<h1 class="get-started__text display-3 font-weight-bold mb-4">KeyLearn</h1>
 							<h1 class="get-started__text display-1 font-weight-light">
-								Easily practice your typing skills and improve your typing
-								speed!
+								Easily practice your typing skills and improve your typing speed!
 							</h1>
 							<v-btn
 								rounded
@@ -27,9 +24,7 @@
 							</v-btn>
 						</v-col>
 						<v-col cols="12" md="8">
-							<typing-machine-icon
-								:isIconShaking="isIconShaking"
-							></typing-machine-icon>
+							<typing-machine-icon :isIconShaking="isIconShaking"></typing-machine-icon>
 						</v-col>
 					</v-row>
 				</v-col>
@@ -40,15 +35,7 @@
 		</v-parallax>
 		<v-container fluid id="features" class="mt-2">
 			<v-row align="center" justify="space-around">
-				<v-col
-					cols="12"
-					xs="12"
-					sm="6"
-					md="4"
-					class="text-center"
-					v-for="(card, index) in cards"
-					:key="index"
-				>
+				<v-col cols="12" xs="12" sm="6" md="4" class="text-center" v-for="(card, index) in cards" :key="index">
 					<router-link :to="card.cardLink">
 						<about-card
 							size="400"
@@ -81,8 +68,7 @@ export default {
 					cardLink: 'test',
 					icon: 'typing-practice-icon',
 					caption: 'practice typing',
-					description:
-						'Start your training. Check how fast and accurate is your typing.',
+					description: 'Start your training. Check how fast and accurate is your typing.',
 				},
 				{
 					cardLink: 'register',
@@ -123,8 +109,8 @@ export default {
 	z-index: 0;
 }
 .get-started__text {
-	text-shadow: -0.5px -0.5px 0.5px #0095a6, 0.5px -0.5px 0.5px #0095a6,
-		-0.5px 0.5px 0.5px #0095a6, 0.5px 0.5px 0.5px #0095a6;
+	text-shadow: -0.5px -0.5px 0.5px #0095a6, 0.5px -0.5px 0.5px #0095a6, -0.5px 0.5px 0.5px #0095a6,
+		0.5px 0.5px 0.5px #0095a6;
 }
 section {
 	position: relative;

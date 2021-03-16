@@ -1,14 +1,6 @@
 <template>
-	<v-row
-		justify="center"
-		:style="{ visibility: enableTestActivator ? 'visible' : 'hidden' }"
-	>
-		<Keypress
-			v-if="enableTestActivator"
-			key-event="keyup"
-			:key-code="13"
-			@success="handleEnterKeypress()"
-		/>
+	<v-row justify="center" :style="{ visibility: enableTestActivator ? 'visible' : 'hidden' }">
+		<Keypress v-if="enableTestActivator" key-event="keyup" :key-code="13" @success="handleEnterKeypress()" />
 		<span class="ma-0 creamy--text"> Press ENTER to activate </span>
 	</v-row>
 </template>
@@ -16,19 +8,9 @@
 import { mapGetters } from 'vuex';
 export default {
 	computed: {
-		...mapGetters([
-			'isTestRunning',
-			'isTestActivated',
-			'errorWhileLoading',
-			'testLoading',
-		]),
+		...mapGetters(['isTestRunning', 'isTestActivated', 'errorWhileLoading', 'testLoading']),
 		enableTestActivator() {
-			return (
-				!this.isTestActivated &&
-				this.isTestRunning &&
-				!this.testLoading &&
-				!this.errorWhileLoading
-			);
+			return !this.isTestActivated && this.isTestRunning && !this.testLoading && !this.errorWhileLoading;
 		},
 	},
 	methods: {

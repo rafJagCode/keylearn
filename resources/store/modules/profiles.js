@@ -5,17 +5,18 @@ const state = {
 	selectedProfile: null,
 };
 const actions = {
-	async setProfiles({ commit, rootGetters }) {
-		await axios
+	async setProfiles({ commit, dispatch, rootGetters }) {
+		await dispatch('setUserStoreState', null, {
+			root: true,
+		});
+		return await axios
 			.post('/api/get-profiles', {
 				id: rootGetters.user.id,
 			})
 			.then((res) => {
 				let profiles = res.data;
 				commit('SET_PROFILES', profiles);
-				let selectedProfile = profiles.find(
-					(obj) => obj.id === rootGetters.user.selected_profile_id,
-				);
+				let selectedProfile = profiles.find((obj) => obj.id === rootGetters.user.selected_profile_id);
 				commit('SET_WATCHED_PROFILE', selectedProfile);
 				commit('SET_SELECTED_PROFILE', selectedProfile);
 			});

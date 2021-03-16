@@ -69,13 +69,10 @@ const mutations = {
 	UPDATE_TEXT: (state, text) => (state.text = text),
 	UPDATE_SIGNS: (state, signs) => (state.signs = signs),
 	UPDATE_TEST_LOADIN_STATUS: (state, status) => (state.testLoading = status),
-	UPDATE_ERROR_WHILE_LOADING_STATUS: (state, status) =>
-		(state.errorWhileLoading = status),
+	UPDATE_ERROR_WHILE_LOADING_STATUS: (state, status) => (state.errorWhileLoading = status),
 	INCREMENT_ERROR_COUNTER: (state) => state.errorCounter++,
-	SET_SIGNS_TIME_FLAGS: (state, signsTimeFlags) =>
-		(state.signsTimeFlags = signsTimeFlags),
-	SET_ERRORS_POSITIONS: (state, errorsPositions) =>
-		(state.errorsPositions = errorsPositions),
+	SET_SIGNS_TIME_FLAGS: (state, signsTimeFlags) => (state.signsTimeFlags = signsTimeFlags),
+	SET_ERRORS_POSITIONS: (state, errorsPositions) => (state.errorsPositions = errorsPositions),
 };
 const getters = {
 	isTestRunning: (state) => state.isTestRunning,

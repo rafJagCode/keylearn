@@ -11,25 +11,14 @@
 								</v-btn>
 							</router-link>
 							<v-spacer></v-spacer>
-							<img
-								class="register__logo"
-								src="@/assets/img/logo.png"
-								alt="Logo"
-							/>
+							<img class="register__logo" src="@/assets/img/logo.png" alt="Logo" />
 						</v-row>
 					</v-container>
 					<v-alert prominent type="error" v-if="isEmailAlreadyUsed">
-						<v-row align="center">
-							There is already an account registered to this email
-						</v-row>
+						<v-row align="center"> There is already an account registered to this email </v-row>
 					</v-alert>
 					<v-form class="ma-6" ref="form" v-model="valid" lazy-validation>
-						<v-text-field
-							v-model="email"
-							:rules="emailRules"
-							label="E-mail"
-							validate-on-blur
-						></v-text-field>
+						<v-text-field v-model="email" :rules="emailRules" label="E-mail" validate-on-blur></v-text-field>
 						<v-text-field
 							v-model="password"
 							type="password"
@@ -60,10 +49,7 @@
 						<div class="sign-up-text">
 							Already have an account?
 							<v-icon>mdi-arrow-right</v-icon>
-							<router-link
-								to="/login"
-								style="text-decoration: none; color: inherit"
-							>
+							<router-link to="/login" style="text-decoration: none; color: inherit">
 								<v-btn color="primary">
 									<strong>Login</strong>
 								</v-btn>
@@ -83,10 +69,7 @@ export default {
 		email: '',
 		password: '',
 		passwordConfirmation: '',
-		emailRules: [
-			(v) => !!v || 'E-mail is required',
-			(v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-		],
+		emailRules: [(v) => !!v || 'E-mail is required', (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'],
 		passwordRules: [
 			(v) => !!v || 'Password is required',
 			(v) => (v && v.length >= 5) || 'Password must have 5+ characters',
@@ -94,11 +77,7 @@ export default {
 	}),
 	computed: {
 		comparePasswords() {
-			return [
-				this.password !== this.passwordConfirmation
-					? 'Passwords do not match'
-					: true,
-			];
+			return [this.password !== this.passwordConfirmation ? 'Passwords do not match' : true];
 		},
 	},
 	methods: {

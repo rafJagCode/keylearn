@@ -1,36 +1,16 @@
 <template>
 	<div>
-		<v-app-bar
-			app
-			:color="color"
-			:flat="flat"
-			dark
-			class="px-15"
-			:class="{ expand: flat }"
-		>
+		<v-app-bar app :color="color" :flat="flat" dark class="px-15" :class="{ expand: flat }">
 			<v-toolbar-title v-if="!smallWidth">
-				<v-img
-					:src="require('@/assets/img/logo.png')"
-					max-width="120px"
-					min-width="120px"
-				/>
+				<v-img :src="require('@/assets/img/logo.png')" max-width="120px" min-width="120px" />
 			</v-toolbar-title>
 			<v-spacer />
 
-			<v-btn
-				v-for="(item, index) in items"
-				:key="index"
-				text
-				@click="$vuetify.goTo(item.link)"
-			>
+			<v-btn v-for="(item, index) in items" :key="index" text @click="$vuetify.goTo(item.link)">
 				<v-icon left>{{ item.icon }}</v-icon>
 				<span class="mr-2">{{ item.name }}</span>
 			</v-btn>
-			<router-link
-				to="/login"
-				style="text-decoration: none; color: inherit"
-				v-if="!isUserAuthenticated"
-			>
+			<router-link to="/login" style="text-decoration: none; color: inherit" v-if="!isUserAuthenticated">
 				<v-btn class="white--text ml-2" color="primaryLight" light>
 					<v-icon left>mdi-account-outline</v-icon>
 					Login

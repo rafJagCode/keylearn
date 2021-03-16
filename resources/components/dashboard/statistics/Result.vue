@@ -4,12 +4,7 @@
 			<span class="font-weight-bold text-caption">DATE:</span>
 			<span class="ml-2 text-caption">{{ testDate }}</span>
 			<v-spacer></v-spacer>
-			<v-icon
-				@click="removeTestResults(test.id)"
-				class="delete-button pa-1"
-				color="red"
-				>mdi-delete-forever</v-icon
-			>
+			<v-icon @click="removeTestResults(test.id)" class="delete-button pa-1" color="red">mdi-delete-forever</v-icon>
 		</v-card-title>
 		<v-card-text>
 			<v-row v-for="(option, name) in options" :key="name">
@@ -62,11 +57,7 @@ export default {
 		options() {
 			let subset = Object.keys(this.availAbleOptions)
 				.filter((key) => this.selectedOptions.indexOf(key) >= 0)
-				.reduce(
-					(obj2, key) =>
-						Object.assign(obj2, { [key]: this.availAbleOptions[key] }),
-					{},
-				);
+				.reduce((obj2, key) => Object.assign(obj2, { [key]: this.availAbleOptions[key] }), {});
 			return subset;
 		},
 		testDate() {
@@ -75,8 +66,7 @@ export default {
 			let month = date.toLocaleString('en', { month: 'long' }).toUpperCase();
 			let day = date.getDate();
 			let hours = date.getHours();
-			let minutes =
-				date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+			let minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
 			return day + ' ' + month + ' ' + year + ' ' + hours + ':' + minutes;
 		},
 	},

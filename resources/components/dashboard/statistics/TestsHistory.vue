@@ -14,11 +14,7 @@
 		<v-row>
 			<v-col cols="4" v-for="test in tests" :key="test.id">
 				<v-row justify="center">
-					<result
-						:test="test"
-						:selectedOptions="selected"
-						@removeTestResults="removeTestResults"
-					></result>
+					<result :test="test" :selectedOptions="selected" @removeTestResults="removeTestResults"></result>
 				</v-row>
 			</v-col>
 		</v-row>
@@ -60,33 +56,20 @@ export default {
 					value: 'testLength',
 				},
 			],
-			selected: [
-				'time',
-				'wpm',
-				'score',
-				'allErrors',
-				'uncorrectedErrors',
-				'accuracy',
-				'testLength',
-			],
+			selected: ['time', 'wpm', 'score', 'allErrors', 'uncorrectedErrors', 'accuracy', 'testLength'],
 		};
 	},
 	computed: {
-		...mapGetters(['user', 'watchedProfile', 'tests']),
-	},
-	watch: {
-		watchedProfile: function (watchedProfile) {
-			if (watchedProfile !== null) this.setResults();
-		},
+		...mapGetters(['user', 'tests']),
 	},
 	methods: {
-		setResults() {
-			this.$store.dispatch('setResults', this.watchedProfile.id).then(() => {});
-		},
 		removeTestResults(testId) {
 			Vue.axios.post('/api/delete-test-results', { id: testId }).then(() => {
 				this.setResults();
 			});
+		},
+		setResults() {
+			this.$store.dispatch('setResults');
 		},
 	},
 	components: {

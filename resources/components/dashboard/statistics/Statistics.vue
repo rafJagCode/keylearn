@@ -1,17 +1,11 @@
 <template>
 	<div class="statistics">
 		<v-card>
-			<v-toolbar flat color="primaryLight" dark>
+			<v-toolbar class="tool" flat color="primaryLight" dark>
 				<v-toolbar-title> Statistics </v-toolbar-title>
 				<v-spacer></v-spacer>
 				<div class="profile-selection">
-					<v-combobox
-						v-model="watchedProfile"
-						:items="profiles"
-						item-text="name"
-						hint="Select profile"
-						persistent-hint
-					></v-combobox>
+					<profile-list class="ma-2"></profile-list>
 				</div>
 			</v-toolbar>
 			<v-tabs vertical color="primaryLight">
@@ -24,8 +18,8 @@
 					Tests Analysis
 				</v-tab>
 				<v-tab>
-					<v-icon left> mdi-access-point </v-icon>
-					Option 3
+					<v-icon left> mdi-clock-fast </v-icon>
+					Words Speed
 				</v-tab>
 
 				<v-tab-item>
@@ -35,7 +29,7 @@
 					<tests-analysis></tests-analysis>
 				</v-tab-item>
 				<v-tab-item>
-					<span>Lubie placki 2</span>
+					<words-typing-speed></words-typing-speed>
 				</v-tab-item>
 			</v-tabs>
 		</v-card>
@@ -44,11 +38,15 @@
 <script>
 import TestsHistory from '@/components/dashboard/statistics/TestsHistory';
 import TestsAnalysis from '@/components/dashboard/statistics/TestsAnalysis';
+import WordsTypingSpeed from '@/components/dashboard/statistics/WordsTypingSpeed';
+import ProfileList from '@/components/dashboard/settings/ProfileList';
 import { mapGetters } from 'vuex';
 export default {
 	components: {
 		TestsHistory,
 		TestsAnalysis,
+		WordsTypingSpeed,
+		ProfileList,
 	},
 	computed: {
 		...mapGetters(['profiles']),
@@ -64,7 +62,14 @@ export default {
 };
 </script>
 <style scoped>
+.tool {
+	position: relative;
+	z-index: 2;
+}
 .profile-selection {
+	position: absolute;
+	top: 0px;
+	right: 0;
 	width: 400px;
 }
 </style>

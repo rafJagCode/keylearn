@@ -9,7 +9,7 @@ import { mapGetters } from 'vuex';
 import NavigationDrawer from '@/components/utils/NavigationDrawer';
 export default {
 	computed: {
-		...mapGetters(['user']),
+		...mapGetters(['user', 'watchedProfile']),
 		email() {
 			if (this.user === null) return '';
 			return this.user.email;
@@ -21,12 +21,16 @@ export default {
 				this.$router.push({ name: 'home' });
 			});
 		},
-		setProfiles() {
-			this.$store.dispatch('setProfiles');
+		async setProfiles() {
+			return this.$store.dispatch('setProfiles');
+		},
+		async setResults() {
+			return this.$store.dispatch('setResults');
 		},
 	},
-	mounted() {
-		this.setProfiles();
+	async mounted() {
+		await this.setProfiles();
+		await this.setResults();
 	},
 	components: {
 		NavigationDrawer,

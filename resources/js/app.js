@@ -7,6 +7,18 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 // Vue.component('test', require('@/components/test').default);
 axios.defaults.withCredentials = true;
+axios.interceptors.response.use(
+	function (response) {
+		return response;
+	},
+	function (error) {
+		if (error.response.status === 419) {
+			store.dispatch('sessionExpired');
+			Route.push('/login');
+		}
+		return Promise.reject(error);
+	},
+);
 Vue.use(VueAxios, axios);
 store.dispatch('setUserStoreState').then(() => {
 	const app = new Vue({

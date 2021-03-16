@@ -6,6 +6,7 @@ const state = {
 	allErrors: 0,
 	accuracy: 0,
 	score: 0,
+	wordsTypingTimes: null,
 };
 const actions = {
 	saveTestResultsInStore({ commit }, testResults) {
@@ -13,8 +14,7 @@ const actions = {
 	},
 };
 const mutations = {
-	SAVE_TEST_RESULTS_IN_STORE: (state, testResults) =>
-		(state = Object.assign(state, testResults)),
+	SAVE_TEST_RESULTS_IN_STORE: (state, testResults) => (state = Object.assign(state, testResults)),
 };
 const getters = {
 	testResults: (state) => state,

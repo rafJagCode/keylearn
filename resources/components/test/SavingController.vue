@@ -24,12 +24,7 @@
 				></v-progress-circular>
 				<v-icon :color="color" x-large class="mx-4">mdi-content-save</v-icon>
 			</div>
-			<v-layout
-				column
-				justify-center
-				align-center
-				class="primaryLight--text text-caption"
-			>
+			<v-layout column justify-center align-center class="primaryLight--text text-caption">
 				<v-row
 					class="saving-result creamy--text"
 					v-if="savedSuccessfully"
@@ -70,18 +65,12 @@ export default {
 	},
 	watch: {
 		isTestRunning: function (isTestRunning) {
-			if (!isTestRunning && this.isUserAuthenticated && this.isSavingEnabled)
-				this.saveTestResults();
+			if (!isTestRunning && this.isUserAuthenticated && this.isSavingEnabled) this.saveTestResults();
 			if (isTestRunning) this.clearData();
 		},
 	},
 	computed: {
-		...mapGetters([
-			'user',
-			'isUserAuthenticated',
-			'isTestRunning',
-			'testResults',
-		]),
+		...mapGetters(['user', 'isUserAuthenticated', 'isTestRunning', 'testResults']),
 		color() {
 			if (this.isSavingEnabled && this.isUserAuthenticated) return 'green';
 			return 'primaryRed';
@@ -111,10 +100,7 @@ export default {
 		saveTestResults() {
 			this.isSavingInProgress = true;
 			Vue.axios
-				.post('/api/save-test-results', {
-					...this.testResults,
-					profile_id: this.user.selected_profile_id,
-				})
+				.post('/api/save-test-results', this.testResults)
 				.then((res) => {
 					this.isSavingInProgress = false;
 					this.savedSuccessfully = true;
@@ -127,12 +113,10 @@ export default {
 		},
 		undoSave() {
 			this.isSavingInProgress = true;
-			Vue.axios
-				.post('/api/delete-test-results', this.lastSavedTest)
-				.then(() => {
-					this.savedSuccessfully = false;
-					this.isSavingInProgress = false;
-				});
+			Vue.axios.post('/api/delete-test-results', this.lastSavedTest).then(() => {
+				this.savedSuccessfully = false;
+				this.isSavingInProgress = false;
+			});
 		},
 	},
 };

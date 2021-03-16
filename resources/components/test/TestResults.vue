@@ -1,22 +1,9 @@
 <template>
 	<v-row>
-		<v-col
-			v-for="(result, index) in testResultsData"
-			:key="index"
-			cols="6"
-			sm="4"
-			class="my-4"
-		>
+		<v-col v-for="(result, index) in testResultsData" :key="index" cols="6" sm="4" class="my-4">
 			<v-card height="80" width="350" color="#D4D8EC">
 				<v-layout row>
-					<v-sheet
-						color="teal"
-						elevation="10"
-						height="80"
-						width="80"
-						rounded
-						class="icon"
-					>
+					<v-sheet color="teal" elevation="10" height="80" width="80" rounded class="icon">
 						<v-layout align-center justify-center fill-height>
 							<v-icon x-large>{{ result.icon }}</v-icon>
 						</v-layout>
@@ -44,17 +31,11 @@ export default {
 			allErrors: 0,
 			accuracy: 0,
 			score: 0,
+			wordsTypingTimes: null,
 		},
 	}),
 	computed: {
-		...mapGetters([
-			'typed',
-			'signs',
-			'errorCounter',
-			'signsTimeFlags',
-			'errorsPositions',
-			'stopwatchTime',
-		]),
+		...mapGetters(['typed', 'signs', 'errorCounter', 'signsTimeFlags', 'errorsPositions', 'stopwatchTime']),
 	},
 	methods: {
 		getCalculatedSignsTypingTimes() {
@@ -62,9 +43,7 @@ export default {
 			let signsTypingTimes = [];
 			signsTypingTimes.push(this.textToSeconds(this.signsTimeFlags[0]));
 			for (let i = 1; i < length; i++) {
-				let time =
-					this.textToSeconds(this.signsTimeFlags[i]) -
-					this.textToSeconds(this.signsTimeFlags[i - 1]);
+				let time = this.textToSeconds(this.signsTimeFlags[i]) - this.textToSeconds(this.signsTimeFlags[i - 1]);
 				signsTypingTimes.push(time);
 			}
 			return signsTypingTimes;
@@ -89,8 +68,7 @@ export default {
 			let positions = [];
 			let position = 0;
 			for (let i = 0; i < this.signs.length; i++) {
-				if (this.errorsPositions.includes(i) && !positions.includes(position))
-					positions.push(position);
+				if (this.errorsPositions.includes(i) && !positions.includes(position)) positions.push(position);
 				if (this.signs[i] === ' ' || this.signs[i] === '\n') position++;
 			}
 			return positions;
@@ -106,7 +84,10 @@ export default {
 					word += signs[i];
 					time += times[i];
 				} else {
-					calculatedWordsTypingTimes.push({ [word]: time / word.length });
+					calculatedWordsTypingTimes.push({
+						word: word,
+						time: time / word.length,
+					});
 					word = '';
 					time = 0;
 				}
@@ -117,16 +98,13 @@ export default {
 			let errorsPositions = this.getPositionsOfWordsWithErrors();
 			let wordTypingTimes = this.getCalculatedWordsTypingTimes();
 			let filtered = wordTypingTimes.filter((value, index) => {
-				return !errorsPositions.includes(index);
+				return !errorsPositions.includes(index) && index !== 0;
 			});
 			return filtered;
 		},
 		textToSeconds(text) {
 			let textDivided = text.split(':');
-			let seconds =
-				parseFloat(textDivided[0]) * 3600 +
-				parseFloat(textDivided[1]) * 60 +
-				parseFloat(textDivided[2]);
+			let seconds = parseFloat(textDivided[0]) * 3600 + parseFloat(textDivided[1]) * 60 + parseFloat(textDivided[2]);
 			return seconds;
 		},
 		uncorrectedErrors() {
@@ -152,26 +130,23 @@ export default {
 			this.testResults.wpm = Math.round(wpmNet);
 			this.testResults.uncorrectedErrors = uncorrectedErrors;
 			this.testResults.allErrors = allErrors;
-			this.testResults.accuracy = Math.round(
-				((testLength - uncorrectedErrors) / testLength) * 100,
-			);
+			this.testResults.accuracy = Math.round(((testLength - uncorrectedErrors) / testLength) * 100);
 
 			//score
 			let wpmWeight = 100;
 			let lenghtWeight = 1;
 			let errorsWeight = 10;
 			this.testResults.score = Math.round(
-				(wpmWeight * wpmNet +
-					lenghtWeight * testLength -
-					errorsWeight * allErrors) /
+				(wpmWeight * wpmNet + lenghtWeight * testLength - errorsWeight * allErrors) /
 					(wpmWeight + lenghtWeight + errorsWeight),
 			);
+			//Chars and words typing times
+			this.testResults.wordsTypingTimes = this.getErrorsFilteredWordsTypingTimes();
 		},
 	},
 	mounted() {
 		this.calculateTestResults();
 		this.$store.dispatch('saveTestResultsInStore', this.testResults);
-		console.log(this.getErrorsFilteredWordsTypingTimes());
 		this.testResultsData = [
 			{
 				title: 'Time',
@@ -185,12 +160,7 @@ export default {
 			},
 			{
 				title: 'Errors',
-				value:
-					'(all/uncorrected)' +
-					'\n' +
-					this.testResults.allErrors +
-					'/' +
-					this.testResults.uncorrectedErrors,
+				value: '(all/uncorrected)' + '\n' + this.testResults.allErrors + '/' + this.testResults.uncorrectedErrors,
 				icon: 'mdi-alert-outline',
 			},
 			{

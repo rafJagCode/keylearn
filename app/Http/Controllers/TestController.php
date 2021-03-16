@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Test;
 use App\Models\Profile;
+use App\Models\WordTypingTime;
 
 class TestController extends Controller
 {
@@ -33,7 +34,11 @@ class TestController extends Controller
             'score' => $request->score,
             'profile_id' => $user->selected_profile_id,
         ]);
-        return response()->json($test);
+		foreach($request->wordsTypingTimes as $word){
+			$wordTypingTime = new WordTypingTime(['word'=>$word['word'], 'time'=>$word['time']]);
+			$test->wordsTypingTimes()->save($wordTypingTime);
+		};
+        return response()->json($test::with('wordsTypingTimes'));
     }
 
     public function deleteTestResults(Request $request)
@@ -44,7 +49,7 @@ class TestController extends Controller
     public function getProfileResults(Request $request)
     {
         $profile = Profile::findOrFail($request->profile_id);
-        $tests = $profile->tests()->get();
+        $tests = $profile->tests()->with('wordsTypingTimes')->get();
         return response()->json($tests);
     }
 }

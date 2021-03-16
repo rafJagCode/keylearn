@@ -2,19 +2,24 @@ import axios from 'axios';
 const state = {
 	isUserAuthenticated: false,
 	user: null,
+	hasSessionExpired: false,
 };
 const actions = {
-	async signIn({ dispatch }, credentials) {
+	async signIn({ dispatch, commit }, credentials) {
 		await axios.get('sanctum/csrf-cookie');
 		await axios.post('/api/login', credentials);
-		return dispatch('setUserStoreState');
+		await dispatch('setUserStoreState');
+		return await commit('SET_SESSION_EXPIRATION_STATE', false);
 	},
 
 	async signOut({ dispatch }) {
 		await axios.post('/api/logout');
 		return dispatch('setUserStoreState');
 	},
-
+	async sessionExpired({ dispatch, commit }) {
+		await dispatch('signOut');
+		return await commit('SET_SESSION_EXPIRATION_STATE', true);
+	},
 	setUserStoreState({ commit }) {
 		return axios
 			.get('/api/user')
@@ -35,10 +40,14 @@ const mutations = {
 	SET_USER: (state, user) => {
 		state.user = user;
 	},
+	SET_SESSION_EXPIRATION_STATE: (state, sessionState) => {
+		state.hasSessionExpired = sessionState;
+	},
 };
 const getters = {
 	isUserAuthenticated: (state) => state.isUserAuthenticated,
 	user: (state) => state.user,
+	hasSessionExpired: (state) => state.hasSessionExpired,
 };
 
 export default {

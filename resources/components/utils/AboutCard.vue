@@ -24,9 +24,8 @@
 	align-self: center;
 	color: #0095a6;
 	text-transform: uppercase;
-	text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
-		1px 1px 0 white, -1px -1px 5px #0095a6, 1px -1px 5px #0095a6,
-		-1px 1px 5px #0095a6, 1px 1px 5px #0095a6;
+	text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white, -1px -1px 5px #0095a6,
+		1px -1px 5px #0095a6, -1px 1px 5px #0095a6, 1px 1px 5px #0095a6;
 	z-index: 3;
 	font-weight: bold;
 }
@@ -50,9 +49,8 @@
 	color: white;
 	text-align: center;
 	font-size: 20px;
-	text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-		1px 1px 0 black, -1px -1px 5px black, 1px -1px 5px black, -1px 1px 5px black,
-		1px 1px 5px black;
+	text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black, -1px -1px 5px black,
+		1px -1px 5px black, -1px 1px 5px black, 1px 1px 5px black;
 }
 .about-card__content {
 	align-self: center;

@@ -1,8 +1,6 @@
 <template>
 	<v-layout align-center class="test-displayer">
-		<test-loading-error-alert
-			v-if="errorWhileLoading"
-		></test-loading-error-alert>
+		<test-loading-error-alert v-if="errorWhileLoading"></test-loading-error-alert>
 		<v-container v-if="!errorWhileLoading">
 			<v-row align="center" justify="center">
 				<v-progress-circular
@@ -13,18 +11,9 @@
 					indeterminate
 				></v-progress-circular>
 			</v-row>
-			<v-layout
-				v-show="!testLoading"
-				column
-				:style="{ opacity: !isTestActivated ? 0.3 : 1 }"
-			>
+			<v-layout v-show="!testLoading" column :style="{ opacity: !isTestActivated ? 0.3 : 1 }">
 				<v-row v-for="(row, index) in rows" :key="index">
-					<sign
-						v-for="sign in row"
-						:key="sign.position"
-						:sign="sign.sign"
-						:state="checkTypedSigns[sign.position]"
-					>
+					<sign v-for="sign in row" :key="sign.position" :sign="sign.sign" :state="checkTypedSigns[sign.position]">
 					</sign>
 				</v-row>
 			</v-layout>
@@ -48,14 +37,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters([
-			'isTestActivated',
-			'text',
-			'typed',
-			'signs',
-			'testLoading',
-			'errorWhileLoading',
-		]),
+		...mapGetters(['isTestActivated', 'text', 'typed', 'signs', 'testLoading', 'errorWhileLoading']),
 		checkTypedSigns() {
 			let compare = [];
 			let typedSigns = this.typed.split('');

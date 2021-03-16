@@ -14,18 +14,11 @@
 			@success="handleCtrlShiftSpaceKeypress()"
 		/>
 		<v-row justify="center">
-			<v-layout
-				column
-				justify-center
-				align-center
-				class="primaryLight--text text-caption"
-			>
+			<v-layout column justify-center align-center class="primaryLight--text text-caption">
 				<span> PRESS CTRL + SHIFT + SPACE </span>
 				<span> TO LOAD NEXT TEST </span>
 			</v-layout>
-			<v-icon x-large class="ml-4" color="creamy"
-				>mdi-arrow-right-bold-box</v-icon
-			>
+			<v-icon x-large class="ml-4" color="creamy">mdi-arrow-right-bold-box</v-icon>
 		</v-row>
 	</div>
 </template>

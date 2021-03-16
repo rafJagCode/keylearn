@@ -7,44 +7,20 @@
 						<v-col cols="12" sm="5">
 							<h1 class="font-weight-light display-1">Contact Us</h1>
 							<h3 class="font-weight-light mt-3">
-								You have questions, need help or have found a mistake? Then do
-								not hesitate to contact us.
+								You have questions, need help or have found a mistake? Then do not hesitate to contact us.
 							</h3>
 							<h3 class="font-weight-light mt-3">Telephone: +xx xxx-xxx-xxx</h3>
 							<h3 class="font-weight-light">Email: email@email.com</h3>
 						</v-col>
 						<v-col cols="12" sm="7">
 							<v-form ref="form" v-model="valid" :lazy-validation="lazy">
-								<v-text-field
-									v-model="name"
-									:counter="10"
-									:rules="nameRules"
-									label="Name"
-									required
-								></v-text-field>
+								<v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-								<v-text-field
-									v-model="email"
-									:rules="emailRules"
-									label="E-mail"
-									required
-								></v-text-field>
+								<v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
-								<v-textarea
-									v-model="textArea"
-									:rules="textAreaRules"
-									label="Message"
-									required
-								/>
+								<v-textarea v-model="textArea" :rules="textAreaRules" label="Message" required />
 
-								<v-btn
-									:disabled="!valid"
-									color="primary"
-									:dark="valid"
-									rounded
-									block
-									class="mt-3"
-								>
+								<v-btn :disabled="!valid" color="primary" :dark="valid" rounded block class="mt-3">
 									Send Message
 								</v-btn>
 							</v-form>

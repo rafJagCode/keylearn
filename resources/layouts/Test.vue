@@ -29,12 +29,7 @@ import TestActivator from '@/components/test/TestActivator';
 import { mapGetters } from 'vuex';
 export default {
 	computed: {
-		...mapGetters([
-			'isTestRunning',
-			'isTestActivated',
-			'text',
-			'errorWhileLoading',
-		]),
+		...mapGetters(['isTestRunning', 'isTestActivated', 'text', 'errorWhileLoading']),
 	},
 	methods: {
 		startClock() {

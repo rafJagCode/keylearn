@@ -14,4 +14,8 @@ class Test extends Model
     {
         return $this->belongsTo(Profile::class);
     }
+	public function WordsTypingTimes()
+	{
+		return $this->hasMany(WordTypingTime::class);
+	}
 }

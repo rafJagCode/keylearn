@@ -1,12 +1,6 @@
 <template>
 	<v-row>
-		<v-progress-linear
-			:value="progress"
-			:color="color"
-			absolute
-			height="7"
-			class="mb-12"
-		></v-progress-linear>
+		<v-progress-linear :value="progress" :color="color" absolute height="7" class="mb-12"></v-progress-linear>
 		<v-textarea
 			ref="userInput"
 			v-model="typed"
@@ -43,12 +37,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters([
-			'isTestActivated',
-			'isTestRunning',
-			'signs',
-			'stopwatchTime',
-		]),
+		...mapGetters(['isTestActivated', 'isTestRunning', 'signs', 'stopwatchTime']),
 		signsTimeFlags: {
 			get() {
 				return this.$store.getters.signsTimeFlags;

@@ -7,17 +7,7 @@
 			<contact />
 		</v-main>
 		<v-scale-transition>
-			<v-btn
-				fab
-				v-show="fab"
-				v-scroll="onScroll"
-				dark
-				fixed
-				bottom
-				right
-				color="secondary"
-				@click="toTop"
-			>
+			<v-btn fab v-show="fab" v-scroll="onScroll" dark fixed bottom right color="secondary" @click="toTop">
 				<v-icon>mdi-arrow-up</v-icon>
 			</v-btn>
 		</v-scale-transition>

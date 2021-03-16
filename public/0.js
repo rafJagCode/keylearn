@@ -19,14 +19,8 @@
 
 				/* normalize component */
 
-				var component = Object(
-					_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__[
-						'default'
-					],
-				)(
-					_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[
-						'default'
-					],
+				var component = Object(_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__['default'])(
+					_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__['default'],
 					render,
 					staticRenderFns,
 					false,
@@ -40,8 +34,7 @@
 					var api;
 				}
 				component.options.__file = 'node_modules/vue-keypress/src/index.vue';
-				/* harmony default export */ __webpack_exports__['default'] =
-					component.exports;
+				/* harmony default export */ __webpack_exports__['default'] = component.exports;
 
 				/***/
 			},
@@ -57,9 +50,7 @@
 				/* harmony import */ var _vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
 					/*! -!../../vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ './node_modules/vue-loader/lib/index.js?!./node_modules/vue-keypress/src/index.vue?vue&type=script&lang=js&',
 				);
-				/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[
-					'default'
-				] =
+				/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__['default'] =
 					_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[
 						'default'
 					];
@@ -151,12 +142,10 @@
 								// Emit the emitEvent '@any' in any case:
 								emitResponse('any', 'Any key was pressed.');
 
-								const inMultipleKeysMode =
-									expectedEvent.multipleKeys.length > 0;
+								const inMultipleKeysMode = expectedEvent.multipleKeys.length > 0;
 
 								// In "any key" mode, emit '@success' and return
-								const inAnyKeyMode =
-									!expectedEvent.keyCode && !inMultipleKeysMode;
+								const inAnyKeyMode = !expectedEvent.keyCode && !inMultipleKeysMode;
 								if (inAnyKeyMode) {
 									emitResponse('success', 'Any key was pressed.');
 									return;
@@ -170,8 +159,7 @@
 
 								for (const expectedInput of expectedInputs) {
 									// Check if the correct keys have been clicked:
-									const correctKeyPressed =
-										expectedInput.keyCode === event.keyCode;
+									const correctKeyPressed = expectedInput.keyCode === event.keyCode;
 									if (!correctKeyPressed) continue;
 
 									// Get modifiers:
@@ -180,8 +168,7 @@
 									// Check if only the specified modifiers were pressed
 									if (hasModifiers) {
 										const modifiersPressed = supportedModifiers.every(
-											(x) =>
-												event[x] == (expectedInput.modifiers.indexOf(x) !== -1),
+											(x) => event[x] == (expectedInput.modifiers.indexOf(x) !== -1),
 										);
 										if (!modifiersPressed) continue;
 									}
