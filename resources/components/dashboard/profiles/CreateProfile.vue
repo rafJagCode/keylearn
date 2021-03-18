@@ -2,6 +2,7 @@
 	<v-container class="create-profile">
 		<v-text-field v-model="profileName" :rules="rules"></v-text-field>
 		<v-btn @click="createProfile()">Create Profile</v-btn>
+		<v-btn @click="handleClick()">Test</v-btn>
 	</v-container>
 </template>
 <script>
@@ -27,6 +28,24 @@ export default {
 					this.$store.dispatch('setProfiles');
 					console.log(res.data);
 				});
+		},
+		handleClick() {
+			this.$confirm({
+				message: `Are you sure?`,
+				button: {
+					no: 'No',
+					yes: 'Yes',
+				},
+				/**
+				 * Callback Function
+				 * @param {Boolean} confirm
+				 */
+				callback: (confirm) => {
+					if (confirm) {
+						console.log('o ja cie... pierniczek');
+					}
+				},
+			});
 		},
 	},
 };

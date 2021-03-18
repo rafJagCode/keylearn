@@ -14,7 +14,6 @@
 							<img class="register__logo" src="@/assets/img/logo.png" alt="Logo" />
 						</v-row>
 					</v-container>
-					<v-alert type="error" v-if="showSessionAlert" class="ma-1">Session has expired, please login again</v-alert>
 					<v-form class="ma-6" ref="form" v-model="valid" lazy-validation>
 						<v-text-field v-model="email" :rules="emailRules" label="E-mail" validate-on-blur></v-text-field>
 						<v-text-field
@@ -53,27 +52,14 @@
 	</v-container>
 </template>
 <script>
-import { mapGetters } from 'vuex';
 export default {
 	data: () => ({
-		showSessionAlert: false,
 		valid: true,
 		email: '',
 		password: '',
 		emailRules: [(v) => !!v || 'E-mail is required', (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'],
 		passwordRules: [(v) => !!v || 'Password is required'],
 	}),
-	computed: {
-		...mapGetters(['hasSessionExpired']),
-	},
-	watch: {
-		hasSessionExpired: function (hasSessionExpired) {
-			if (hasSessionExpired) {
-				this.showSessionAlert = true;
-				this.$store.commit('SET_SESSION_EXPIRATION_STATE', false);
-			}
-		},
-	},
 	methods: {
 		handleSubmit() {
 			this.showSessionAlert = false;

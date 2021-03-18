@@ -1,5 +1,6 @@
 <template>
 	<v-app>
+		<vue-confirm-dialog></vue-confirm-dialog>
 		<router-view></router-view>
 	</v-app>
 </template>
