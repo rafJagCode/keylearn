@@ -120,6 +120,8 @@ export default {
 }
 .register__label {
 	height: 80px;
+	display: flex;
+	align-items: center;
 }
 .register__logo {
 	margin-right: 20px;
