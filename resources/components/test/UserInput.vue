@@ -15,7 +15,7 @@
 	</v-row>
 </template>
 <script>
-//let sound = new Audio(require('@/assets/sound/keyboard-click.mp3'));
+//let sound = new Audio('../../assets/sound/keyboard-click.mp3');
 import { mapGetters } from 'vuex';
 export default {
 	watch: {

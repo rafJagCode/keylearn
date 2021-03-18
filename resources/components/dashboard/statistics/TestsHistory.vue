@@ -12,7 +12,7 @@
 			</v-row>
 		</v-container>
 		<v-row>
-			<v-col cols="4" v-for="test in tests" :key="test.id">
+			<v-col class="my-2" cols="4" v-for="test in tests" :key="test.id">
 				<v-row justify="center">
 					<result :test="test" :selectedOptions="selected" @removeTestResults="removeTestResults"></result>
 				</v-row>
