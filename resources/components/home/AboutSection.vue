@@ -4,7 +4,7 @@
 			<v-img :src="require('@/assets/img/borderWaves.svg')" />
 		</div>
 		<v-container fluid>
-			<v-row align="center" justify="center">
+			<v-row class="py-12" align="center" justify="center">
 				<v-col cols="10">
 					<v-row align="center" justify="center">
 						<v-col sm="5" class="hidden-sm-only">
