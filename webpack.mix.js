@@ -18,6 +18,21 @@ mix.webpackConfig({
  |
  */
 
+
+ class Loader {
+    webpackRules() {
+        return{
+			test: /\.mp3$/,
+			loader: 'file-loader',
+			options: {
+				esModule: false,
+			}
+		}
+    }
+};
+
+mix.extend('loader', new Loader());
+
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
 	//
-]);
+]).loader();

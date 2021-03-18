@@ -15,7 +15,6 @@
 	</v-row>
 </template>
 <script>
-//let sound = new Audio('../../assets/sound/keyboard-click.mp3');
 import { mapGetters } from 'vuex';
 export default {
 	watch: {
@@ -96,16 +95,26 @@ export default {
 		//Tu skończyłem prace z wykrywaniem błędów w czasie pisania
 		checkInput() {
 			if (this.wasBackspaceClicked()) {
+				this.playCorrectSound();
 				this.beforeKeyPress = this.typed;
 				return;
 			}
 			//check
 			if (this.typed.slice(-1) !== this.signs[this.typed.length - 1]) {
+				this.playIncorrectSound();
 				this.$store.dispatch('incrementErrorCounter');
 				this.errorsPositions.push(this.typed.length - 1);
+				this.beforeKeyPress = this.typed;
+				return;
 			}
-			//sound.play();
+			this.playCorrectSound();
 			this.beforeKeyPress = this.typed;
+		},
+		playCorrectSound() {
+			new Audio(require('@/assets/sound/correct-click.mp3')).play();
+		},
+		playIncorrectSound() {
+			new Audio(require('@/assets/sound/incorrect-click.mp3')).play();
 		},
 	},
 };

@@ -1,5 +1,5 @@
 <template>
-	<v-row class="justify-center">
+	<v-row class="mt-4 justify-center">
 		<div id="stopwatch">
 			<span class="time">{{ time }}</span>
 		</div>
@@ -106,6 +106,7 @@ export default {
 	color: rgb(200, 200, 200);
 }
 .time {
+	font-family: 'Share Tech Mono', monospace;
 	font-size: 2em;
 }
 </style>
