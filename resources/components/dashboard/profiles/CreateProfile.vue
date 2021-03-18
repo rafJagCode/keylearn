@@ -29,23 +29,9 @@ export default {
 					console.log(res.data);
 				});
 		},
-		handleClick() {
-			this.$confirm({
-				message: `Are you sure?`,
-				button: {
-					no: 'No',
-					yes: 'Yes',
-				},
-				/**
-				 * Callback Function
-				 * @param {Boolean} confirm
-				 */
-				callback: (confirm) => {
-					if (confirm) {
-						console.log('o ja cie... pierniczek');
-					}
-				},
-			});
+		async handleClick() {
+			let auth = await Vue.axios.get('/api/authenticated');
+			console.log(auth.data);
 		},
 	},
 };

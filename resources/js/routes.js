@@ -33,18 +33,6 @@ const router = new VueRouter({
 			path: '/dashboard',
 			name: 'dashboard',
 			component: Dashboard,
-			beforeEnter: (to, from, next) => {
-				Vue.axios
-					.get('api/authenticated')
-					.then(() => {
-						next();
-					})
-					.catch(() => {
-						return next({
-							name: 'login',
-						});
-					});
-			},
 			children: [
 				{
 					name: 'statistics',
@@ -65,5 +53,24 @@ const router = new VueRouter({
 		},
 	],
 });
-
+router.beforeEach(async (to, from, next) => {
+	let routesThatDontNeedAuthentication = ['home', 'login', 'register', 'test'];
+	if(routesThatDontNeedAuthentication.includes(to.name)){
+		next();
+	}
+	else{
+		try{
+			let auth = await Vue.axios.get('/api/authenticated');
+			if(auth.data){
+				next();
+			}
+			else{
+				next({name: 'login'});
+			}
+		}
+		catch{
+			next({name: 'login'});
+		}
+	}
+})
 export default router;
