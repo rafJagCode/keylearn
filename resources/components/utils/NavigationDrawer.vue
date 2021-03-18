@@ -62,10 +62,10 @@ export default {
 					icon: 'mdi-chart-line',
 					text: 'Statistics',
 				},
-				settings: {
-					link: 'settings',
-					icon: 'mdi-cog-outline',
-					text: 'Settings',
+				profiles: {
+					link: 'profiles',
+					icon: 'mdi-folder-account-outline',
+					text: 'Profiles',
 				},
 			},
 		};
@@ -79,7 +79,7 @@ export default {
 		items() {
 			let items = [];
 			if (this.isUserAuthenticated) {
-				items = [this.availableItems.home, this.availableItems.statistics, this.availableItems.settings];
+				items = [this.availableItems.home, this.availableItems.profiles, this.availableItems.statistics];
 			}
 			if (!this.isUserAuthenticated) {
 				items = [this.availableItems.login, this.availableItems.home];
@@ -92,10 +92,15 @@ export default {
 	},
 	methods: {
 		goTo(link) {
+			if (this.$route.name === link) {
+				return;
+			}
 			this.$router.push({ name: link });
 		},
 		signOut() {
-			this.$store.dispatch('signOut');
+			this.$store.dispatch('signOut').then(() => {
+				this.$router.push({ name: 'home' });
+			});
 		},
 	},
 };

@@ -39,7 +39,7 @@
 import TestsHistory from '@/components/dashboard/statistics/TestsHistory';
 import TestsAnalysis from '@/components/dashboard/statistics/TestsAnalysis';
 import WordsTypingSpeed from '@/components/dashboard/statistics/WordsTypingSpeed';
-import ProfileList from '@/components/dashboard/settings/ProfileList';
+import ProfileList from '@/components/dashboard/profiles/ProfileList';
 import { mapGetters } from 'vuex';
 export default {
 	components: {

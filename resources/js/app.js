@@ -16,7 +16,7 @@ axios.interceptors.response.use(
 			store.dispatch('sessionExpired');
 			Route.push('/login');
 		}
-		return Promise.reject(error);
+		return Promise.reject(new Error('CSRF token mismatch'));
 	},
 );
 Vue.use(VueAxios, axios);

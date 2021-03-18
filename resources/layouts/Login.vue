@@ -76,6 +76,7 @@ export default {
 	},
 	methods: {
 		handleSubmit() {
+			this.showSessionAlert = false;
 			if (!this.$refs.form.validate()) return;
 			// Vue.axios
 			//   .post("api/login", { email: this.email, password: this.password })

@@ -7,7 +7,7 @@ import Login from '@/layouts/Login';
 import Dashboard from '@/layouts/Dashboard';
 import Test from '@/layouts/Test';
 import Statistics from '@/components/dashboard/statistics/Statistics';
-import Settings from '@/components/dashboard/settings/Settings';
+import Profiles from '@/components/dashboard/profiles/Profiles';
 
 Vue.use(VueRouter);
 
@@ -52,9 +52,9 @@ const router = new VueRouter({
 					component: Statistics,
 				},
 				{
-					name: 'settings',
-					path: 'settings',
-					component: Settings,
+					name: 'profiles',
+					path: 'profiles',
+					component: Profiles,
 				},
 			],
 		},

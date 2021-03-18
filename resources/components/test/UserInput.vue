@@ -9,10 +9,7 @@
 			autocomplete="off"
 			multi-line
 			@blur="deactivate()"
-			@input="
-				typingStarted();
-				checkInput();
-			"
+			@input="handleInput()"
 		>
 		</v-textarea>
 	</v-row>
@@ -78,6 +75,10 @@ export default {
 		},
 	},
 	methods: {
+		handleInput() {
+			this.typingStarted();
+			this.checkInput();
+		},
 		deactivate() {
 			this.$store.dispatch('deactivateTest');
 		},
@@ -102,6 +103,7 @@ export default {
 				this.$store.dispatch('incrementErrorCounter');
 				this.errorsPositions.push(this.typed.length - 1);
 			}
+			this.play();
 			this.beforeKeyPress = this.typed;
 		},
 	},
