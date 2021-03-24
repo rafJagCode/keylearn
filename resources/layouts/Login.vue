@@ -14,6 +14,9 @@
 							<img class="register__logo" src="@/assets/img/logo.png" alt="Logo" />
 						</v-row>
 					</v-container>
+					<v-alert class="ma-1" prominent type="error" v-if="error">
+						<v-row align="center"> {{ error }} </v-row>
+					</v-alert>
 					<v-form class="ma-6" ref="form" v-model="valid" lazy-validation>
 						<v-text-field v-model="email" :rules="emailRules" label="E-mail" validate-on-blur></v-text-field>
 						<v-text-field
@@ -54,6 +57,7 @@
 <script>
 export default {
 	data: () => ({
+		error: null,
 		valid: true,
 		email: '',
 		password: '',
@@ -64,21 +68,13 @@ export default {
 		handleSubmit() {
 			this.showSessionAlert = false;
 			if (!this.$refs.form.validate()) return;
-			// Vue.axios
-			//   .post("api/login", { email: this.email, password: this.password })
-			//   .then(() => {
-			//     this.$router.push({ name: "dashboard" });
-			//   })
-			//   .catch((error) => {
-			//     this.errors = error.response.data.errors;
-			//   });
 			this.$store
 				.dispatch('signIn', { email: this.email, password: this.password })
 				.then(() => {
 					this.$router.push({ name: 'dashboard' });
 				})
 				.catch((error) => {
-					this.errors = error.response.data.errors;
+					this.error = error.response.data.message;
 				});
 		},
 	},
