@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CharStatistics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Test;
@@ -39,7 +40,18 @@ class TestController extends Controller
 			$wordTypingTime = new WordTypingTime(['word' => $word['word'], 'time' => $word['time']]);
 			$test->wordsTypingTimes()->save($wordTypingTime);
 		}
-		return response()->json($test::with('wordsTypingTimes'));
+		foreach ($request->charsStatistics as $char) {
+			if ($char['char'] === null) {
+				continue;
+			}
+			$charStatistics = new CharStatistics([
+				'char' => $char['char'],
+				'time' => $char['time'],
+				'correct' => $char['correct'],
+			]);
+			$test->charsStatistics()->save($charStatistics);
+		}
+		return response()->json($test);
 	}
 
 	public function deleteTestResults(Request $request)
@@ -52,7 +64,7 @@ class TestController extends Controller
 		$profile = Profile::findOrFail($request->profile_id);
 		$tests = $profile
 			->tests()
-			->with('wordsTypingTimes')
+			->with('wordsTypingTimes', 'charsStatistics')
 			->get();
 		return response()->json($tests);
 	}

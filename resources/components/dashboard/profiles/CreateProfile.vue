@@ -1,5 +1,6 @@
 <template>
 	<v-container class="create-profile">
+		<v-alert type="error" v-if="error">{{ error }}</v-alert>
 		<v-text-field v-model="profileName" :rules="rules"></v-text-field>
 		<v-textarea
 			label="Words that you would like to practice"
@@ -22,6 +23,7 @@ import { mapGetters } from 'vuex';
 export default {
 	data() {
 		return {
+			error: null,
 			wordsField: '',
 			wordsToAdd: [],
 			profileName: '',
@@ -35,12 +37,14 @@ export default {
 		createProfile() {
 			Vue.axios
 				.post('/api/create-profile', {
-					user_id: this.user.id,
 					name: this.profileName,
+					words: this.wordsToAdd,
 				})
-				.then((res) => {
+				.then(() => {
 					this.$store.dispatch('setProfiles');
-					console.log(res.data);
+				})
+				.catch((error) => {
+					this.error = error.response.data.message;
 				});
 		},
 		addWords() {

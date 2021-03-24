@@ -34,8 +34,9 @@ axios.interceptors.response.use(
 						}
 					},
 				});
+				return Promise.reject(new Error('CSRF token mismatch'));
 		}
-		return Promise.reject(new Error('CSRF token mismatch'));
+		return Promise.reject(error);
 	},
 );
 Vue.use(VueAxios, axios);
