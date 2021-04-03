@@ -1,5 +1,5 @@
 <template>
-	<v-card class="test-results pa-2" width="300px">
+	<v-card class="test-results pa-2" width="250px" height="250px">
 		<v-card-title class="text-subtitle-1">
 			<span class="font-weight-bold text-caption">DATE:</span>
 			<span class="ml-2 text-caption">{{ testDate }}</span>
