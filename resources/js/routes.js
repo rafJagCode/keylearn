@@ -6,6 +6,7 @@ import Register from '@/layouts/Register';
 import Login from '@/layouts/Login';
 import Dashboard from '@/layouts/Dashboard';
 import Test from '@/layouts/Test';
+import PageNotFound from '@/layouts/PageNotFound';
 import Statistics from '@/components/dashboard/statistics/Statistics';
 import Profiles from '@/components/dashboard/profiles/Profiles';
 
@@ -33,18 +34,6 @@ const router = new VueRouter({
 			path: '/dashboard',
 			name: 'dashboard',
 			component: Dashboard,
-			beforeEnter: (to, from, next) => {
-				Vue.axios
-					.get('api/authenticated')
-					.then(() => {
-						next();
-					})
-					.catch(() => {
-						return next({
-							name: 'login',
-						});
-					});
-			},
 			children: [
 				{
 					name: 'statistics',
@@ -63,7 +52,32 @@ const router = new VueRouter({
 			name: 'test',
 			component: Test,
 		},
+		{
+			path: '*',
+			name: 'page-not-found',
+			component: PageNotFound,
+		},
 	],
 });
-
+router.beforeEach(async (to, from, next) => {
+	if(from.name === to.name) return;
+	let routesThatDontNeedAuthentication = ['home', 'login', 'register', 'test', 'page-not-found'];
+	if(routesThatDontNeedAuthentication.includes(to.name)){
+		next();
+	}
+	else{
+		try{
+			let auth = await Vue.axios.get('/api/authenticated');
+			if(auth.data){
+				next();
+			}
+			else{
+				next({name: 'login'});
+			}
+		}
+		catch(e){
+			next({name: 'login'});
+		}
+	}
+})
 export default router;

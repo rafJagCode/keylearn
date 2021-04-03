@@ -1,5 +1,5 @@
 <template>
-	<section class="pb-8" id="contact">
+	<section class="pb-12" id="contact">
 		<v-container fluid>
 			<v-row align="center" justify="center">
 				<v-col cols="10">

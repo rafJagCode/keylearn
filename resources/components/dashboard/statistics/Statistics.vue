@@ -21,6 +21,10 @@
 					<v-icon left> mdi-clock-fast </v-icon>
 					Words Speed
 				</v-tab>
+				<v-tab>
+					<v-icon left> mdi-chart-bar </v-icon>
+					Chars Statistics
+				</v-tab>
 
 				<v-tab-item>
 					<tests-history></tests-history>
@@ -31,6 +35,9 @@
 				<v-tab-item>
 					<words-typing-speed></words-typing-speed>
 				</v-tab-item>
+				<v-tab-item>
+					<chars-statistics></chars-statistics>
+				</v-tab-item>
 			</v-tabs>
 		</v-card>
 	</div>
@@ -39,6 +46,7 @@
 import TestsHistory from '@/components/dashboard/statistics/TestsHistory';
 import TestsAnalysis from '@/components/dashboard/statistics/TestsAnalysis';
 import WordsTypingSpeed from '@/components/dashboard/statistics/WordsTypingSpeed';
+import CharsStatistics from '@/components/dashboard/statistics/CharsStatistics';
 import ProfileList from '@/components/dashboard/profiles/ProfileList';
 import { mapGetters } from 'vuex';
 export default {
@@ -46,6 +54,7 @@ export default {
 		TestsHistory,
 		TestsAnalysis,
 		WordsTypingSpeed,
+		CharsStatistics,
 		ProfileList,
 	},
 	computed: {

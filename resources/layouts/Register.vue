@@ -14,8 +14,8 @@
 							<img class="register__logo" src="@/assets/img/logo.png" alt="Logo" />
 						</v-row>
 					</v-container>
-					<v-alert prominent type="error" v-if="isEmailAlreadyUsed">
-						<v-row align="center"> There is already an account registered to this email </v-row>
+					<v-alert class="ma-1" prominent type="error" v-if="error">
+						<v-row align="center"> {{ error }} </v-row>
 					</v-alert>
 					<v-form class="ma-6" ref="form" v-model="valid" lazy-validation>
 						<v-text-field v-model="email" :rules="emailRules" label="E-mail" validate-on-blur></v-text-field>
@@ -65,7 +65,7 @@
 export default {
 	data: () => ({
 		valid: true,
-		isEmailAlreadyUsed: false,
+		error: null,
 		email: '',
 		password: '',
 		passwordConfirmation: '',
@@ -92,8 +92,7 @@ export default {
 					this.loginAndRedirect();
 				})
 				.catch((error) => {
-					this.isEmailAlreadyUsed = true;
-					this.errors = error.response.data.errors;
+					this.error = error.response.data.message;
 				});
 		},
 		loginAndRedirect() {
@@ -106,7 +105,7 @@ export default {
 					this.$router.push({ name: 'dashboard' });
 				})
 				.catch((error) => {
-					this.errors = error.response.data.errors;
+					this.error = error.response.data.message;
 				});
 		},
 	},
@@ -120,6 +119,8 @@ export default {
 }
 .register__label {
 	height: 80px;
+	display: flex;
+	align-items: center;
 }
 .register__logo {
 	margin-right: 20px;

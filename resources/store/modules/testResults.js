@@ -7,6 +7,7 @@ const state = {
 	accuracy: 0,
 	score: 0,
 	wordsTypingTimes: null,
+	charsStatistics: null,
 };
 const actions = {
 	saveTestResultsInStore({ commit }, testResults) {

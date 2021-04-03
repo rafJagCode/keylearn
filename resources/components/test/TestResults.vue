@@ -32,6 +32,7 @@ export default {
 			accuracy: 0,
 			score: 0,
 			wordsTypingTimes: null,
+			charsStatistics: null,
 		},
 	}),
 	computed: {
@@ -52,16 +53,18 @@ export default {
 			let times = this.getCalculatedSignsTypingTimes();
 			let charTypingTimes = [];
 			for (let i = 0; i < times.length; i++) {
-				let charTypingTime = { [this.signs[i]]: times[i] };
+				let charTypingTime = { char: this.signs[i], time: times[i] };
 				charTypingTimes.push(charTypingTime);
 			}
 			return charTypingTimes;
 		},
-		getErrorsFilteredSignsTypingTimes() {
+		getCharsTimesAndCorrectness() {
 			let charTimes = this.getAssignedCharTypingTimes();
-			let withoutErrors = charTimes.filter((value, index) => {
-				return !this.errorsPositions.includes(index);
+			let withoutErrors = charTimes.map((object, index) => {
+				let correctness = !this.errorsPositions.includes(index);
+				return { ...object, correct: correctness };
 			});
+			withoutErrors.shift();
 			return withoutErrors;
 		},
 		getPositionsOfWordsWithErrors() {
@@ -142,6 +145,7 @@ export default {
 			);
 			//Chars and words typing times
 			this.testResults.wordsTypingTimes = this.getErrorsFilteredWordsTypingTimes();
+			this.testResults.charsStatistics = this.getCharsTimesAndCorrectness();
 		},
 	},
 	mounted() {
