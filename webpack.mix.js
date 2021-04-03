@@ -32,7 +32,7 @@ mix.webpackConfig({
 };
 
 mix.extend('loader', new Loader());
-
+mix.browserSync({ proxy: "http://keylearn.test" });
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
 	//
 ]).loader();
