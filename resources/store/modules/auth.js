@@ -4,7 +4,7 @@ const state = {
 	user: null,
 };
 const actions = {
-	async signIn({ dispatch, commit }, credentials) {
+	async signIn({ dispatch }, credentials) {
 		await axios.get('sanctum/csrf-cookie');
 		await axios.post('/api/login', credentials);
 		return await dispatch('setUserStoreState');

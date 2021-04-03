@@ -60,6 +60,7 @@ const router = new VueRouter({
 	],
 });
 router.beforeEach(async (to, from, next) => {
+	if(from.name === to.name) return;
 	let routesThatDontNeedAuthentication = ['home', 'login', 'register', 'test', 'page-not-found'];
 	if(routesThatDontNeedAuthentication.includes(to.name)){
 		next();
@@ -74,7 +75,7 @@ router.beforeEach(async (to, from, next) => {
 				next({name: 'login'});
 			}
 		}
-		catch{
+		catch(e){
 			next({name: 'login'});
 		}
 	}
