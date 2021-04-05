@@ -16,7 +16,18 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { Howl, Howler } from 'howler';
 export default {
+  data() {
+    return {
+      correctSound: new Howl({
+        src: [require('@/assets/sound/correct-click.mp3')],
+      }),
+      incorrectSound: new Howl({
+        src: [require('@/assets/sound/incorrect-click.mp3')],
+      }),
+    };
+  },
   watch: {
     typed: function (typed) {
       if (typed.length !== 0)
@@ -111,10 +122,10 @@ export default {
       this.beforeKeyPress = this.typed;
     },
     playCorrectSound() {
-      new Audio(require('@/assets/sound/correct-click.mp3')).play();
+      this.correctSound.play();
     },
     playIncorrectSound() {
-      new Audio(require('@/assets/sound/incorrect-click.mp3')).play();
+      this.incorrectSound.play();
     },
   },
 };
