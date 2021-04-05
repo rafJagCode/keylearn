@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class WordTypingTime extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-	protected $guarded = [];
+  protected $guarded = [];
 
-	public function Test()
-	{
-		return $this->belongsTo(Test::class);
-	}
+  public function Test()
+  {
+    return $this->belongsTo(Test::class);
+  }
 }

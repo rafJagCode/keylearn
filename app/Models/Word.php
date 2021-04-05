@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Word extends Model
 {
-	use HasFactory;
-	protected $guarded = [];
+  use HasFactory;
+  protected $guarded = [];
 
-	public function profile()
-	{
-		return $this->belongsTo(Profile::class);
-	}
+  public function profile()
+  {
+    return $this->belongsTo(Profile::class);
+  }
 }

@@ -6,31 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProfilesTable extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('profiles', function (Blueprint $table) {
-			$table->id();
-			$table->timestamps();
-			$table->string('name');
-			$table
-				->foreignId('user_id')
-				->constrained()
-				->onDelete('cascade');
-		});
-	}
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('profiles', function (Blueprint $table) {
+      $table->id();
+      $table->timestamps();
+      $table->string('name');
+      $table
+        ->foreignId('user_id')
+        ->constrained()
+        ->onDelete('cascade');
+    });
+  }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::dropIfExists('profiles');
-	}
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('profiles');
+  }
 }
