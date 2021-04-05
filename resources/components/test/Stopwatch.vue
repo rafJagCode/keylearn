@@ -69,6 +69,7 @@ export default {
       this.timeBegan = null;
       this.timeStopped = null;
       this.time = '00:00:00.000';
+      this.stopwatchTime = '00:00:00.000';
     },
     clockRunning() {
       let currentTime = new Date(),
