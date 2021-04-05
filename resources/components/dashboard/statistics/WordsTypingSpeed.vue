@@ -1,11 +1,12 @@
 <template>
   <v-container class="words-typing-speed">
-    <word-typing-speed
-      v-for="word in sortedWords"
-      :key="word.name"
-      :word="word"
-      :bestResult="bestResult"
-    ></word-typing-speed>
+    <v-row>
+      <v-col class="my-2" cols="3" v-for="word in sortedWords" :key="word.name">
+        <v-row justify="center">
+          <word-typing-speed :word="word" :bestResult="bestResult"></word-typing-speed>
+        </v-row>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>

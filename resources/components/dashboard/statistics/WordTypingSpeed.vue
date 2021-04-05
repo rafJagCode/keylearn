@@ -1,18 +1,31 @@
 <template>
-  <div class="word">
-    <v-sheet elevation="4" outlined class="my-2 py-1 px-2">
-      <v-row align="center" justify="center">
-        <v-col cols="2" class="text-center">
-          <span>{{ word.name }}</span>
-        </v-col>
-        <v-col cols="10">
-          <v-progress-linear height="20" color="green" background-color="red" :value="result" striped>
-            {{ time }}
-          </v-progress-linear></v-col
-        >
+  <v-card class="test-results pa-2" width="250px" height="250px">
+    <v-layout column align-center fill-height justify-space-around>
+      <v-row>
+        <v-card-title class="font-weight-black purple--text display-3">
+          <span class="pa-2">{{ word.name }}</span>
+        </v-card-title>
       </v-row>
-    </v-sheet>
-  </div>
+      <v-card-text>
+        <v-row>
+          <v-col cols="auto">
+            <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="teal" class="text-caption">
+              {{ avgSpeed }}%
+            </v-progress-circular>
+          </v-col>
+          <v-col cols="auto">
+            <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="purple" class="text-caption">
+              {{ avgSpeed }}WPM
+            </v-progress-circular>
+          </v-col>
+        </v-row>
+        <v-row class="text-subtitle-2 font-weight-black">
+          <v-col cols="auto">Accuracy</v-col>
+          <v-col cols="auto">Average speed</v-col>
+        </v-row>
+      </v-card-text>
+    </v-layout>
+  </v-card>
 </template>
 <script>
 export default {
@@ -21,12 +34,12 @@ export default {
     bestResult: null,
   },
   computed: {
-    time() {
-      return Math.round(60 / this.word.time / 5) + ' WPM';
+    avgSpeed() {
+      return Math.round(60 / this.word.time / 5);
     },
-    result() {
-      let result = (this.bestResult / this.word.time) * 100;
-      return result;
+    percentSpeed() {
+      let percentSpeed = (this.bestResult / this.word.time) * 100;
+      return percentSpeed;
     },
   },
 };
