@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class CharStatistics extends Model
 {
-	use HasFactory;
-	protected $guarded = [];
-	public function test()
-	{
-		return $this->belongsTo(Test::class);
-	}
+  use HasFactory;
+  protected $guarded = [];
+  public function test()
+  {
+    return $this->belongsTo(Test::class);
+  }
 }

@@ -6,5 +6,5 @@ use Exception;
 
 class ProfileNameDuplicated extends Exception
 {
-    //
+  //
 }

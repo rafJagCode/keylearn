@@ -1,11 +1,11 @@
 const mix = require('laravel-mix');
 mix.webpackConfig({
-	resolve: {
-		extensions: ['.js', '.vue'],
-		alias: {
-			'@': __dirname + '/resources',
-		},
-	},
+  resolve: {
+    extensions: ['.js', '.vue'],
+    alias: {
+      '@': __dirname + '/resources',
+    },
+  },
 });
 /*
  |--------------------------------------------------------------------------
@@ -18,21 +18,23 @@ mix.webpackConfig({
  |
  */
 
-
- class Loader {
-    webpackRules() {
-        return{
-			test: /\.mp3$/,
-			loader: 'file-loader',
-			options: {
-				esModule: false,
-			}
-		}
-    }
-};
+class Loader {
+  webpackRules() {
+    return {
+      test: /\.mp3$/,
+      loader: 'file-loader',
+      options: {
+        esModule: false,
+      },
+    };
+  }
+}
 
 mix.extend('loader', new Loader());
-mix.browserSync({ proxy: "http://keylearn.test" });
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
-	//
-]).loader();
+mix.browserSync({ proxy: 'http://keylearn.test' });
+mix
+  .js('resources/js/app.js', 'public/js')
+  .postCss('resources/css/app.css', 'public/css', [
+    //
+  ])
+  .loader();
