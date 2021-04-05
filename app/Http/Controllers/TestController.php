@@ -69,7 +69,7 @@ class TestController extends Controller
     $profile = Profile::findOrFail($request->profile_id);
     $tests = $profile
       ->tests()
-      ->with('wordsTypingTimes', 'charsStatistics')
+      ->with('wordsTypingTimes', 'charsTypingTimes', 'charsStatistics')
       ->get();
     return response()->json($tests);
   }

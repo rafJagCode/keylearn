@@ -15,7 +15,7 @@
           </v-col>
           <v-col cols="auto">
             <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="purple" class="text-caption">
-              {{ charStatistics.avgWpm }}WPM
+              {{ avgSpeed }}WPM
             </v-progress-circular>
           </v-col>
         </v-row>
@@ -31,17 +31,22 @@
 export default {
   props: {
     charStatistics: null,
-    bestSpeed: null,
+    bestAvgTime: null,
   },
   computed: {
+    avgSpeed() {
+      let avg_time = this.charStatistics.avg_time;
+      return Math.round(60 / avg_time / 5);
+    },
     percentCorrect() {
-      let all = this.charStatistics.all;
-      let incorrect = this.charStatistics.incorrect;
-      return Math.round(((all - incorrect) / all) * 100);
+      let samples = this.charStatistics.samples;
+      let correct = this.charStatistics.correct;
+      console.log(correct, samples);
+      return Math.round((correct / samples) * 100);
     },
     percentSpeed() {
-      let avgWpm = this.charStatistics.avgWpm;
-      return Math.round((avgWpm / this.bestSpeed) * 100);
+      let avg_time = this.charStatistics.avg_time;
+      return Math.round((this.bestAvgTime / avg_time) * 100);
     },
   },
 };
