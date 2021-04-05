@@ -2,7 +2,9 @@
   <v-card class="test-results pa-2" width="250px" height="250px">
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="text-heading-6 font-weight-black"> KEY: {{ charStatistics.char }} </v-card-title>
+        <v-card-title class="font-weight-black purple--text display-3">
+          <span class="pa-2">{{ charStatistics.char }}</span>
+        </v-card-title>
       </v-row>
       <v-card-text>
         <v-row>
@@ -12,7 +14,7 @@
             </v-progress-circular>
           </v-col>
           <v-col cols="auto">
-            <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="teal" class="text-caption">
+            <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="purple" class="text-caption">
               {{ charStatistics.avgWpm }}WPM
             </v-progress-circular>
           </v-col>
