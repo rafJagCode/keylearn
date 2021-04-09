@@ -82,6 +82,7 @@ export default {
   },
   methods: {
     handleSubmit() {
+      this.error = null;
       if (!this.$refs.form.validate()) return;
       Vue.axios
         .post('api/register', {
