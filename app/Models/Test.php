@@ -24,18 +24,4 @@ class Test extends Model
   {
     return $this->hasMany(CharStatistics::class);
   }
-
-  public function wordsStatistics()
-  {
-  }
-
-  public function charsStatistics()
-  {
-    return $this->hasMany(CharStatistics::class)
-      ->selectRaw(
-        'test_id, `char`, AVG(CASE WHEN correct = 1 THEN time ELSE NULL END) as avg_time, COUNT(id) as samples, SUM(correct) as correct'
-      )
-      ->groupByRaw('CAST(`char` as BINARY)')
-      ->having('avg_time', '!=', 0);
-  }
 }

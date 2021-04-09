@@ -24,8 +24,9 @@ class TestController extends Controller
         $text .= $item['word'] . ' ';
       }
     }
-    return $text;
+    // return $text;
     // return 'Stoi na stacji lokomotywa, ciężka ogromna i pot z niej spływa, tłusta oliwa.';
+    return 'word word word Word test';
   }
 
   public function saveTestResults(Request $request)
@@ -42,7 +43,11 @@ class TestController extends Controller
       'profile_id' => $user->selected_profile_id,
     ]);
     foreach ($request->wordsTypingTimes as $word) {
-      $wordTypingTime = new WordTypingTime(['word' => $word['word'], 'time' => $word['time']]);
+      $wordTypingTime = new WordTypingTime([
+        'word' => $word['word'],
+        'avg_time_per_key' => $word['avgTimePerKey'],
+        'errors' => $word['errors'],
+      ]);
       $test->wordsTypingTimes()->save($wordTypingTime);
     }
     foreach ($request->charsStatistics as $char) {
@@ -67,10 +72,7 @@ class TestController extends Controller
   public function getProfileResults(Request $request)
   {
     $profile = Profile::findOrFail($request->profile_id);
-    $tests = $profile
-      ->tests()
-      ->with('wordsTypingTimes', 'charsTypingTimes', 'charsStatistics')
-      ->get();
+    $tests = $profile->tests()->get();
     return response()->json($tests);
   }
 }

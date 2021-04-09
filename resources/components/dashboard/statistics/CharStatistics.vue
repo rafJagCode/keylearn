@@ -2,7 +2,7 @@
   <v-card class="test-results pa-2" width="250px" height="250px">
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="font-weight-black purple--text display-3">
+        <v-card-title class="font-weight-black purple--text display-2">
           <span class="pa-2">{{ charStatistics.char }}</span>
         </v-card-title>
       </v-row>
@@ -41,7 +41,6 @@ export default {
     percentCorrect() {
       let samples = this.charStatistics.samples;
       let correct = this.charStatistics.correct;
-      console.log(correct, samples);
       return Math.round((correct / samples) * 100);
     },
     percentSpeed() {

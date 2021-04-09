@@ -17,7 +17,8 @@ class CreateWordTypingTimesTable extends Migration
       $table->id();
       $table->timestamps();
       $table->string('word');
-      $table->double('time');
+      $table->double('avg_time_per_key');
+      $table->integer('errors');
       $table
         ->foreignId('test_id')
         ->constrained()

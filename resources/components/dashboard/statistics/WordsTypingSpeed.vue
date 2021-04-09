@@ -1,9 +1,9 @@
 <template>
   <v-container class="words-typing-speed">
     <v-row>
-      <v-col class="my-2" cols="3" v-for="word in sortedWords" :key="word.name">
+      <v-col class="my-2" cols="3" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
-          <word-typing-speed :word="word" :bestResult="bestResult"></word-typing-speed>
+          <word-typing-speed :word="word" :bestTime="bestTime"></word-typing-speed>
         </v-row>
       </v-col>
     </v-row>
@@ -17,58 +17,21 @@ export default {
     WordTypingSpeed,
   },
   computed: {
-    ...mapGetters(['tests']),
-    words() {
-      let avgTimes = this.getAvgWordsTypingTimes();
-      let words = [];
-      Object.keys(avgTimes).forEach((word) => {
-        words.push({ name: word, time: avgTimes[word] });
-      });
-      return words;
+    ...mapGetters(['watchedProfile']),
+    wordsStatistics() {
+      return this.watchedProfile.words_statistics;
     },
-    bestResult() {
-      let best = this.words[0].time;
-      this.words.forEach((word) => {
-        if (word.time < best) best = word.time;
+    bestTime() {
+      let best = this.wordsStatistics[0].avg_time_per_key;
+      this.wordsStatistics.forEach((word) => {
+        if (word.avg_time_per_key < best) best = word.avg_time_per_key;
       });
       return best;
     },
     sortedWords() {
       let words = this.words;
-      words.sort((firstWord, secondWord) => secondWord.time - firstWord.time);
+      words.sort((firstWord, secondWord) => secondWord.avg_time_per_key - firstWord.avg_time_per_key);
       return words;
-    },
-  },
-  methods: {
-    getWordsTypingTimes() {
-      return [...this.tests]
-        .map((test) => {
-          return test.words_typing_times;
-        })
-        .flat(Infinity);
-    },
-    getSegregatedWordsTypingTimes() {
-      let times = this.getWordsTypingTimes();
-      let segregated = Object.create(null);
-      times.forEach((word) => {
-        if (segregated[word.word]) {
-          segregated[word.word] = [segregated[word.word], word.time].flat(Infinity);
-        } else {
-          segregated[word.word] = word.time;
-        }
-      });
-      return segregated;
-    },
-    getAvgWordsTypingTimes() {
-      let times = this.getSegregatedWordsTypingTimes();
-      Object.keys(times).forEach((word) => {
-        if (Array.isArray(times[word]))
-          times[word] = times[word].reduce((sum, time) => sum + time) / times[word].length;
-      });
-      return times;
-    },
-    showWordsTypingSpeed() {
-      console.log(this.words);
     },
   },
 };

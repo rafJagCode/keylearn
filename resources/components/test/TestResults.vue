@@ -67,43 +67,30 @@ export default {
       withoutErrors.shift();
       return withoutErrors;
     },
-    getPositionsOfWordsWithErrors() {
-      let positions = [];
-      let position = 0;
-      for (let i = 0; i < this.signs.length; i++) {
-        if (this.errorsPositions.includes(i) && !positions.includes(position)) positions.push(position);
-        if (this.signs[i] === ' ' || this.signs[i] === '\n') position++;
-      }
-      return positions;
-    },
-    getCalculatedWordsTypingTimes() {
-      let calculatedWordsTypingTimes = [];
-      let signs = this.signs;
-      let times = this.getCalculatedSignsTypingTimes();
+    getWordsStatistics() {
+      let chars = this.getCharsTimesAndCorrectness();
+      let wordsStatisitcs = [];
       let word = '';
       let time = 0;
-      for (let i = 0; i < signs.length; i++) {
-        if (signs[i] !== ' ' && signs[i] !== '\n') {
-          word += signs[i];
-          time += times[i];
+      let errors = 0;
+      chars.forEach((object) => {
+        if (object.char !== ' ' && object.char !== '\n') {
+          word += object.char;
+          time += object.time;
+          errors += object.correct ? 0 : 1;
         } else {
-          calculatedWordsTypingTimes.push({
+          wordsStatisitcs.push({
             word: word,
-            time: time / word.length,
+            avgTimePerKey: time / word.length,
+            errors: errors,
           });
           word = '';
           time = 0;
+          errors = 0;
         }
-      }
-      return calculatedWordsTypingTimes;
-    },
-    getErrorsFilteredWordsTypingTimes() {
-      let errorsPositions = this.getPositionsOfWordsWithErrors();
-      let wordTypingTimes = this.getCalculatedWordsTypingTimes();
-      let filtered = wordTypingTimes.filter((value, index) => {
-        return !errorsPositions.includes(index) && index !== 0;
       });
-      return filtered;
+      wordsStatisitcs.shift();
+      return wordsStatisitcs;
     },
     textToSeconds(text) {
       let textDivided = text.split(':');
@@ -133,7 +120,7 @@ export default {
       this.testResults.wpm = Math.round(wpmNet);
       this.testResults.uncorrectedErrors = uncorrectedErrors;
       this.testResults.allErrors = allErrors;
-      this.testResults.accuracy = Math.round(((testLength - uncorrectedErrors) / testLength) * 100);
+      this.testResults.accuracy = Math.round(((testLength - allErrors) / testLength) * 100);
 
       //score
       let wpmWeight = 100;
@@ -144,7 +131,7 @@ export default {
           (wpmWeight + lenghtWeight + errorsWeight),
       );
       //Chars and words typing times
-      this.testResults.wordsTypingTimes = this.getErrorsFilteredWordsTypingTimes();
+      this.testResults.wordsTypingTimes = this.getWordsStatistics();
       this.testResults.charsStatistics = this.getCharsTimesAndCorrectness();
     },
   },

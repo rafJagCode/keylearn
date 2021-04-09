@@ -14,20 +14,15 @@ import { mapGetters } from 'vuex';
 import CharStatistics from '@/components/dashboard/statistics/CharStatistics.vue';
 export default {
   computed: {
-    ...mapGetters(['tests']),
+    ...mapGetters(['watchedProfile']),
     charsStatistics() {
-      return [...this.tests]
-        .map((test) => {
-          return test.chars_statistics;
-        })
-        .flat(Infinity);
+      return this.watchedProfile.chars_statistics;
     },
     bestAvgTime() {
       let chars = this.charsStatistics;
       let bestChar = chars.reduce((prev, current) => {
         return prev.avg_time < current.avg_time ? prev : current;
       });
-      console.log(bestChar.avg_time);
       return bestChar.avg_time;
     },
   },

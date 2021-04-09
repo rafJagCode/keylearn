@@ -52,7 +52,7 @@ class ProfileController extends Controller
     $user = $request->user();
     $profiles = $user
       ->profiles()
-      ->with('words')
+      ->with('words', 'charsStatistics', 'wordsStatistics')
       ->get();
     return response()->json($profiles);
   }

@@ -103,14 +103,12 @@ export default {
       if (this.beforeKeyPress.length + 1 > this.typed.length) return true;
       return false;
     },
-    //Tu skończyłem prace z wykrywaniem błędów w czasie pisania
     checkInput() {
       if (this.wasBackspaceClicked()) {
         this.playCorrectSound();
         this.beforeKeyPress = this.typed;
         return;
       }
-      //check
       if (this.typed.slice(-1) !== this.signs[this.typed.length - 1]) {
         this.playIncorrectSound();
         this.$store.dispatch('incrementErrorCounter');
