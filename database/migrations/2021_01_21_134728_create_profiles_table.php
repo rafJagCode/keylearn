@@ -17,6 +17,9 @@ class CreateProfilesTable extends Migration
       $table->id();
       $table->timestamps();
       $table->string('name');
+      $table->integer('test_length');
+      $table->boolean('use_words_from_api');
+      $table->boolean('auto_difficulty');
       $table
         ->foreignId('user_id')
         ->constrained()

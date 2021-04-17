@@ -25,17 +25,17 @@ class RegisterController extends Controller
         'password' => Hash::make($request->password),
         'selected_profile_id' => null,
       ]);
-      $startingProfile = new Profile(['name' => 'Starting Profile']);
+      $startingProfile = new Profile([
+        'name' => 'Starting Profile',
+        'auto_difficulty' => false,
+        'use_words_from_api' => true,
+        'test_length' => 50,
+      ]);
       $user->profiles()->save($startingProfile);
       $user
         ->selectedProfile()
         ->associate($startingProfile)
         ->save();
-      $words = ['testowanie', 'słów', 'profilu', 'startowego'];
-      foreach ($words as $word) {
-        $wordToAdd = new Word(['word' => $word]);
-        $startingProfile->words()->save($wordToAdd);
-      }
       return response()->json($user);
     } catch (QueryException $e) {
       throw new Exception('Server is having trouble right now. Please try again later', $e->getCode(), $e);
