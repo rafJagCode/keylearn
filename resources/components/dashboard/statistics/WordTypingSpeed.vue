@@ -2,15 +2,15 @@
   <v-card class="test-results pa-2" width="250px" height="250px">
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="font-weight-black purple--text display-3">
-          <span class="pa-2">{{ word.name }}</span>
+        <v-card-title class="font-weight-black purple--text display-2">
+          <span class="pa-2">{{ word.word }}</span>
         </v-card-title>
       </v-row>
       <v-card-text>
         <v-row>
           <v-col cols="auto">
-            <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="teal" class="text-caption">
-              {{ avgSpeed }}%
+            <v-progress-circular :size="80" :width="8" :value="percentAccuracy" color="teal" class="text-caption">
+              {{ percentAccuracy }}%
             </v-progress-circular>
           </v-col>
           <v-col cols="auto">
@@ -31,15 +31,21 @@
 export default {
   props: {
     word: null,
-    bestResult: null,
+    bestTime: null,
   },
   computed: {
     avgSpeed() {
-      return Math.round(60 / this.word.time / 5);
+      return Math.round(60 / this.word.avg_time_per_key / 5);
     },
     percentSpeed() {
-      let percentSpeed = (this.bestResult / this.word.time) * 100;
+      let percentSpeed = (this.bestTime / this.word.avg_time_per_key) * 100;
       return percentSpeed;
+    },
+    percentAccuracy() {
+      let allChars = this.word.word.length * this.word.samples;
+      let correct = allChars - this.word.errors;
+      let percentAccuracy = (correct / allChars) * 100;
+      return percentAccuracy;
     },
   },
 };

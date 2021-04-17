@@ -66,7 +66,7 @@ export default {
   }),
   methods: {
     handleSubmit() {
-      this.showSessionAlert = false;
+      this.error = null;
       if (!this.$refs.form.validate()) return;
       this.$store
         .dispatch('signIn', { email: this.email, password: this.password })

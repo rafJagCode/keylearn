@@ -16,7 +16,18 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { Howl, Howler } from 'howler';
 export default {
+  data() {
+    return {
+      correctSound: new Howl({
+        src: [require('@/assets/sound/correct-click.mp3')],
+      }),
+      incorrectSound: new Howl({
+        src: [require('@/assets/sound/incorrect-click.mp3')],
+      }),
+    };
+  },
   watch: {
     typed: function (typed) {
       if (typed.length !== 0)
@@ -92,14 +103,12 @@ export default {
       if (this.beforeKeyPress.length + 1 > this.typed.length) return true;
       return false;
     },
-    //Tu skończyłem prace z wykrywaniem błędów w czasie pisania
     checkInput() {
       if (this.wasBackspaceClicked()) {
         this.playCorrectSound();
         this.beforeKeyPress = this.typed;
         return;
       }
-      //check
       if (this.typed.slice(-1) !== this.signs[this.typed.length - 1]) {
         this.playIncorrectSound();
         this.$store.dispatch('incrementErrorCounter');
@@ -111,10 +120,10 @@ export default {
       this.beforeKeyPress = this.typed;
     },
     playCorrectSound() {
-      new Audio(require('@/assets/sound/correct-click.mp3')).play();
+      this.correctSound.play();
     },
     playIncorrectSound() {
-      new Audio(require('@/assets/sound/incorrect-click.mp3')).play();
+      this.incorrectSound.play();
     },
   },
 };

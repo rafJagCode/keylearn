@@ -1,12 +1,13 @@
 <template>
   <v-container class="create-profile">
-    <v-snackbar v-model="created" :timeout="1000" centered>
+    <v-snackbar v-model="updated" :timeout="1000" centered>
       <v-row align="center" justify="space-around">
-        <span class="ml-3">Profile Created</span>
+        <span class="ml-3">Profile Updated</span>
         <v-spacer></v-spacer>
-        <v-btn text color="primaryLight" @click.native="created = false">Close</v-btn>
+        <v-btn text color="primaryLight" @click.native="updated = false">Close</v-btn>
       </v-row>
     </v-snackbar>
+    <profile-list class="mb-8"></profile-list>
     <v-alert type="error" v-if="error">{{ error }}</v-alert>
     <v-text-field label="Profile Name" v-model="profileName" :rules="rules" width="30%"></v-text-field>
     <v-slider
@@ -52,18 +53,22 @@
     </div>
     <v-row class="my-3">
       <v-spacer></v-spacer>
-      <v-progress-circular indeterminate color="primaryLight" class="mr-2" v-if="creating"></v-progress-circular>
-      <v-btn @click="createProfile()"> Create Profile</v-btn>
+      <v-progress-circular v-if="updating" indeterminate color="primaryLight" class="mr-2"></v-progress-circular>
+      <v-btn @click="updateProfile()">Update Profile</v-btn>
     </v-row>
   </v-container>
 </template>
 <script>
+import ProfileList from '@/components/dashboard/profiles/ProfileList';
 import { mapGetters } from 'vuex';
 export default {
+  components: {
+    ProfileList,
+  },
   data() {
     return {
-      created: false,
-      creating: false,
+      updated: false,
+      updating: false,
       error: null,
       wordsField: '',
       wordsToAdd: [],
@@ -79,32 +84,45 @@ export default {
       if (!useWordsFromApi) return;
       this.isAutoDifficultyEnabled = false;
     },
+    watchedProfile: {
+      handler: 'updateData',
+      immediate: true,
+    },
   },
   computed: {
+    ...mapGetters(['watchedProfile']),
     useWordsFromApi() {
       return this.wordSelection === 'random' ? true : false;
     },
   },
   methods: {
-    createProfile() {
-      this.creating = true;
+    updateData() {
+      this.profileName = this.watchedProfile.name;
+      this.testLength = this.watchedProfile.test_length;
+      this.wordSelection = this.watchedProfile.use_words_from_api ? 'random' : 'defined';
+      this.isAutoDifficultyEnabled = this.watchedProfile.auto_difficulty;
+      this.wordsToAdd = this.watchedProfile.words.map((word) => word.word);
+    },
+    updateProfile() {
       this.error = null;
+      this.updating = true;
       Vue.axios
-        .post('/api/create-profile', {
+        .post('/api/update-profile', {
           name: this.profileName,
           words: this.wordsToAdd,
           useWordsFromApi: this.useWordsFromApi,
           isAutoDifficultyEnabled: this.isAutoDifficultyEnabled,
           testLength: this.testLength,
+          id: this.watchedProfile.id,
         })
         .then(() => {
           this.$store.dispatch('setProfiles');
-          this.created = true;
+          this.updated = true;
         })
         .catch((error) => {
           this.error = error.response.data.message;
         });
-      this.creating = false;
+      this.updating = false;
     },
     addWords() {
       let words = this.wordsField.trim().split(/\s+/);

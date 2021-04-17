@@ -2,7 +2,7 @@
   <v-card class="test-results pa-2" width="250px" height="250px">
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="font-weight-black purple--text display-3">
+        <v-card-title class="font-weight-black purple--text display-2">
           <span class="pa-2">{{ charStatistics.char }}</span>
         </v-card-title>
       </v-row>
@@ -15,7 +15,7 @@
           </v-col>
           <v-col cols="auto">
             <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="purple" class="text-caption">
-              {{ charStatistics.avgWpm }}WPM
+              {{ avgSpeed }}WPM
             </v-progress-circular>
           </v-col>
         </v-row>
@@ -31,17 +31,21 @@
 export default {
   props: {
     charStatistics: null,
-    bestSpeed: null,
+    bestAvgTime: null,
   },
   computed: {
+    avgSpeed() {
+      let avg_time = this.charStatistics.avg_time;
+      return Math.round(60 / avg_time / 5);
+    },
     percentCorrect() {
-      let all = this.charStatistics.all;
-      let incorrect = this.charStatistics.incorrect;
-      return Math.round(((all - incorrect) / all) * 100);
+      let samples = this.charStatistics.samples;
+      let correct = this.charStatistics.correct;
+      return Math.round((correct / samples) * 100);
     },
     percentSpeed() {
-      let avgWpm = this.charStatistics.avgWpm;
-      return Math.round((avgWpm / this.bestSpeed) * 100);
+      let avg_time = this.charStatistics.avg_time;
+      return Math.round((this.bestAvgTime / avg_time) * 100);
     },
   },
 };

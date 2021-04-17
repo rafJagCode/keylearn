@@ -1,7 +1,6 @@
 <template>
   <div class="profile-menager pa-4">
-    <profile-list class="mb-4"></profile-list>
-    <v-btn>Update Profile</v-btn>
+    <profile-list class="mb-8"></profile-list>
     <v-btn @click="deleteProfile()">Delete Profile</v-btn>
     <v-btn @click="useProfile()">Use This Profile</v-btn>
   </div>

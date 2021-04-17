@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class Test extends Model
 {
@@ -14,11 +16,11 @@ class Test extends Model
   {
     return $this->belongsTo(Profile::class);
   }
-  public function WordsTypingTimes()
+  public function wordsTypingTimes()
   {
     return $this->hasMany(WordTypingTime::class);
   }
-  public function CharsStatistics()
+  public function charsTypingTimes()
   {
     return $this->hasMany(CharStatistics::class);
   }
