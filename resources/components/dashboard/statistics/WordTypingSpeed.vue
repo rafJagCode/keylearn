@@ -2,7 +2,7 @@
   <v-card class="test-results pa-2" width="250px" height="250px">
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="font-weight-black purple--text display-2">
+        <v-card-title class="font-weight-black purple--text headline">
           <span class="pa-2">{{ word.word }}</span>
         </v-card-title>
       </v-row>
@@ -45,7 +45,7 @@ export default {
       let allChars = this.word.word.length * this.word.samples;
       let correct = allChars - this.word.errors;
       let percentAccuracy = (correct / allChars) * 100;
-      return percentAccuracy;
+      return Math.round(percentAccuracy);
     },
   },
 };

@@ -12,11 +12,11 @@
     <v-slider
       v-model="testLength"
       thumb-label="always"
-      step="50"
+      step="5"
       ticks
-      min="50"
-      max="500"
-      label="Test Length"
+      min="10"
+      max="50"
+      label="Test Length(in words)"
       class="pt-6"
     ></v-slider>
     <v-radio-group v-model="wordSelection">
@@ -70,7 +70,7 @@ export default {
       profileName: '',
       wordSelection: 'random',
       isAutoDifficultyEnabled: false,
-      testLength: 50,
+      testLength: 10,
       rules: [(value) => !!value || 'Required.', (value) => (value || '').length <= 20 || 'Max 20 characters'],
     };
   },

@@ -6,29 +6,27 @@ const state = {
 };
 const actions = {
   async setResults({ dispatch, commit, rootGetters }) {
-    await axios
-      .post('/api/get-profile-results', {
-        profile_id: rootGetters.watchedProfile.id,
-      })
-      .then((res) => {
-        commit('SET_TESTS', res.data);
-      });
+	  console.log('setting results')
+    let res = await axios.post('/api/get-profile-results', {
+      profile_id: rootGetters.watchedProfile.id,
+    });
+    commit('SET_TESTS', res.data);
     dispatch('setSpeeds');
-    return dispatch('setErrors');
+    dispatch('setErrors');
   },
-  async setSpeeds({ commit }) {
+  setSpeeds({ commit }) {
     let speeds = [];
     state.tests.forEach((test) => {
       speeds.push(test.wpm);
     });
-    return commit('SET_SPEEDS', speeds);
+    commit('SET_SPEEDS', speeds);
   },
-  async setErrors({ commit }) {
+  setErrors({ commit }) {
     let errors = [];
     state.tests.forEach((test) => {
       errors.push(test.all_errors);
     });
-    return commit('SET_ERRORS', errors);
+    commit('SET_ERRORS', errors);
   },
 };
 const mutations = {
