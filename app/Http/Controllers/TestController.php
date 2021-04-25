@@ -37,13 +37,11 @@ class TestController extends Controller
       return $this->getRandomWordsTest($profile->test_length);
     }
     if ($profile->auto_difficulty) {
-      return 'test granat mortadela macintosh apzylokoiadoneroida';
+      $autoDifficultyWords = $profile->getAutoDifficultyWords($profile->test_length);
+      return $this->convertToText($autoDifficultyWords);
     }
     $randomUserWords = $profile->getRandomUserWords($profile->test_length);
     return $this->convertToText($randomUserWords);
-  }
-  public function getRandomUserWords($test_length = 20)
-  {
   }
   public function getRandomWordsTest($test_length = 20)
   {
