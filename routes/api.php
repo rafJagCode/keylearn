@@ -33,3 +33,4 @@ Route::post('create-profile', 'ProfileController@createProfile')->middleware('au
 Route::post('delete-profile', 'ProfileController@deleteProfile')->middleware('auth:sanctum');
 Route::post('update-profile', 'ProfileController@updateProfile')->middleware('auth:sanctum');
 Route::post('use-profile', 'ProfileController@useProfile')->middleware('auth:sanctum');
+Route::post('get-general-statistics', 'GeneralStatisticsController@getGeneralStatistics')->middleware('auth:sanctum');

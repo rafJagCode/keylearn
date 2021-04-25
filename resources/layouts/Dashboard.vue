@@ -1,15 +1,16 @@
 <template>
   <div class="dashboard">
     <navigation-drawer></navigation-drawer>
-    <v-container style="height: 100vh" v-if="profilLoader || dataLoader || error">
+    <v-container style="height: 100vh" v-if="generalStatisticsLoader || profilLoader || dataLoader || error">
       <v-layout align-center justify-center fill-height>
         <v-row justify="center" align="center" class="text-subtitle-1 font-weight-black">
           <v-progress-circular
-            v-if="(profilLoader || dataLoader) && !error"
+            v-if="(generalStatisticsLoader || profilLoader || dataLoader) && !error"
             indeterminate
             color="primaryLight"
             class="mr-2"
           ></v-progress-circular>
+          <span v-if="generalStatisticsLoader && !error">Loading General Statistics ...</span>
           <span v-if="profilLoader && !error">Loading Profiles...</span>
           <span v-if="dataLoader && !error">Loading Data...</span>
           <div v-if="error">
@@ -19,7 +20,10 @@
         </v-row>
       </v-layout>
     </v-container>
-    <router-view v-if="!profilLoader && !dataLoader && !error" class="ma-2 ml-16"></router-view>
+    <router-view
+      v-if="!generalStatisticsLoader && !profilLoader && !dataLoader && !error"
+      class="ma-2 ml-16"
+    ></router-view>
   </div>
 </template>
 <script>
@@ -28,6 +32,7 @@ import NavigationDrawer from '@/components/utils/NavigationDrawer';
 export default {
   data() {
     return {
+      generalStatisticsLoader: false,
       profilLoader: false,
       dataLoader: false,
       error: false,
@@ -52,9 +57,17 @@ export default {
     async setResults() {
       return this.$store.dispatch('setResults');
     },
+    async setGeneralStatistics() {
+      return this.$store.dispatch('setGeneralStatistics');
+    },
     async loadData() {
       try {
         this.error = false;
+        this.generalStatisticsLoader = true;
+        console.log(this.generalStatisticsLoader);
+        await this.setGeneralStatistics();
+        this.generalStatisticsLoader = false;
+        console.log(this.generalStatisticsLoader);
         this.profilLoader = true;
         await this.setProfiles();
         this.profilLoader = false;

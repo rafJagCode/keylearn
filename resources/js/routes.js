@@ -9,6 +9,7 @@ import Test from '@/layouts/Test';
 import PageNotFound from '@/layouts/PageNotFound';
 import Statistics from '@/components/dashboard/statistics/Statistics';
 import Profiles from '@/components/dashboard/profiles/Profiles';
+import GeneralStatistics from '@/components/dashboard/GeneralStatistics';
 
 Vue.use(VueRouter);
 
@@ -35,6 +36,7 @@ const router = new VueRouter({
       name: 'dashboard',
       component: Dashboard,
       children: [
+        { path: '', component: GeneralStatistics },
         {
           name: 'statistics',
           path: 'statistics',

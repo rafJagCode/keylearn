@@ -6,7 +6,6 @@ const state = {
 };
 const actions = {
   async setResults({ dispatch, commit, rootGetters }) {
-	  console.log('setting results')
     let res = await axios.post('/api/get-profile-results', {
       profile_id: rootGetters.watchedProfile.id,
     });
