@@ -1,5 +1,8 @@
 <template>
   <v-card class="test-results pa-2" width="250px" height="250px">
+    <v-badge class="sample-badge" color="primaryLight">
+      <span slot="badge">Samples: {{ charStatistics.samples }}</span>
+    </v-badge>
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
         <v-card-title class="font-weight-black purple--text display-2">
@@ -19,7 +22,7 @@
             </v-progress-circular>
           </v-col>
         </v-row>
-        <v-row class="text-subtitle-2 font-weight-black">
+        <v-row class="text-subtitle-2 font-weight-black mb-2">
           <v-col cols="auto">Accuracy</v-col>
           <v-col cols="auto">Average speed</v-col>
         </v-row>
@@ -50,3 +53,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.samples-badge {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+</style>
