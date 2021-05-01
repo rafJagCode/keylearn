@@ -4,7 +4,7 @@
       <v-toolbar flat color="primaryLight" dark>
         <v-toolbar-title>Profiles</v-toolbar-title>
       </v-toolbar>
-      <v-tabs vertical color="primaryLight">
+      <v-tabs class="profiles__window" vertical color="primaryLight">
         <v-tab>
           <v-icon left> mdi-folder-account-outline </v-icon>
           Profile Menager
@@ -43,3 +43,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.profiles__window {
+  min-height: calc(100vh - 80px);
+}
+</style>

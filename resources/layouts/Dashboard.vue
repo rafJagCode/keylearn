@@ -64,10 +64,8 @@ export default {
       try {
         this.error = false;
         this.generalStatisticsLoader = true;
-        console.log(this.generalStatisticsLoader);
         await this.setGeneralStatistics();
         this.generalStatisticsLoader = false;
-        console.log(this.generalStatisticsLoader);
         this.profilLoader = true;
         await this.setProfiles();
         this.profilLoader = false;

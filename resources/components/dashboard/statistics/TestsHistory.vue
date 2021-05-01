@@ -1,7 +1,7 @@
 <template>
   <v-container class="tests-history">
     <v-container>
-      <v-row justify="space-around">
+      <v-row justify="space-around" class="mb-3">
         <v-checkbox
           v-for="checkbox in checkboxes"
           :key="checkbox.label"

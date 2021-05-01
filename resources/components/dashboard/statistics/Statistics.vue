@@ -8,7 +8,7 @@
           <profile-list class="ma-2"></profile-list>
         </div>
       </v-toolbar>
-      <v-tabs vertical color="primaryLight">
+      <v-tabs class="statistics__window" vertical color="primaryLight">
         <v-tab>
           <v-icon left> mdi-history </v-icon>
           Tests history
@@ -80,5 +80,8 @@ export default {
   top: 0px;
   right: 0;
   width: 400px;
+}
+.statistics__window {
+  min-height: calc(100vh - 80px);
 }
 </style>

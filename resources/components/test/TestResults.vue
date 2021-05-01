@@ -111,9 +111,7 @@ export default {
       let seconds = this.textToSeconds(time);
       let minutes = seconds / 60;
       let testLength = this.signs.length;
-      let cpmGross = testLength / minutes;
-      let wpmGross = cpmGross / 5;
-      let wpmNet = wpmGross - uncorrectedErrors / minutes;
+      let wpmNet = (testLength / 5 - uncorrectedErrors) / minutes;
       let allErrors = this.errorCounter;
       this.testResults.time = time;
       this.testResults.testLength = testLength;

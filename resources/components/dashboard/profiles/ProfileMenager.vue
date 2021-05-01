@@ -16,13 +16,11 @@ export default {
     deleteProfile() {
       Vue.axios.post('/api/delete-profile', this.watchedProfile).then((res) => {
         this.$store.dispatch('setProfiles');
-        console.log(res.data);
       });
     },
     useProfile() {
       Vue.axios.post('/api/use-profile', this.watchedProfile).then((res) => {
         this.$store.dispatch('setProfiles');
-        console.log(res.data);
       });
     },
   },
