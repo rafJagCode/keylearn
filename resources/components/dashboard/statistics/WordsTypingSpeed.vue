@@ -1,5 +1,5 @@
 <template>
-  <v-container class="words-typing-speed pt-12">
+  <v-container class="words-typing-speed pt-12" v-if="wordsStatistics.length">
     <v-row>
       <v-col class="my-2" cols="3" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
@@ -8,13 +8,16 @@
       </v-col>
     </v-row>
   </v-container>
+  <no-data v-else></no-data>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 import WordTypingSpeed from '@/components/dashboard/statistics/WordTypingSpeed';
+import NoData from '@/components/utils/NoData';
 export default {
   components: {
     WordTypingSpeed,
+    NoData,
   },
   computed: {
     ...mapGetters(['watchedProfile']),

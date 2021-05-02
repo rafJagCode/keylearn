@@ -42,7 +42,7 @@ export default {
           data:
             this.generalStatistics.averageWpm !== null
               ? this.roundTwoPlaces(this.generalStatistics.averageWpm)
-              : 'not enough data',
+              : 'not data',
           description: 'Average WPM',
           gridArea: 'first',
         },
@@ -53,7 +53,7 @@ export default {
           data:
             this.generalStatistics.averageAccuracy !== null
               ? this.roundTwoPlaces(this.generalStatistics.averageAccuracy) + '%'
-              : 'not enough data',
+              : 'not data',
           description: 'Average Accuracy',
           gridArea: 'second',
         },
@@ -61,7 +61,7 @@ export default {
           color: '#7b1e7a',
           smallIcon: 'mdi-chart-line',
           bigIcon: 'mdi-file-word-box-outline',
-          data: this.generalStatistics.wordsCount !== null ? this.generalStatistics.wordsCount : 'not enough data',
+          data: this.generalStatistics.wordsCount !== null ? this.generalStatistics.wordsCount : 'not data',
           description: 'Words that you typed',
           gridArea: 'third',
         },
@@ -69,7 +69,7 @@ export default {
           color: '#87255b',
           smallIcon: 'mdi-chart-line',
           bigIcon: 'mdi-alpha-a-box-outline',
-          data: this.generalStatistics.charsCount !== null ? this.generalStatistics.charsCount : 'not enough data',
+          data: this.generalStatistics.charsCount !== null ? this.generalStatistics.charsCount : 'not data',
           description: 'Chars that you typed',
           gridArea: 'fourth',
         },

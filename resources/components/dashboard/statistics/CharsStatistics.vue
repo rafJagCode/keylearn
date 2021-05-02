@@ -1,5 +1,5 @@
 <template>
-  <v-container class="chars-statistics pt-12">
+  <v-container v-if="charsStatistics.length" class="chars-statistics pt-12">
     <v-row>
       <v-col class="my-2" cols="3" v-for="charStatistics in charsStatistics" :key="charStatistics.char">
         <v-row justify="center">
@@ -8,10 +8,12 @@
       </v-col>
     </v-row>
   </v-container>
+  <no-data v-else></no-data>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 import CharStatistics from '@/components/dashboard/statistics/CharStatistics.vue';
+import NoData from '@/components/utils/NoData';
 export default {
   computed: {
     ...mapGetters(['watchedProfile']),
@@ -26,6 +28,6 @@ export default {
       return bestChar.avg_time;
     },
   },
-  components: { CharStatistics },
+  components: { CharStatistics, NoData },
 };
 </script>
