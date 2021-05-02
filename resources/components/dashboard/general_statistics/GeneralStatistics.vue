@@ -42,7 +42,7 @@ export default {
           data:
             this.generalStatistics.averageWpm !== null
               ? this.roundTwoPlaces(this.generalStatistics.averageWpm)
-              : 'No Data',
+              : 'not enough data',
           description: 'Average WPM',
           gridArea: 'first',
         },
@@ -53,7 +53,7 @@ export default {
           data:
             this.generalStatistics.averageAccuracy !== null
               ? this.roundTwoPlaces(this.generalStatistics.averageAccuracy) + '%'
-              : 'No Data',
+              : 'not enough data',
           description: 'Average Accuracy',
           gridArea: 'second',
         },
@@ -61,7 +61,7 @@ export default {
           color: '#7b1e7a',
           smallIcon: 'mdi-chart-line',
           bigIcon: 'mdi-file-word-box-outline',
-          data: this.generalStatistics.wordsCount !== null ? this.generalStatistics.wordsCount : 'No Data',
+          data: this.generalStatistics.wordsCount !== null ? this.generalStatistics.wordsCount : 'not enough data',
           description: 'Words that you typed',
           gridArea: 'third',
         },
@@ -69,7 +69,7 @@ export default {
           color: '#87255b',
           smallIcon: 'mdi-chart-line',
           bigIcon: 'mdi-alpha-a-box-outline',
-          data: this.generalStatistics.charsCount !== null ? this.generalStatistics.charsCount : 'No Data',
+          data: this.generalStatistics.charsCount !== null ? this.generalStatistics.charsCount : 'not enough data',
           description: 'Chars that you typed',
           gridArea: 'fourth',
         },
@@ -89,6 +89,11 @@ export default {
 
 <style lang="css" scoped>
 .general-statistics__cards-container {
+  background: #a8e2f9;
+  background: -webkit-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: -moz-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: -o-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: linear-gradient(to bottom right, #a8e2f9 0%, #d3f0fb 100%);
   min-height: calc(100vh - 80px);
   grid-template-areas:
     '. . . .'

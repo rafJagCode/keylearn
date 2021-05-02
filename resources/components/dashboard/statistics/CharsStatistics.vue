@@ -1,5 +1,5 @@
 <template>
-  <v-container class="chars-statistics">
+  <v-container class="chars-statistics pt-12">
     <v-row>
       <v-col class="my-2" cols="3" v-for="charStatistics in charsStatistics" :key="charStatistics.char">
         <v-row justify="center">

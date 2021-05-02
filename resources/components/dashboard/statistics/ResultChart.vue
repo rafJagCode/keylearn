@@ -1,6 +1,6 @@
 <template>
-  <v-card width="100%" class="ma-2 pa-2">
-    <v-row justify="center" align="center">
+  <v-card outlined width="90%" class="ma-2" color="transparent">
+    <v-row class="my-3" justify="center" align="center">
       <div class="chart-container">
         <chart :chart-data="datacollection" :options="options"></chart>
       </div>
@@ -64,11 +64,20 @@ export default {
           },
         },
         scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
           yAxes: [
             {
               ticks: {
-                suggestedMin: this.minInResults - 10,
-                suggestedMax: this.maxInResults + 10,
+                beginAtZero: true,
+              },
+              gridLines: {
+                display: false,
               },
             },
           ],
@@ -86,7 +95,7 @@ export default {
         datasets: [
           {
             data: this.results,
-            showLine: false,
+            showLine: true,
             pointBackgroundColor: 'red',
           },
         ],

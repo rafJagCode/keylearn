@@ -1,10 +1,10 @@
 <template>
   <div class="profiles">
-    <v-card>
+    <v-card background-color="transparent">
       <v-toolbar flat color="primaryLight" dark>
         <v-toolbar-title>Profiles</v-toolbar-title>
       </v-toolbar>
-      <v-tabs class="profiles__window" vertical color="primaryLight">
+      <v-tabs class="profiles__window" vertical color="primaryLight" background-color="transparent">
         <v-tab>
           <v-icon left> mdi-folder-account-outline </v-icon>
           Profile Menager
@@ -45,6 +45,11 @@ export default {
 </script>
 <style scoped>
 .profiles__window {
+  background: #a8e2f9;
+  background: -webkit-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: -moz-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: -o-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: linear-gradient(to bottom right, #a8e2f9 0%, #d3f0fb 100%);
   min-height: calc(100vh - 80px);
 }
 </style>

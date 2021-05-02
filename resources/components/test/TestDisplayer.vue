@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center" class="test-displayer my-12">
+  <v-row align="center" class="test-displayer mt-12 mb-16">
     <test-loading-error-alert v-if="errorWhileLoading"></test-loading-error-alert>
     <v-container v-if="!errorWhileLoading">
       <v-row align="center" justify="center">

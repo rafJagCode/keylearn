@@ -59,4 +59,15 @@ export default {
   left: 20px;
   top: 10px;
 }
+.test-results {
+  background-color: transparent;
+}
+.test-results::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
+}
 </style>

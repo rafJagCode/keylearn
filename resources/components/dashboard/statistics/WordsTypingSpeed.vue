@@ -1,5 +1,5 @@
 <template>
-  <v-container class="words-typing-speed">
+  <v-container class="words-typing-speed pt-12">
     <v-row>
       <v-col class="my-2" cols="3" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">

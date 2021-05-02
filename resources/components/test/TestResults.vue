@@ -40,11 +40,11 @@ export default {
   },
   methods: {
     getCalculatedSignsTypingTimes() {
-      const length = Object.keys(this.signsTimeFlags).length;
+      let times = this.signsTimeFlags.map(this.textToSeconds);
       let signsTypingTimes = [];
-      signsTypingTimes.push(this.textToSeconds(this.signsTimeFlags[0]));
-      for (let i = 1; i < length; i++) {
-        let time = this.textToSeconds(this.signsTimeFlags[i]) - this.textToSeconds(this.signsTimeFlags[i - 1]);
+      signsTypingTimes.push(times[0]);
+      for (let i = 1; i < times.length; i++) {
+        let time = times[i] - times[i - 1];
         signsTypingTimes.push(time);
       }
       return signsTypingTimes;
@@ -92,7 +92,7 @@ export default {
       wordsStatisitcs.shift();
       return wordsStatisitcs;
     },
-    textToSeconds(text) {
+    textToSeconds: (text) => {
       let textDivided = text.split(':');
       let seconds = parseFloat(textDivided[0]) * 3600 + parseFloat(textDivided[1]) * 60 + parseFloat(textDivided[2]);
       return seconds;

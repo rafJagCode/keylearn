@@ -151,6 +151,18 @@ export default {
   grid-row-start: 1;
   grid-row-end: 2;
   padding: 10px;
+  background-color: transparent;
+  position: relative;
+  z-index: 0;
+}
+.create-profile__user-words::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
+  position: absolute;
+  z-index: -1;
 }
 .create-profile__textarea {
   height: 100%;
@@ -177,5 +189,17 @@ export default {
   height: 250px;
   grid-column-start: 3;
   grid-column-end: 4;
+  background-color: transparent;
+  z-index: 0;
+  position: relative;
+}
+.create-profile__virtual-scroll::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
 }
 </style>
