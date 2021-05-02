@@ -1,5 +1,5 @@
 <template>
-  <v-container class="tests-history">
+  <v-container class="tests-history" v-if="tests.length">
     <v-container>
       <v-row justify="space-around" class="mb-3">
         <v-checkbox
@@ -19,10 +19,12 @@
       </v-col>
     </v-row>
   </v-container>
+  <no-data v-else></no-data>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 import Result from '@/components/dashboard/statistics/Result';
+import NoData from '@/components/utils/NoData';
 export default {
   data() {
     return {
@@ -74,6 +76,7 @@ export default {
   },
   components: {
     Result,
+    NoData,
   },
 };
 </script>
