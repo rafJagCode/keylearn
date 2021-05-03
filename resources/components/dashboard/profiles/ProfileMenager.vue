@@ -1,7 +1,7 @@
 <template>
   <div class="profile-menager pa-4">
     <profile-list class="mb-8"></profile-list>
-    <v-btn @click="deleteProfile()">Delete Profile</v-btn>
+    <v-btn :disabled="watchedProfile.name === 'Starting Profile'" @click="deleteProfile()">Delete Profile</v-btn>
     <v-btn @click="useProfile()">Use This Profile</v-btn>
   </div>
 </template>

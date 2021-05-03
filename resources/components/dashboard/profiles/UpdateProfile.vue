@@ -54,7 +54,7 @@
     <v-row class="my-3">
       <v-spacer></v-spacer>
       <v-progress-circular v-if="updating" indeterminate color="primaryLight" class="mr-2"></v-progress-circular>
-      <v-btn @click="updateProfile()">Update Profile</v-btn>
+      <v-btn :disabled="watchedProfile.name === 'Starting Profile'" @click="updateProfile()">Update Profile</v-btn>
     </v-row>
   </v-container>
 </template>

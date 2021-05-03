@@ -1,5 +1,6 @@
 <template>
   <v-container class="words-typing-speed pt-12" v-if="wordsStatistics.length">
+    <statistic-sorter @sorted="assignSorted" :data="watchedProfile.words_statistics"></statistic-sorter>
     <v-row>
       <v-col class="my-2" cols="3" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
@@ -13,16 +14,24 @@
 <script>
 import { mapGetters } from 'vuex';
 import WordTypingSpeed from '@/components/dashboard/statistics/WordTypingSpeed';
+import StatisticSorter from '@/components/dashboard/statistics/StatisticSorter';
 import NoData from '@/components/utils/NoData';
 export default {
+  data() {
+    return {
+      sorted: null,
+    };
+  },
   components: {
     WordTypingSpeed,
     NoData,
+    StatisticSorter,
   },
   computed: {
     ...mapGetters(['watchedProfile']),
     wordsStatistics() {
-      return this.watchedProfile.words_statistics;
+      return this.sorted === null ? this.watchedProfile.words_statistics : this.sorted;
+      //   return this.watchedProfile.words_statistics;
     },
     bestTime() {
       let best = this.wordsStatistics[0].avg_time_per_key;
@@ -31,10 +40,10 @@ export default {
       });
       return best;
     },
-    sortedWords() {
-      let words = this.words;
-      words.sort((firstWord, secondWord) => secondWord.avg_time_per_key - firstWord.avg_time_per_key);
-      return words;
+  },
+  methods: {
+    assignSorted(sorted) {
+      this.sorted = sorted;
     },
   },
 };

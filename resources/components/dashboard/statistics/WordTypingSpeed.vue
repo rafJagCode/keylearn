@@ -45,10 +45,7 @@ export default {
       return percentSpeed;
     },
     percentAccuracy() {
-      let allChars = this.word.word.length * this.word.samples;
-      let correct = allChars - this.word.errors;
-      let percentAccuracy = (correct / allChars) * 100;
-      return Math.round(percentAccuracy);
+      return Math.round(this.word.accuracy);
     },
   },
 };

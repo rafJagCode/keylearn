@@ -40,6 +40,7 @@ export default {
       //   [typed.length - 1]: this.stopwatchTime,
       // };
       if (typed.length !== 0 && typed.length >= this.signs.length) {
+        console.log(this.timeFlags);
         this.signsTimeFlags = this.timeFlags;
         this.endTest();
       }
@@ -47,6 +48,9 @@ export default {
     isTestActivated: function (isTestActivated) {
       if (isTestActivated) this.$refs.userInput.focus();
       if (!isTestActivated) this.$refs.userInput.blur();
+    },
+    signs: function (signs) {
+      this.timeFlags = [...new Array(this.signs.length)];
     },
   },
   computed: {

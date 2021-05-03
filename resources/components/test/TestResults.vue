@@ -64,7 +64,6 @@ export default {
         let correctness = !this.errorsPositions.includes(index);
         return { ...object, correct: correctness };
       });
-      withoutErrors.shift();
       return withoutErrors;
     },
     getWordsStatistics() {
@@ -89,7 +88,6 @@ export default {
           errors = 0;
         }
       });
-      wordsStatisitcs.shift();
       return wordsStatisitcs;
     },
     textToSeconds: (text) => {

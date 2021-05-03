@@ -61,7 +61,7 @@ class Profile extends Model
   {
     return $this->hasManyThrough(WordTypingTime::class, Test::class)
       ->selectRaw(
-        '`tests`.`profile_id`, `word`, AVG(CASE WHEN errors = 0 THEN avg_time_per_key ELSE NULL END) as avg_time_per_key, COUNT(*) as samples, SUM(errors) as errors'
+        '`tests`.`profile_id`, `word`, AVG(CASE WHEN errors = 0 THEN avg_time_per_key ELSE NULL END) as avg_time_per_key, COUNT(*) as samples, SUM(errors) as errors, (sum(length(word)) - sum(errors)) / sum(length(word)) * 100 as accuracy'
       )
       ->groupByRaw('`profile_id`, CAST(`word` as BINARY)')
       ->having('avg_time_per_key', '!=', 0);
