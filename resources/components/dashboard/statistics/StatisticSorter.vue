@@ -1,7 +1,13 @@
 <template>
   <div class="statistic-sorter">
-    <v-btn v-for="option in options" :key="option.name" class="statistic-sorter__btn" @click="sort(option.property)"
-      >{{ option.name }}<v-icon right>mdi-chevron-up</v-icon></v-btn
+    <v-btn
+      v-for="button in buttons"
+      :key="button.name"
+      class="statistic-sorter__btn"
+      @click="sort(button)"
+      :color="button.active ? 'primaryLight' : ''"
+      >{{ button.name
+      }}<v-icon right>{{ button.order === 'ASC' ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon></v-btn
     >
   </div>
 </template>
@@ -10,21 +16,24 @@
 export default {
   data() {
     return {
-      options: [
+      buttons: [
         {
           name: 'wpm',
-          icon: 'mdi-chevron-up',
-          property: 'avg_time',
+          property: 'avg_wpm',
+          active: false,
+          order: 'ASC',
         },
         {
           name: 'accuracy',
-          icon: 'mdi-chevron-up',
           property: 'accuracy',
+          active: false,
+          order: 'ASC',
         },
         {
           name: 'samples',
-          icon: 'mdi-chevron-up',
           property: 'samples',
+          active: false,
+          order: 'ASC',
         },
       ],
     };
@@ -33,9 +42,35 @@ export default {
     data: null,
   },
   methods: {
-    sort(property) {
-      let sorted = this.data.sort((current, next) => current[property] - next[property]);
-      this.$emit('sorted', sorted);
+    activateButton(button) {
+      this.buttons.forEach((button) => {
+        button.active = false;
+      });
+      button.active = true;
+    },
+    changeOrder(button) {
+      if (button.order === 'ASC') {
+        button.order = 'DESC';
+        return;
+      }
+      if (button.order === 'DESC') button.order = 'ASC';
+    },
+    sort(button) {
+      let property = button.property;
+      if (button.active) {
+        this.changeOrder(button);
+      }
+      if (!button.active) {
+        this.activateButton(button);
+      }
+      if (button.order === 'ASC') {
+        let sorted = this.data.sort((current, next) => current[property] - next[property]);
+        this.$emit('sorted', sorted);
+      }
+      if (button.order === 'DESC') {
+        let sorted = this.data.sort((current, next) => next[property] - current[property]);
+        this.$emit('sorted', sorted);
+      }
     },
   },
 };

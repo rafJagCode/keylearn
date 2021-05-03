@@ -1,9 +1,10 @@
 <template>
   <v-container v-if="charsStatistics.length" class="chars-statistics pt-12">
+    <statistic-sorter :data="watchedProfile.chars_statistics" @sorted="assignSorted"></statistic-sorter>
     <v-row>
       <v-col class="my-2" cols="3" v-for="charStatistics in charsStatistics" :key="charStatistics.char">
         <v-row justify="center">
-          <char-statistics :charStatistics="charStatistics" :bestAvgTime="bestAvgTime"></char-statistics>
+          <char-statistics :charStatistics="charStatistics" :bestAvgWpm="bestAvgWpm"></char-statistics>
         </v-row>
       </v-col>
     </v-row>
@@ -14,20 +15,31 @@
 import { mapGetters } from 'vuex';
 import CharStatistics from '@/components/dashboard/statistics/CharStatistics.vue';
 import NoData from '@/components/utils/NoData';
+import StatisticSorter from '@/components/dashboard/statistics/StatisticSorter';
 export default {
+  data() {
+    return {
+      sorted: null,
+    };
+  },
   computed: {
     ...mapGetters(['watchedProfile']),
     charsStatistics() {
-      return this.watchedProfile.chars_statistics;
+      return this.sorted === null ? this.watchedProfile.chars_statistics : this.sorted;
     },
-    bestAvgTime() {
+    bestAvgWpm() {
       let chars = this.charsStatistics;
       let bestChar = chars.reduce((prev, current) => {
-        return prev.avg_time < current.avg_time ? prev : current;
+        return prev.avg_wpm > current.avg_wpm ? prev : current;
       });
       return bestChar.avg_time;
     },
   },
-  components: { CharStatistics, NoData },
+  methods: {
+    assignSorted(sorted) {
+      this.sorted = sorted;
+    },
+  },
+  components: { CharStatistics, NoData, StatisticSorter },
 };
 </script>

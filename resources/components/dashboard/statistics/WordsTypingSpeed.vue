@@ -4,7 +4,7 @@
     <v-row>
       <v-col class="my-2" cols="3" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
-          <word-typing-speed :word="word" :bestTime="bestTime"></word-typing-speed>
+          <word-typing-speed :word="word" :bestWpm="bestWpm"></word-typing-speed>
         </v-row>
       </v-col>
     </v-row>
@@ -33,10 +33,10 @@ export default {
       return this.sorted === null ? this.watchedProfile.words_statistics : this.sorted;
       //   return this.watchedProfile.words_statistics;
     },
-    bestTime() {
-      let best = this.wordsStatistics[0].avg_time;
+    bestWpm() {
+      let best = this.wordsStatistics[0].avg_wpm;
       this.wordsStatistics.forEach((word) => {
-        if (word.avg_time < best) best = word.avg_time;
+        if (word.avg_wpm > best) best = word.avg_wpm;
       });
       return best;
     },

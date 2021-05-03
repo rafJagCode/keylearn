@@ -61,7 +61,7 @@ class Profile extends Model
   {
     return $this->hasManyThrough(WordTypingTime::class, Test::class)
       ->selectRaw(
-        '`tests`.`profile_id`, `word`, AVG(avg_time_per_key) as avg_time, COUNT(*) as samples, SUM(errors) as errors, (sum(length(word)) - sum(errors)) / sum(length(word)) * 100 as accuracy'
+        '`tests`.`profile_id`, `word`, 60 / AVG(avg_time_per_key) / 5 as avg_wpm, COUNT(*) as samples, SUM(errors) as errors, (sum(length(word)) - sum(errors)) / sum(length(word)) * 100 as accuracy'
       )
       ->groupByRaw('`profile_id`, CAST(`word` as BINARY)');
   }
@@ -70,7 +70,7 @@ class Profile extends Model
   {
     return $this->hasManyThrough(CharStatistics::class, Test::class)
       ->selectRaw(
-        '`tests`.`profile_id`, `char`, AVG(char_statistics.time) as avg_time, COUNT(*) as samples, SUM(correct) as correct, SUM(correct) / COUNT(*) * 100 as accuracy'
+        '`tests`.`profile_id`, `char`, 60 / AVG(char_statistics.time) / 5 as avg_wpm, COUNT(*) as samples, SUM(correct) as correct, SUM(correct) / COUNT(*) * 100 as accuracy'
       )
       ->groupByRaw('`profile_id`, CAST(`char` as BINARY)');
   }

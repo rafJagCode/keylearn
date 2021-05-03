@@ -34,14 +34,14 @@
 export default {
   props: {
     word: null,
-    bestTime: null,
+    bestWpm: null,
   },
   computed: {
     avgSpeed() {
-      return Math.round(60 / this.word.avg_time / 5);
+      return Math.round(this.word.avg_wpm);
     },
     percentSpeed() {
-      let percentSpeed = (this.bestTime / this.word.avg_time) * 100;
+      let percentSpeed = (this.bestWpm / this.word.avg_wpm) * 100;
       return percentSpeed;
     },
     percentAccuracy() {

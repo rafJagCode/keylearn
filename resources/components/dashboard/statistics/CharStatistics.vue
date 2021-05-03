@@ -34,19 +34,18 @@
 export default {
   props: {
     charStatistics: null,
-    bestAvgTime: null,
+    bestAvgWpm: null,
   },
   computed: {
     avgSpeed() {
-      let avg_time = this.charStatistics.avg_time;
-      return Math.round(60 / avg_time / 5);
+      return Math.round(this.charStatistics.avg_wpm);
     },
     percentCorrect() {
       return Math.round(this.charStatistics.accuracy);
     },
     percentSpeed() {
-      let avg_time = this.charStatistics.avg_time;
-      return Math.round((this.bestAvgTime / avg_time) * 100);
+      let avg_wpm = this.charStatistics.avg_wpm;
+      return Math.round((this.bestAvgWpm / avg_wpm) * 100);
     },
   },
 };

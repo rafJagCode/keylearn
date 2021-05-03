@@ -40,7 +40,6 @@ export default {
       //   [typed.length - 1]: this.stopwatchTime,
       // };
       if (typed.length !== 0 && typed.length >= this.signs.length) {
-        console.log(this.timeFlags);
         this.signsTimeFlags = this.timeFlags;
         this.endTest();
       }
