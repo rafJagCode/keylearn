@@ -42,9 +42,7 @@ export default {
       return Math.round(60 / avg_time / 5);
     },
     percentCorrect() {
-      let samples = this.charStatistics.samples;
-      let correct = this.charStatistics.correct;
-      return Math.round((correct / samples) * 100);
+      return Math.round(this.charStatistics.accuracy);
     },
     percentSpeed() {
       let avg_time = this.charStatistics.avg_time;

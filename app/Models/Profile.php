@@ -61,19 +61,17 @@ class Profile extends Model
   {
     return $this->hasManyThrough(WordTypingTime::class, Test::class)
       ->selectRaw(
-        '`tests`.`profile_id`, `word`, AVG(CASE WHEN errors = 0 THEN avg_time_per_key ELSE NULL END) as avg_time_per_key, COUNT(*) as samples, SUM(errors) as errors, (sum(length(word)) - sum(errors)) / sum(length(word)) * 100 as accuracy'
+        '`tests`.`profile_id`, `word`, AVG(avg_time_per_key) as avg_time, COUNT(*) as samples, SUM(errors) as errors, (sum(length(word)) - sum(errors)) / sum(length(word)) * 100 as accuracy'
       )
-      ->groupByRaw('`profile_id`, CAST(`word` as BINARY)')
-      ->having('avg_time_per_key', '!=', 0);
+      ->groupByRaw('`profile_id`, CAST(`word` as BINARY)');
   }
 
   public function charsStatistics()
   {
     return $this->hasManyThrough(CharStatistics::class, Test::class)
       ->selectRaw(
-        '`tests`.`profile_id`, `char`, AVG(CASE WHEN correct = 1 THEN char_statistics.time ELSE NULL END) as avg_time, COUNT(*) as samples, SUM(correct) as correct'
+        '`tests`.`profile_id`, `char`, AVG(char_statistics.time) as avg_time, COUNT(*) as samples, SUM(correct) as correct, SUM(correct) / COUNT(*) * 100 as accuracy'
       )
-      ->groupByRaw('`profile_id`, CAST(`char` as BINARY)')
-      ->having('avg_time', '!=', 0);
+      ->groupByRaw('`profile_id`, CAST(`char` as BINARY)');
   }
 }

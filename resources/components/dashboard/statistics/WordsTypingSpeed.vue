@@ -34,9 +34,9 @@ export default {
       //   return this.watchedProfile.words_statistics;
     },
     bestTime() {
-      let best = this.wordsStatistics[0].avg_time_per_key;
+      let best = this.wordsStatistics[0].avg_time;
       this.wordsStatistics.forEach((word) => {
-        if (word.avg_time_per_key < best) best = word.avg_time_per_key;
+        if (word.avg_time < best) best = word.avg_time;
       });
       return best;
     },

@@ -14,7 +14,7 @@ export default {
         {
           name: 'wpm',
           icon: 'mdi-chevron-up',
-          property: 'avg_time_per_key',
+          property: 'avg_time',
         },
         {
           name: 'accuracy',

@@ -38,10 +38,10 @@ export default {
   },
   computed: {
     avgSpeed() {
-      return Math.round(60 / this.word.avg_time_per_key / 5);
+      return Math.round(60 / this.word.avg_time / 5);
     },
     percentSpeed() {
-      let percentSpeed = (this.bestTime / this.word.avg_time_per_key) * 100;
+      let percentSpeed = (this.bestTime / this.word.avg_time) * 100;
       return percentSpeed;
     },
     percentAccuracy() {
