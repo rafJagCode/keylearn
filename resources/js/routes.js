@@ -35,7 +35,7 @@ const router = new VueRouter({
       path: '/dashboard',
       component: Dashboard,
       children: [
-        { path:'', name: 'dashboard', component: GeneralStatistics },
+        { path: '', name: 'dashboard', component: GeneralStatistics },
         {
           name: 'statistics',
           path: 'statistics',
@@ -60,22 +60,37 @@ const router = new VueRouter({
     },
   ],
 });
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (from.name === to.name) return;
   let routesThatDontNeedAuthentication = ['home', 'login', 'register', 'test', 'page-not-found'];
   if (routesThatDontNeedAuthentication.includes(to.name)) {
     next();
   } else {
-    try {
-      let auth = await Vue.axios.get('/api/authenticated');
-      if (auth.data) {
+    Vue.axios
+      .get('/api/authenticated')
+      .then(() => {
         next();
-      } else {
-        next({ name: 'login' });
-      }
-    } catch (e) {
-      next({ name: 'login' });
-    }
+      })
+      .catch((e) => {
+        Vue.$confirm({
+          title: 'Session Expired',
+          message: 'You will be redirected to login page',
+          button: {
+            yes: 'OK',
+          },
+          /**
+           * Callback Function
+           * @param {Boolean} confirm
+           */
+          callback: (confirm) => {
+            if (confirm) {
+              next({ name: 'login' });
+            }
+			else next({name: 'login'})
+			throw e;
+          },
+        });
+      });
   }
 });
 export default router;
