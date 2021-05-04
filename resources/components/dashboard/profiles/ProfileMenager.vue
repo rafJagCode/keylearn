@@ -14,8 +14,10 @@ export default {
   },
   methods: {
     deleteProfile() {
-      Vue.axios.post('/api/delete-profile', this.watchedProfile).then((res) => {
-        this.$store.dispatch('setProfiles');
+      Vue.axios.post('/api/delete-profile', this.watchedProfile).then(async (res) => {
+        await this.$store.dispatch('setProfiles');
+        this.$store.dispatch('setResults');
+        this.$store.dispatch('setGeneralStatistics');
       });
     },
     useProfile() {

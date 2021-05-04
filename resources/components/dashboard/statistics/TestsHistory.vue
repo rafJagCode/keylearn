@@ -71,6 +71,8 @@ export default {
       });
     },
     setResults() {
+      this.$store.dispatch('setProfiles');
+      this.$store.dispatch('setGeneralStatistics');
       this.$store.dispatch('setResults');
     },
   },

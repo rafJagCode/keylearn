@@ -9,9 +9,7 @@ const actions = {
     await dispatch('setUserStoreState', null, {
       root: true,
     });
-    let res = await axios.post('/api/get-profiles', {
-      id: rootGetters.user.id,
-    });
+    let res = await axios.post('/api/get-profiles');
     let profiles = res.data;
     commit('SET_PROFILES', profiles);
     let selectedProfile = profiles.find((obj) => obj.id === rootGetters.user.selected_profile_id);
