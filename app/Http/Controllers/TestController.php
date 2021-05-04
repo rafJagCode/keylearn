@@ -105,6 +105,13 @@ class TestController extends Controller
     Test::findOrFail($request->id)->delete();
   }
 
+  public function deleteProfileResults(Request $request)
+  {
+    Profile::findOrFail($request->id)
+      ->tests()
+      ->delete();
+  }
+
   public function getProfileResults(Request $request)
   {
     $profile = Profile::findOrFail($request->profile_id);

@@ -44,7 +44,9 @@
           <template v-slot:default="{ item }">
             <v-list-item :key="item">
               <v-list-item-content>
-                <v-chip outlined label close @click:close="removeWord(item)">{{ item }}</v-chip>
+                <v-chip outlined label
+                  ><v-icon color="error" @click="removeWord(item)">mdi-delete-forever</v-icon>{{ item }}</v-chip
+                >
               </v-list-item-content>
             </v-list-item>
           </template>

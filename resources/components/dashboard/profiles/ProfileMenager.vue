@@ -8,7 +8,9 @@
       </v-row>
     </v-snackbar>
     <profile-list class="mb-8"></profile-list>
-    <v-btn :disabled="watchedProfile.name === 'Starting Profile'" @click="deleteProfile()">Delete Profile</v-btn>
+    <v-btn color="error" :disabled="watchedProfile.name === 'Starting Profile'" @click="deleteProfile()"
+      >Delete Profile</v-btn
+    >
     <v-btn @click="useProfile()">Use This Profile</v-btn>
   </div>
 </template>

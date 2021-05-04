@@ -28,6 +28,7 @@ Route::post('new-test', 'TestController@getNewTest');
 Route::post('save-test-results', 'TestController@saveTestResults')->middleware('auth:sanctum');
 Route::post('get-profile-results', 'TestController@getProfileResults')->middleware('auth:sanctum');
 Route::post('delete-test-results', 'TestController@deleteTestResults')->middleware('auth:sanctum');
+Route::post('delete-profile-results', 'TestController@deleteProfileResults')->middleware('auth:sanctum');
 Route::post('get-profiles', 'ProfileController@getProfiles')->middleware('auth:sanctum');
 Route::post('create-profile', 'ProfileController@createProfile')->middleware('auth:sanctum');
 Route::post('delete-profile', 'ProfileController@deleteProfile')->middleware('auth:sanctum');

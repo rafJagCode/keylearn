@@ -43,7 +43,7 @@ class Profile extends Model
     $words = [];
     while (count($words) < $test_length) {
       $query = $this->words()
-        ->selectRaw('words.word, avg_time_per_key, -LOG(1.0 - RAND()) / avg_time_per_key as weight')
+        ->selectRaw('words.word, avg_wpm, -LOG(1.0 - RAND()) / avg_wpm as weight')
         ->leftJoinSub($this->wordsStatistics(), 'words_statistics', function ($join) {
           $join->on('words.word', '=', 'words_statistics.word');
         })

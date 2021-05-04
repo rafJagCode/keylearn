@@ -1,5 +1,6 @@
 <template>
   <v-container class="tests-history" v-if="tests.length">
+    <v-btn color="error" @click="removeAll()" text x-large>REMOVE ALL <v-icon>mdi-delete-forever</v-icon></v-btn>
     <v-container>
       <v-row justify="space-around" class="mb-3">
         <v-checkbox
@@ -59,15 +60,58 @@ export default {
         },
       ],
       selected: ['time', 'wpm', 'score', 'allErrors', 'uncorrectedErrors', 'accuracy', 'testLength'],
+      removing: false,
+      removingAll: false,
     };
   },
   computed: {
-    ...mapGetters(['user', 'tests']),
+    ...mapGetters(['user', 'tests', 'watchedProfile']),
   },
   methods: {
     removeTestResults(testId) {
-      Vue.axios.post('/api/delete-test-results', { id: testId }).then(() => {
-        this.setResults();
+      if (this.removing) return;
+      Vue.$confirm({
+        title: 'Delete Result',
+        message: 'Do you realy want to delete this result?',
+        button: {
+          yes: 'YES',
+          no: 'NO',
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: (confirm) => {
+          if (confirm) {
+            this.removing = true;
+            Vue.axios.post('/api/delete-test-results', { id: testId }).then(() => {
+              this.setResults();
+            });
+          }
+        },
+      });
+    },
+    removeAll() {
+      if (this.removingAll) return;
+      Vue.$confirm({
+        title: 'Delete All Results',
+        message: 'Do you realy want to delete all results?',
+        button: {
+          yes: 'YES',
+          no: 'NO',
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: (confirm) => {
+          if (confirm) {
+            this.removingAll = true;
+            Vue.axios.post('/api/delete-profile-results', { id: this.watchedProfile.id }).then(() => {
+              this.setResults();
+            });
+          }
+        },
       });
     },
     setResults() {
