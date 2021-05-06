@@ -9,13 +9,13 @@
   >
     <Keypress
       key-event="keyup"
-      :key-code="32"
-      :modifiers="['ctrlKey', 'shiftKey']"
+      :key-code="76"
+      :modifiers="['altKey', 'shiftKey']"
       @success="handleCtrlShiftSpaceKeypress()"
     />
     <v-row justify="center">
       <v-layout column justify-center align-center class="primaryLight--text text-caption">
-        <span> PRESS CTRL + SHIFT + SPACE </span>
+        <span> PRESS ALT + SHIFT + L </span>
         <span> TO LOAD NEXT TEST </span>
       </v-layout>
       <v-icon x-large class="ml-4" color="creamy">mdi-arrow-right-bold-box</v-icon>

@@ -42,6 +42,7 @@ export default {
       if (typed.length !== 0 && typed.length >= this.signs.length) {
         this.signsTimeFlags = this.timeFlags;
         this.endTest();
+        this.$refs.userInput.blur();
       }
     },
     isTestActivated: function (isTestActivated) {
