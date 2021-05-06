@@ -2,7 +2,7 @@
   <v-container class="words-typing-speed pt-12" v-if="wordsStatistics.length">
     <statistic-sorter @sorted="assignSorted" :data="watchedProfile.words_statistics"></statistic-sorter>
     <v-row>
-      <v-col class="my-2" cols="3" v-for="word in wordsStatistics" :key="word.name">
+      <v-col class="my-2" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
           <word-typing-speed :word="word" :bestWpm="bestWpm"></word-typing-speed>
         </v-row>
