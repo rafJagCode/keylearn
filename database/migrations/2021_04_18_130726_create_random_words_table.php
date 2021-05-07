@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWordTypingTimesTable extends Migration
+class CreateRandomWordsTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,16 +13,9 @@ class CreateWordTypingTimesTable extends Migration
    */
   public function up()
   {
-    Schema::create('word_typing_times', function (Blueprint $table) {
+    Schema::create('random_words', function (Blueprint $table) {
       $table->id();
-      $table->timestamps();
       $table->string('word');
-      $table->double('avg_time_per_key');
-      $table->integer('errors');
-      $table
-        ->foreignId('test_id')
-        ->constrained()
-        ->onDelete('cascade');
     });
   }
 
@@ -33,6 +26,6 @@ class CreateWordTypingTimesTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('word_typing_times');
+    Schema::dropIfExists('random_words');
   }
 }

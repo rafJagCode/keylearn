@@ -40,11 +40,11 @@ export default {
   },
   methods: {
     getCalculatedSignsTypingTimes() {
-      const length = Object.keys(this.signsTimeFlags).length;
+      let times = this.signsTimeFlags.map(this.textToSeconds);
       let signsTypingTimes = [];
-      signsTypingTimes.push(this.textToSeconds(this.signsTimeFlags[0]));
-      for (let i = 1; i < length; i++) {
-        let time = this.textToSeconds(this.signsTimeFlags[i]) - this.textToSeconds(this.signsTimeFlags[i - 1]);
+      signsTypingTimes.push(times[0]);
+      for (let i = 1; i < times.length; i++) {
+        let time = times[i] - times[i - 1];
         signsTypingTimes.push(time);
       }
       return signsTypingTimes;
@@ -64,48 +64,33 @@ export default {
         let correctness = !this.errorsPositions.includes(index);
         return { ...object, correct: correctness };
       });
-      withoutErrors.shift();
       return withoutErrors;
     },
-    getPositionsOfWordsWithErrors() {
-      let positions = [];
-      let position = 0;
-      for (let i = 0; i < this.signs.length; i++) {
-        if (this.errorsPositions.includes(i) && !positions.includes(position)) positions.push(position);
-        if (this.signs[i] === ' ' || this.signs[i] === '\n') position++;
-      }
-      return positions;
-    },
-    getCalculatedWordsTypingTimes() {
-      let calculatedWordsTypingTimes = [];
-      let signs = this.signs;
-      let times = this.getCalculatedSignsTypingTimes();
+    getWordsStatistics() {
+      let chars = this.getCharsTimesAndCorrectness();
+      let wordsStatisitcs = [];
       let word = '';
       let time = 0;
-      for (let i = 0; i < signs.length; i++) {
-        if (signs[i] !== ' ' && signs[i] !== '\n') {
-          word += signs[i];
-          time += times[i];
+      let errors = 0;
+      chars.forEach((object) => {
+        if (object.char !== ' ' && object.char !== '\n') {
+          word += object.char;
+          time += object.time;
+          errors += object.correct ? 0 : 1;
         } else {
-          calculatedWordsTypingTimes.push({
+          wordsStatisitcs.push({
             word: word,
-            time: time / word.length,
+            avgTimePerKey: time / word.length,
+            errors: errors,
           });
           word = '';
           time = 0;
+          errors = 0;
         }
-      }
-      return calculatedWordsTypingTimes;
-    },
-    getErrorsFilteredWordsTypingTimes() {
-      let errorsPositions = this.getPositionsOfWordsWithErrors();
-      let wordTypingTimes = this.getCalculatedWordsTypingTimes();
-      let filtered = wordTypingTimes.filter((value, index) => {
-        return !errorsPositions.includes(index) && index !== 0;
       });
-      return filtered;
+      return wordsStatisitcs;
     },
-    textToSeconds(text) {
+    textToSeconds: (text) => {
       let textDivided = text.split(':');
       let seconds = parseFloat(textDivided[0]) * 3600 + parseFloat(textDivided[1]) * 60 + parseFloat(textDivided[2]);
       return seconds;
@@ -124,16 +109,14 @@ export default {
       let seconds = this.textToSeconds(time);
       let minutes = seconds / 60;
       let testLength = this.signs.length;
-      let cpmGross = testLength / minutes;
-      let wpmGross = cpmGross / 5;
-      let wpmNet = wpmGross - uncorrectedErrors / minutes;
+      let wpmNet = (testLength / 5 - uncorrectedErrors) / minutes;
       let allErrors = this.errorCounter;
       this.testResults.time = time;
       this.testResults.testLength = testLength;
       this.testResults.wpm = Math.round(wpmNet);
       this.testResults.uncorrectedErrors = uncorrectedErrors;
       this.testResults.allErrors = allErrors;
-      this.testResults.accuracy = Math.round(((testLength - uncorrectedErrors) / testLength) * 100);
+      this.testResults.accuracy = Math.round(((testLength - allErrors) / testLength) * 100);
 
       //score
       let wpmWeight = 100;
@@ -144,7 +127,7 @@ export default {
           (wpmWeight + lenghtWeight + errorsWeight),
       );
       //Chars and words typing times
-      this.testResults.wordsTypingTimes = this.getErrorsFilteredWordsTypingTimes();
+      this.testResults.wordsTypingTimes = this.getWordsStatistics();
       this.testResults.charsStatistics = this.getCharsTimesAndCorrectness();
     },
   },

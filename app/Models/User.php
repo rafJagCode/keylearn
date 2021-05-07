@@ -42,4 +42,8 @@ class User extends Authenticatable
   {
     return $this->belongsTo(Profile::class, 'selected_profile_id');
   }
+
+  public function getGeneralStatistics()
+  {
+  }
 }

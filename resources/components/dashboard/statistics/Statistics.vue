@@ -1,6 +1,6 @@
 <template>
   <div class="statistics">
-    <v-card>
+    <v-card background-color="transparent">
       <v-toolbar class="tool" flat color="primaryLight" dark>
         <v-toolbar-title> Statistics </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -8,7 +8,7 @@
           <profile-list class="ma-2"></profile-list>
         </div>
       </v-toolbar>
-      <v-tabs vertical color="primaryLight">
+      <v-tabs class="statistics__window" vertical color="primaryLight" background-color="transparent">
         <v-tab>
           <v-icon left> mdi-history </v-icon>
           Tests history
@@ -80,5 +80,13 @@ export default {
   top: 0px;
   right: 0;
   width: 400px;
+}
+.statistics__window {
+  background: #a8e2f9;
+  background: -webkit-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: -moz-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: -o-linear-gradient(top left, #a8e2f9 0%, #d3f0fb 100%);
+  background: linear-gradient(to bottom right, #a8e2f9 0%, #d3f0fb 100%);
+  min-height: calc(100vh - 80px);
 }
 </style>

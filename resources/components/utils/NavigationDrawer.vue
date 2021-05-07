@@ -57,6 +57,11 @@ export default {
           icon: 'mdi-home-outline',
           text: 'Home',
         },
+        dashboard: {
+          link: 'dashboard',
+          icon: 'mdi-monitor-dashboard',
+          text: 'Dashboard',
+        },
         statistics: {
           link: 'statistics',
           icon: 'mdi-chart-line',
@@ -79,7 +84,12 @@ export default {
     items() {
       let items = [];
       if (this.isUserAuthenticated) {
-        items = [this.availableItems.home, this.availableItems.profiles, this.availableItems.statistics];
+        items = [
+          this.availableItems.home,
+          this.availableItems.dashboard,
+          this.availableItems.profiles,
+          this.availableItems.statistics,
+        ];
       }
       if (!this.isUserAuthenticated) {
         items = [this.availableItems.login, this.availableItems.home];

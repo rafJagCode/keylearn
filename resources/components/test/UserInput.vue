@@ -16,21 +16,41 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { Howl, Howler } from 'howler';
 export default {
+  data() {
+    return {
+      correctSound: new Howl({
+        src: [require('@/assets/sound/correct-click.mp3')],
+      }),
+      incorrectSound: new Howl({
+        src: [require('@/assets/sound/incorrect-click.mp3')],
+      }),
+      timeFlags: null,
+    };
+  },
+  mounted() {
+    this.timeFlags = [...new Array(this.signs.length)];
+  },
   watch: {
     typed: function (typed) {
-      if (typed.length !== 0)
-        this.signsTimeFlags = {
-          ...this.signsTimeFlags,
-          [typed.length - 1]: this.stopwatchTime,
-        };
+      if (typed.length !== 0) this.timeFlags[typed.length - 1] = this.stopwatchTime;
+      // this.signsTimeFlags = {
+      //   ...this.signsTimeFlags,
+      //   [typed.length - 1]: this.stopwatchTime,
+      // };
       if (typed.length !== 0 && typed.length >= this.signs.length) {
+        this.signsTimeFlags = this.timeFlags;
         this.endTest();
+        this.$refs.userInput.blur();
       }
     },
     isTestActivated: function (isTestActivated) {
       if (isTestActivated) this.$refs.userInput.focus();
       if (!isTestActivated) this.$refs.userInput.blur();
+    },
+    signs: function (signs) {
+      this.timeFlags = [...new Array(this.signs.length)];
     },
   },
   computed: {
@@ -92,14 +112,12 @@ export default {
       if (this.beforeKeyPress.length + 1 > this.typed.length) return true;
       return false;
     },
-    //Tu skończyłem prace z wykrywaniem błędów w czasie pisania
     checkInput() {
       if (this.wasBackspaceClicked()) {
         this.playCorrectSound();
         this.beforeKeyPress = this.typed;
         return;
       }
-      //check
       if (this.typed.slice(-1) !== this.signs[this.typed.length - 1]) {
         this.playIncorrectSound();
         this.$store.dispatch('incrementErrorCounter');
@@ -111,10 +129,10 @@ export default {
       this.beforeKeyPress = this.typed;
     },
     playCorrectSound() {
-      new Audio(require('@/assets/sound/correct-click.mp3')).play();
+      this.correctSound.play();
     },
     playIncorrectSound() {
-      new Audio(require('@/assets/sound/incorrect-click.mp3')).play();
+      this.incorrectSound.play();
     },
   },
 };

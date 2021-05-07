@@ -2,7 +2,7 @@
   <v-app id="test" color="primary">
     <navigation-drawer></navigation-drawer>
     <v-main>
-      <v-container style="width: 800px">
+      <v-container style="width: 800px; height: 100%">
         <user-input @typingStarted="typingStarted()"></user-input>
         <stopwatch ref="stopwatch" class="mt-1"></stopwatch>
         <test-activator></test-activator>
@@ -29,7 +29,7 @@ import TestActivator from '@/components/test/TestActivator';
 import { mapGetters } from 'vuex';
 export default {
   computed: {
-    ...mapGetters(['isTestRunning', 'isTestActivated', 'text', 'errorWhileLoading']),
+    ...mapGetters(['isTestRunning', 'isTestActivated', 'text', 'errorWhileLoading', 'user']),
   },
   methods: {
     startClock() {
@@ -48,7 +48,7 @@ export default {
       this.$store.dispatch('updateErrorWhileLoadingStatus', false);
       this.$store.dispatch('updateTestLoadingStatus', true);
       Vue.axios
-        .post('api/new-test')
+        .post('api/new-test', { user: this.user })
         .then((res) => {
           this.$store.dispatch('updateText', res.data);
           this.$store.dispatch('updateTestLoadingStatus', false);

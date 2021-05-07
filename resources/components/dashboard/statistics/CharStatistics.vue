@@ -1,8 +1,11 @@
 <template>
   <v-card class="test-results pa-2" width="250px" height="250px">
+    <v-badge class="sample-badge" color="primaryLight">
+      <span slot="badge">Samples: {{ charStatistics.samples }}</span>
+    </v-badge>
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="font-weight-black purple--text display-3">
+        <v-card-title class="font-weight-black purple--text display-2">
           <span class="pa-2">{{ charStatistics.char }}</span>
         </v-card-title>
       </v-row>
@@ -15,11 +18,11 @@
           </v-col>
           <v-col cols="auto">
             <v-progress-circular :size="80" :width="8" :value="percentSpeed" color="purple" class="text-caption">
-              {{ charStatistics.avgWpm }}WPM
+              {{ avgSpeed }}WPM
             </v-progress-circular>
           </v-col>
         </v-row>
-        <v-row class="text-subtitle-2 font-weight-black">
+        <v-row class="text-subtitle-2 font-weight-black mb-2">
           <v-col cols="auto">Accuracy</v-col>
           <v-col cols="auto">Average speed</v-col>
         </v-row>
@@ -31,18 +34,37 @@
 export default {
   props: {
     charStatistics: null,
-    bestSpeed: null,
+    bestAvgWpm: null,
   },
   computed: {
+    avgSpeed() {
+      return Math.round(this.charStatistics.avg_wpm);
+    },
     percentCorrect() {
-      let all = this.charStatistics.all;
-      let incorrect = this.charStatistics.incorrect;
-      return Math.round(((all - incorrect) / all) * 100);
+      return Math.round(this.charStatistics.accuracy);
     },
     percentSpeed() {
-      let avgWpm = this.charStatistics.avgWpm;
-      return Math.round((avgWpm / this.bestSpeed) * 100);
+      let avg_wpm = this.charStatistics.avg_wpm;
+      return Math.round((this.bestAvgWpm / avg_wpm) * 100);
     },
   },
 };
 </script>
+<style scoped>
+.samples-badge {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+.test-results {
+  background-color: transparent;
+}
+.test-results::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
+}
+</style>

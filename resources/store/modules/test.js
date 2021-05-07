@@ -9,7 +9,7 @@ const INITIAL_STATE = () => {
     testLoading: false,
     errorWhileLoading: false,
     errorCounter: 0,
-    signsTimeFlags: {},
+    signsTimeFlags: null,
     errorsPositions: [],
   };
 };

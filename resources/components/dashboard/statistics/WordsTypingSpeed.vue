@@ -1,74 +1,49 @@
 <template>
-  <v-container class="words-typing-speed">
+  <v-container class="words-typing-speed pt-12" v-if="wordsStatistics.length">
+    <statistic-sorter @sorted="assignSorted" :data="watchedProfile.words_statistics"></statistic-sorter>
     <v-row>
-      <v-col class="my-2" cols="3" v-for="word in sortedWords" :key="word.name">
+      <v-col class="my-2" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
-          <word-typing-speed :word="word" :bestResult="bestResult"></word-typing-speed>
+          <word-typing-speed :word="word" :bestWpm="bestWpm"></word-typing-speed>
         </v-row>
       </v-col>
     </v-row>
   </v-container>
+  <no-data v-else></no-data>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 import WordTypingSpeed from '@/components/dashboard/statistics/WordTypingSpeed';
+import StatisticSorter from '@/components/dashboard/statistics/StatisticSorter';
+import NoData from '@/components/utils/NoData';
 export default {
+  data() {
+    return {
+      sorted: null,
+    };
+  },
   components: {
     WordTypingSpeed,
+    NoData,
+    StatisticSorter,
   },
   computed: {
-    ...mapGetters(['tests']),
-    words() {
-      let avgTimes = this.getAvgWordsTypingTimes();
-      let words = [];
-      Object.keys(avgTimes).forEach((word) => {
-        words.push({ name: word, time: avgTimes[word] });
-      });
-      return words;
+    ...mapGetters(['watchedProfile']),
+    wordsStatistics() {
+      return this.sorted === null ? this.watchedProfile.words_statistics : this.sorted;
+      //   return this.watchedProfile.words_statistics;
     },
-    bestResult() {
-      let best = this.words[0].time;
-      this.words.forEach((word) => {
-        if (word.time < best) best = word.time;
+    bestWpm() {
+      let best = this.wordsStatistics[0].avg_wpm;
+      this.wordsStatistics.forEach((word) => {
+        if (word.avg_wpm > best) best = word.avg_wpm;
       });
       return best;
     },
-    sortedWords() {
-      let words = this.words;
-      words.sort((firstWord, secondWord) => secondWord.time - firstWord.time);
-      return words;
-    },
   },
   methods: {
-    getWordsTypingTimes() {
-      return [...this.tests]
-        .map((test) => {
-          return test.words_typing_times;
-        })
-        .flat(Infinity);
-    },
-    getSegregatedWordsTypingTimes() {
-      let times = this.getWordsTypingTimes();
-      let segregated = Object.create(null);
-      times.forEach((word) => {
-        if (segregated[word.word]) {
-          segregated[word.word] = [segregated[word.word], word.time].flat(Infinity);
-        } else {
-          segregated[word.word] = word.time;
-        }
-      });
-      return segregated;
-    },
-    getAvgWordsTypingTimes() {
-      let times = this.getSegregatedWordsTypingTimes();
-      Object.keys(times).forEach((word) => {
-        if (Array.isArray(times[word]))
-          times[word] = times[word].reduce((sum, time) => sum + time) / times[word].length;
-      });
-      return times;
-    },
-    showWordsTypingSpeed() {
-      console.log(this.words);
+    assignSorted(sorted) {
+      this.sorted = sorted;
     },
   },
 };

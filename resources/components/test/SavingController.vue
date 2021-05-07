@@ -9,8 +9,8 @@
   >
     <Keypress
       key-event="keyup"
-      :key-code="83"
-      :modifiers="['ctrlKey', 'shiftKey']"
+      :key-code="75"
+      :modifiers="['altKey', 'shiftKey']"
       @success="handleCtrlShiftSKeypress()"
     />
     <v-row justify="center">
@@ -76,7 +76,7 @@ export default {
       return 'primaryRed';
     },
     text1() {
-      if (this.isUserAuthenticated) return 'Press CTRL + SHIFT + S';
+      if (this.isUserAuthenticated) return 'Press ALT + SHIFT + K';
       return 'LOG IN';
     },
     text2() {
