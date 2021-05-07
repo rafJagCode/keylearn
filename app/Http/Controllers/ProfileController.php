@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ProfileNameDuplicated;
+use App\Exceptions\NoNameSelected;
+use App\Exceptions\NoWordsSelected;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Profile;
@@ -21,6 +23,14 @@ class ProfileController extends Controller
         ->exists()
     ) {
       throw new ProfileNameDuplicated('Profile with that name already exists');
+    }
+    if (!strlen($request->name)) {
+      throw new NoNameSelected('You must choose a name');
+    }
+    if (!$request->useWordsFromApi) {
+      if (!count($request->words)) {
+        throw new NoWordsSelected('You must choose at least on word');
+      }
     }
     $profile = new Profile([
       'name' => $request->name,
@@ -47,6 +57,14 @@ class ProfileController extends Controller
         ->exists()
     ) {
       throw new ProfileNameDuplicated('Profile with that name already exists');
+    }
+    if (!strlen($request->name)) {
+      throw new NoNameSelected('You must choose a name');
+    }
+    if (!$request->useWordsFromApi) {
+      if (!count($request->words)) {
+        throw new NoWordsSelected('You must choose at least on word');
+      }
     }
     $profile = Profile::findOrFail($request->id);
     $profile->update([

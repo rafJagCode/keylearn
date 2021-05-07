@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center class="test-displayer">
+  <v-row align="center" class="test-displayer mt-12 mb-16">
     <test-loading-error-alert v-if="errorWhileLoading"></test-loading-error-alert>
     <v-container v-if="!errorWhileLoading">
       <v-row align="center" justify="center">
@@ -18,7 +18,7 @@
         </v-row>
       </v-layout>
     </v-container>
-  </v-layout>
+  </v-row>
 </template>
 <script>
 import TestLoadingErrorAlert from '@/components/test/TestLoadingErrorAlert';
@@ -107,6 +107,6 @@ export default {
 </script>
 <style scoped>
 .test-displayer {
-  height: 200px;
+  height: fit-content;
 }
 </style>

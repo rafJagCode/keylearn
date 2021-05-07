@@ -13,11 +13,11 @@
     <v-slider
       v-model="testLength"
       thumb-label="always"
-      step="50"
+      step="5"
       ticks
-      min="50"
-      max="500"
-      label="Test Length"
+      min="10"
+      max="50"
+      label="Test Length(in words)"
       class="pt-6"
     ></v-slider>
     <v-radio-group v-model="wordSelection">
@@ -44,7 +44,9 @@
           <template v-slot:default="{ item }">
             <v-list-item :key="item">
               <v-list-item-content>
-                <v-chip outlined label close @click:close="removeWord(item)">{{ item }}</v-chip>
+                <v-chip outlined label
+                  ><v-icon color="error" @click="removeWord(item)">mdi-delete-forever</v-icon>{{ item }}</v-chip
+                >
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -54,7 +56,7 @@
     <v-row class="my-3">
       <v-spacer></v-spacer>
       <v-progress-circular v-if="updating" indeterminate color="primaryLight" class="mr-2"></v-progress-circular>
-      <v-btn @click="updateProfile()">Update Profile</v-btn>
+      <v-btn :disabled="watchedProfile.name === 'Starting Profile'" @click="updateProfile()">Update Profile</v-btn>
     </v-row>
   </v-container>
 </template>
@@ -151,6 +153,18 @@ export default {
   grid-row-start: 1;
   grid-row-end: 2;
   padding: 10px;
+  background-color: transparent;
+  position: relative;
+  z-index: 0;
+}
+.create-profile__user-words::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
+  position: absolute;
+  z-index: -1;
 }
 .create-profile__textarea {
   height: 100%;
@@ -177,5 +191,17 @@ export default {
   height: 250px;
   grid-column-start: 3;
   grid-column-end: 4;
+  background-color: transparent;
+  z-index: 0;
+  position: relative;
+}
+.create-profile__virtual-scroll::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
 }
 </style>

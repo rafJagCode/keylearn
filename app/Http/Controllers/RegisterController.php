@@ -29,7 +29,7 @@ class RegisterController extends Controller
         'name' => 'Starting Profile',
         'auto_difficulty' => false,
         'use_words_from_api' => true,
-        'test_length' => 50,
+        'test_length' => 20,
       ]);
       $user->profiles()->save($startingProfile);
       $user

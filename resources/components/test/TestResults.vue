@@ -40,11 +40,11 @@ export default {
   },
   methods: {
     getCalculatedSignsTypingTimes() {
-      const length = Object.keys(this.signsTimeFlags).length;
+      let times = this.signsTimeFlags.map(this.textToSeconds);
       let signsTypingTimes = [];
-      signsTypingTimes.push(this.textToSeconds(this.signsTimeFlags[0]));
-      for (let i = 1; i < length; i++) {
-        let time = this.textToSeconds(this.signsTimeFlags[i]) - this.textToSeconds(this.signsTimeFlags[i - 1]);
+      signsTypingTimes.push(times[0]);
+      for (let i = 1; i < times.length; i++) {
+        let time = times[i] - times[i - 1];
         signsTypingTimes.push(time);
       }
       return signsTypingTimes;
@@ -64,7 +64,6 @@ export default {
         let correctness = !this.errorsPositions.includes(index);
         return { ...object, correct: correctness };
       });
-      withoutErrors.shift();
       return withoutErrors;
     },
     getWordsStatistics() {
@@ -89,10 +88,9 @@ export default {
           errors = 0;
         }
       });
-      wordsStatisitcs.shift();
       return wordsStatisitcs;
     },
-    textToSeconds(text) {
+    textToSeconds: (text) => {
       let textDivided = text.split(':');
       let seconds = parseFloat(textDivided[0]) * 3600 + parseFloat(textDivided[1]) * 60 + parseFloat(textDivided[2]);
       return seconds;
@@ -111,9 +109,7 @@ export default {
       let seconds = this.textToSeconds(time);
       let minutes = seconds / 60;
       let testLength = this.signs.length;
-      let cpmGross = testLength / minutes;
-      let wpmGross = cpmGross / 5;
-      let wpmNet = wpmGross - uncorrectedErrors / minutes;
+      let wpmNet = (testLength / 5 - uncorrectedErrors) / minutes;
       let allErrors = this.errorCounter;
       this.testResults.time = time;
       this.testResults.testLength = testLength;

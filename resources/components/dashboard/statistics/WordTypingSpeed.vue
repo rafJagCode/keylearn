@@ -1,8 +1,11 @@
 <template>
   <v-card class="test-results pa-2" width="250px" height="250px">
+    <v-badge class="sample-badge" color="primaryLight">
+      <span slot="badge">Samples: {{ word.samples }}</span>
+    </v-badge>
     <v-layout column align-center fill-height justify-space-around>
       <v-row>
-        <v-card-title class="font-weight-black purple--text display-2">
+        <v-card-title class="font-weight-black purple--text text-subtitle-2">
           <span class="pa-2">{{ word.word }}</span>
         </v-card-title>
       </v-row>
@@ -19,7 +22,7 @@
             </v-progress-circular>
           </v-col>
         </v-row>
-        <v-row class="text-subtitle-2 font-weight-black">
+        <v-row class="text-subtitle-2 font-weight-black mb-2">
           <v-col cols="auto">Accuracy</v-col>
           <v-col cols="auto">Average speed</v-col>
         </v-row>
@@ -31,22 +34,37 @@
 export default {
   props: {
     word: null,
-    bestTime: null,
+    bestWpm: null,
   },
   computed: {
     avgSpeed() {
-      return Math.round(60 / this.word.avg_time_per_key / 5);
+      return Math.round(this.word.avg_wpm);
     },
     percentSpeed() {
-      let percentSpeed = (this.bestTime / this.word.avg_time_per_key) * 100;
+      let percentSpeed = (this.bestWpm / this.word.avg_wpm) * 100;
       return percentSpeed;
     },
     percentAccuracy() {
-      let allChars = this.word.word.length * this.word.samples;
-      let correct = allChars - this.word.errors;
-      let percentAccuracy = (correct / allChars) * 100;
-      return percentAccuracy;
+      return Math.round(this.word.accuracy);
     },
   },
 };
 </script>
+<style scoped>
+.samples-badge {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+.test-results {
+  background-color: transparent;
+}
+.test-results::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(40px);
+}
+</style>

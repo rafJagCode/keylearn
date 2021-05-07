@@ -8,5 +8,7 @@
   "bracketSpacing": true,
   "jsxBracketSameLine": false,
   "semi": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "formatOnSave": true,
+  "formatOnPaste": true
 }

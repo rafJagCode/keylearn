@@ -31,6 +31,9 @@ axios.interceptors.response.use(
           if (confirm) {
             Route.push('/login');
           }
+		  else{
+			  Route.push('/login');
+		  }
         },
       });
       return Promise.reject(new Error('CSRF token mismatch'));

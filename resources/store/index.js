@@ -6,6 +6,7 @@ import auth from './modules/auth';
 import statistics from './modules/statistics';
 import stopwatch from './modules/stopwatch';
 import profiles from './modules/profiles';
+import generalStatistics from "./modules/generalStatistics";
 
 Vue.use(Vuex);
 
@@ -17,5 +18,6 @@ export default new Vuex.Store({
     statistics,
     stopwatch,
     profiles,
+	generalStatistics,
   },
 });

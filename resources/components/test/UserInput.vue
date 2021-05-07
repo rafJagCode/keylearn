@@ -26,22 +26,31 @@ export default {
       incorrectSound: new Howl({
         src: [require('@/assets/sound/incorrect-click.mp3')],
       }),
+      timeFlags: null,
     };
+  },
+  mounted() {
+    this.timeFlags = [...new Array(this.signs.length)];
   },
   watch: {
     typed: function (typed) {
-      if (typed.length !== 0)
-        this.signsTimeFlags = {
-          ...this.signsTimeFlags,
-          [typed.length - 1]: this.stopwatchTime,
-        };
+      if (typed.length !== 0) this.timeFlags[typed.length - 1] = this.stopwatchTime;
+      // this.signsTimeFlags = {
+      //   ...this.signsTimeFlags,
+      //   [typed.length - 1]: this.stopwatchTime,
+      // };
       if (typed.length !== 0 && typed.length >= this.signs.length) {
+        this.signsTimeFlags = this.timeFlags;
         this.endTest();
+        this.$refs.userInput.blur();
       }
     },
     isTestActivated: function (isTestActivated) {
       if (isTestActivated) this.$refs.userInput.focus();
       if (!isTestActivated) this.$refs.userInput.blur();
+    },
+    signs: function (signs) {
+      this.timeFlags = [...new Array(this.signs.length)];
     },
   },
   computed: {

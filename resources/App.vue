@@ -31,4 +31,7 @@
 #scrollable {
   scrollbar-width: thin;
 }
+.v-window.v-item-group.theme--light.v-tabs-items {
+  background-color: transparent;
+}
 </style>
