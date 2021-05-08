@@ -12,12 +12,13 @@
         ></v-checkbox>
       </v-row>
     </v-container>
-    <v-row>
-      <v-col class="my-2" v-for="test in tests" :key="test.id">
+    <v-row justify="start">
+      <v-col class="tests-history__result-col ma-2" v-for="test in tests" :key="test.id">
         <v-row justify="center">
           <result :test="test" :selectedOptions="selected" @removeTestResults="removeTestResults"></result>
         </v-row>
       </v-col>
+      <v-spacer></v-spacer>
     </v-row>
   </v-container>
   <no-data v-else></no-data>
@@ -126,3 +127,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.tests-history__result-col {
+  flex-grow: 0;
+}
+</style>
