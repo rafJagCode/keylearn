@@ -1,12 +1,13 @@
 <template>
   <v-container class="words-typing-speed pt-12" v-if="wordsStatistics.length">
     <statistic-sorter @sorted="assignSorted" :data="watchedProfile.words_statistics"></statistic-sorter>
-    <v-row>
-      <v-col class="my-2" v-for="word in wordsStatistics" :key="word.name">
+    <v-row justify="start">
+      <v-col class="words-typing-speed__result-col ma-2" v-for="word in wordsStatistics" :key="word.name">
         <v-row justify="center">
           <word-typing-speed :word="word" :bestWpm="bestWpm"></word-typing-speed>
         </v-row>
       </v-col>
+      <v-spacer></v-spacer>
     </v-row>
   </v-container>
   <no-data v-else></no-data>
@@ -48,3 +49,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.words-typing-speed__result-col {
+  flex-grow: 0;
+}
+</style>
