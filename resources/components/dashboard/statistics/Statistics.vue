@@ -18,11 +18,11 @@
           Tests Analysis
         </v-tab>
         <v-tab>
-          <v-icon left> mdi-clock-fast </v-icon>
-          Words Speed
+          <v-icon left> mdi-file-word-box-outline </v-icon>
+          Words Statistics
         </v-tab>
         <v-tab>
-          <v-icon left> mdi-chart-bar </v-icon>
+          <v-icon left> mdi-alpha-a-box-outline </v-icon>
           Chars Statistics
         </v-tab>
 
