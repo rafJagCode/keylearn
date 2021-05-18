@@ -13,7 +13,7 @@ const actions = {
     let profiles = res.data;
     commit('SET_PROFILES', profiles);
     let selectedProfile = profiles.find((obj) => obj.id === rootGetters.user.selected_profile_id);
-    commit('SET_WATCHED_PROFILE', selectedProfile);
+	if(!state.watchedProfile) commit('SET_WATCHED_PROFILE', selectedProfile);
     commit('SET_SELECTED_PROFILE', selectedProfile);
   },
   setWatchedProfile({ commit }, watchedProfile) {

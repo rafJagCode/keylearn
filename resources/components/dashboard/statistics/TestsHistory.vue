@@ -62,7 +62,6 @@ export default {
       ],
       selected: ['time', 'wpm', 'score', 'allErrors', 'uncorrectedErrors', 'accuracy', 'testLength'],
       removing: false,
-      removingAll: false,
     };
   },
   computed: {
@@ -85,15 +84,16 @@ export default {
         callback: (confirm) => {
           if (confirm) {
             this.removing = true;
-            Vue.axios.post('/api/delete-test-results', { id: testId }).then(() => {
-              this.setResults();
+            Vue.axios.post('/api/delete-test-results', { id: testId }).then(async () => {
+              await this.setResults();
+              this.removing = false;
             });
           }
         },
       });
     },
     removeAll() {
-      if (this.removingAll) return;
+      if (this.removing) return;
       Vue.$confirm({
         title: 'Delete All Results',
         message: 'Do you realy want to delete all results?',
@@ -107,18 +107,19 @@ export default {
          */
         callback: (confirm) => {
           if (confirm) {
-            this.removingAll = true;
-            Vue.axios.post('/api/delete-profile-results', { id: this.watchedProfile.id }).then(() => {
-              this.setResults();
+            this.removing = true;
+            Vue.axios.post('/api/delete-profile-results', { id: this.watchedProfile.id }).then(async () => {
+              await this.setResults();
+              this.removing = false;
             });
           }
         },
       });
     },
-    setResults() {
-      this.$store.dispatch('setProfiles');
-      this.$store.dispatch('setGeneralStatistics');
-      this.$store.dispatch('setResults');
+    async setResults() {
+      await this.$store.dispatch('setProfiles');
+      await this.$store.dispatch('setGeneralStatistics');
+      await this.$store.dispatch('setResults');
     },
   },
   components: {

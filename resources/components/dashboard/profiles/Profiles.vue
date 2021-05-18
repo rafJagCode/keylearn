@@ -7,7 +7,7 @@
       <v-tabs class="profiles__window" vertical color="primaryLight" background-color="transparent">
         <v-tab>
           <v-icon left> mdi-folder-account-outline </v-icon>
-          Profile Menager
+          Profile Manager
         </v-tab>
         <v-tab>
           <v-icon left>mdi-folder-plus-outline</v-icon>
