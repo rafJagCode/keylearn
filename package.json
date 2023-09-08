@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
+    "caniuse-lite": "^1.0.30001529",
     "chart.js": "^2.9.4",
     "howler": "^2.2.1",
     "import": "0.0.6",
