@@ -68,7 +68,7 @@ router.beforeEach((to, from, next) => {
   } else {
     Vue.axios
       .get('/api/authenticated')
-      .then(() => {
+      .then((res) => {
         next();
       })
       .catch((e) => {
@@ -85,9 +85,8 @@ router.beforeEach((to, from, next) => {
           callback: (confirm) => {
             if (confirm) {
               next({ name: 'login' });
-            }
-			else next({name: 'login'})
-			throw e;
+            } else next({ name: 'login' });
+            throw e;
           },
         });
       });
