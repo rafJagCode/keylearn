@@ -1,71 +1,101 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Keylearn - _increase your typing speed_
+---
+Keylearn is an web app designed to help you learn quick typing and to collect information about your progress towards achieving this goal.
+__Testing Credentials: `test@test.com` / `test123`__
+[__=> LINK TO LIVE VERSION <=__](toDo)
+---
+## Table of Contents
+* [General Informations](#general-informations)
+* [Technologies](#technologies)
+* [Usage](#usage)
+* [License](#license)
+---
+## General Informations
+Training with Keylearn consists of rewriting the displayed text as quickly as possible. Displayed text can be generated randomly from the base of english words or can be provided by the user. Each complated test is analyzed and obtained results are saved to the database.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and
-creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in
-many web projects, such as:
+- Account registration and login
+- Creating, editing and removing profiles
+- Collecting and displaying tests results
+- Displaying statistics about complated tests and typed words and letters
+- Auto difficulty adjustment for user provided texts based on results
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache)
-  storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
+## Technologies
+List of technologies used to build the app:
+__Database__
+- [mysql] - open-source relational database management system.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+__Backend:__
+- [laravel] - php web application framework.
 
-## Learning Laravel
+__Frontend:__
+- [vue] - progressive JavaScript Framework.
+- [vuetify] - Open Source UI Library with beautifully handcrafted Vue Components.
+- [vue-chartjs] -  wrapper for Chart.js in Vue.
+- [vue-keypress] - global keypress event handler component for Vue.js 2 applications.
+- [vue-router] - expressive, configurable and convenient routing for Vue.js.
+- [vuex] -  state management pattern + library for Vue.js applications. 
+- [vue-axios] - small wrapper for integrating axios to Vue.
+- [howler.js] - audio library for the modern web.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all
-modern web application frameworks, making it a breeze to get started with the framework.
+---
+## Usage
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video
-tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
-into our comprehensive video library.
+### Practice Typing
 
-## Laravel Sponsors
+![App Screenshot](./readme_images/keylearn_pracitce_typing.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
-becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+App generates text to type. User by pressing ENTER on keyboard can start the test. Time starts when user starts typing.
 
-### Premium Partners
+### Registration and login
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+![App Screenshot](./readme_images/keylearn_registration.png)
+![App Screenshot](./readme_images/keylearn_login.png)
 
-## Contributing
+To save practice results and statistics user needs to create account and login.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the
-[Laravel documentation](https://laravel.com/docs/contributions).
+### Dashboard
 
-## Code of Conduct
+When logged use have access to dashboard. Where he can see collected results and statistics.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the
-[Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- ##### General Statistics
 
-## Security Vulnerabilities
+![App Screenshot](./readme_images/keylearn_dashboard.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via
-[taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- ##### Tests History
 
+![App Screenshot](./readme_images/keylearn_tests_history.png)
+
+- ##### Words Statistics
+
+![App Screenshot](./readme_images/keylearn_words_statistics.png)
+
+### Managing Profiles
+
+User can create, update, remove profiles. Each profile can have different settings and collected data is separated for each profile. Currently used profile can be changed in any moment.
+
+![App Screenshot](./readme_images/keylearn_profile_manager.png)
+
+While creating profile user specifies test length and can choose if words should be generated randomly or if app should use words provided by user.
+
+![App Screenshot](./readme_images/keylearn_creating_profile.png)
+
+---
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
+
+[mysql]: <https://www.mysql.com>
+[laravel]: <https://laravel.com>
+[vue]: <https://vuejs.org>
+[vuetify]: <https://vuetifyjs.com>
+[vue-chartjs]: <https://vue-chartjs.org>
+[vue-keypress]: <https://www.npmjs.com/package/vue-keypress>
+[vue-router]: <https://router.vuejs.org>
+[vuex]: <https://vuex.vuejs.org>
+[vue-axios]: <https://www.npmjs.com/package/vue-axios>
+[howler.js]: <https://howlerjs.com>
