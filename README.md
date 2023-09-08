@@ -1,12 +1,15 @@
 # Keylearn - _increase your typing speed_
 ---
 Keylearn is an web app designed to help you learn quick typing and to collect information about your progress towards achieving this goal.
+
 __Testing Credentials: `test@test.com` / `test123`__
+
 [__=> LINK TO LIVE VERSION <=__](toDo)
 ---
 ## Table of Contents
 * [General Informations](#general-informations)
 * [Technologies](#technologies)
+* [Features](#features)
 * [Usage](#usage)
 * [License](#license)
 ---
@@ -53,8 +56,7 @@ App generates text to type. User by pressing ENTER on keyboard can start the tes
 
 ### Registration and login
 
-![App Screenshot](./readme_images/keylearn_registration.png)
-![App Screenshot](./readme_images/keylearn_login.png)
+![App Screenshot](./readme_images/keylearn_register.png)
 
 To save practice results and statistics user needs to create account and login.
 
@@ -68,7 +70,7 @@ When logged use have access to dashboard. Where he can see collected results and
 
 - ##### Tests History
 
-![App Screenshot](./readme_images/keylearn_tests_history.png)
+![App Screenshot](./readme_images/keylearn_test_history.png)
 
 - ##### Words Statistics
 
