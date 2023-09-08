@@ -106,6 +106,7 @@ export default {
 }
 
 #get-started {
+  width: 100vw;
   z-index: 0;
 }
 .get-started__text {
