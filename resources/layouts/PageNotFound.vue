@@ -12,8 +12,8 @@
             universe.</span
           >
           <span class="mt-6 central-text text-caption">
-            It is however possible that you have made a typing mistake, in that case clicking below will get you to a
-            place that will help you reduce the likelihood of that kind of events in the future.</span
+            It is however possible that you have made a typing mistake, in that case clicking below will get you to home
+            page.</span
           >
           <v-btn outlined text dark class="mt-4" @click="$router.push({ name: 'home' })">CLICK</v-btn>
         </v-layout>
