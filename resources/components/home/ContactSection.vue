@@ -19,10 +19,23 @@
                 <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
                 <v-textarea v-model="textArea" :rules="textAreaRules" label="Message" required />
-
-                <v-btn :disabled="!valid" color="primary" :dark="valid" rounded block class="mt-3">
-                  Send Message
-                </v-btn>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      :disabled="!valid"
+                      color="primary"
+                      :dark="valid"
+                      rounded
+                      block
+                      class="mt-3"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      Send Message
+                    </v-btn>
+                  </template>
+                  <span>The contact form is not currently supported. It is for illustrative purposes only.</span>
+                </v-tooltip>
               </v-form>
             </v-col>
           </v-row>
