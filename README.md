@@ -1,9 +1,9 @@
-# $\color{orange}{Keylearn}$ <font style='font-weight: 100; font-style: italic'>- increase your typing speed</font>
+# $\color{orange}{Keylearn}$ _- increase your typing speed_
 
 Keylearn is an web app designed to help you learn quick typing and to collect information about your progress towards
 achieving this goal.
 
-**<font style='color:lime'>TESTING CREDENTIALS: test<span>@</span>test.com \ test123</font>**
+`TESTING CREDENTIALS: test@test.com \ test123`
 
 ## [🔗 CLICK TO SEE IT LIVE](https://keylearn.rafaljagielski.pl)
 
