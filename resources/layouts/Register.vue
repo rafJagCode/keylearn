@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height class="register">
-    <v-layout row wrap align-center>
-      <v-flex xs12 sm6 offset-sm3>
+    <v-layout row wrap align-center justify-center>
+      <v-flex xs12 sm6>
         <v-card elevation="5" outlined>
           <v-container class="register__label primary">
             <v-row align="center">
