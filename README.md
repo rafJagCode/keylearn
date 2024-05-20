@@ -62,14 +62,14 @@ Vuetify</a> - open source UI library with beautifully handcrafted Vue Components
 <a href="https://www.npmjs.com/package/vue-keypress"><img src="https://github.com/rafJagCode/tech_icons/blob/main/keypress.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
 Vue-keypress</a> - global keypress event handler component for Vue.js 2 applications.
 
-<a href="https://vue-chartjs.org">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/chart.png?raw=true" width="30" height="30" style="vertical-align:middle"/> Vue-chartjs</a> - wrapper for Chart.js in Vue.
+<a href="https://vue-chartjs.org"><img src="https://github.com/rafJagCode/tech_icons/blob/main/chart.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+Vue-chartjs</a> - wrapper for Chart.js in Vue.
 
-<a href="https://axios-http.com">
-<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/01135de0f10196248f5472ee79bb8a826a553b7f/axios.svg" width="30" height="30" style="vertical-align:middle"/> Axios</a> - promise-based HTTP Client for node.js and the browser.
+<a href="https://axios-http.com"><img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/01135de0f10196248f5472ee79bb8a826a553b7f/axios.svg" width="30" height="30" style="vertical-align:middle"/>
+Axios</a> - promise-based HTTP Client for node.js and the browser.
 
-<a href="https://howlerjs.com">
-<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/f7293832f26dd3ae3c3315f3dc28e1970df304c4/howler.svg" width="30" height="30" style="vertical-align:middle"/> Howlerjs</a> - audio library for the modern web.
+<a href="https://howlerjs.com"><img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/f7293832f26dd3ae3c3315f3dc28e1970df304c4/howler.svg" width="30" height="30" style="vertical-align:middle"/>
+Howlerjs</a> - audio library for the modern web.
 
 ## Usage
 
