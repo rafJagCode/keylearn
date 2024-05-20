@@ -1,24 +1,29 @@
-# $\color{orange}{Keylearn}$ _- increase your typing speed_
+# Keylearn _- increase your typing speed_
 
 Keylearn is an web app designed to help you learn quick typing and to collect information about your progress towards
 achieving this goal.
 
-`TESTING CREDENTIALS: test@test.com \ test123`
-
 ## [🔗 CLICK TO SEE IT LIVE](https://keylearn.rafaljagielski.pl)
 
-## $\color{orange}{Table\ of\ Contents}$
+## Table of Contents
 
-[⚓ General Informations](#general-informations)<br> [⚓ Technologies](#technologies)<br> [⚓ Features](#features)<br>
-[⚓ Usage](#usage)<br> [⚓ License](#license)
+[⚓General Informations](#general-informations)
 
-## $\color{orange}{General\ Informations}$
+[⚓Technologies](#technologies)
+
+[⚓Features](#features)
+
+[⚓Usage](#usage)
+
+[⚓License](#license)
+
+## General Informations
 
 Training with Keylearn consists of rewriting the displayed text as quickly as possible. Displayed text can be generated
 randomly from the base of english words or can be provided by the user. Each complated test is analyzed and then
 obtained results are saved to the database.
 
-## $\color{orange}{Features}$
+## Features
 
 - Account registration and login
 - Creating, editing and removing profiles
@@ -26,52 +31,88 @@ obtained results are saved to the database.
 - Displaying statistics about complated tests and typed words and letters
 - Auto difficulty adjustment for user provided texts based on results
 
-## $\color{orange}{Technologies}$
+## Technologies
 
 List of technologies used to build the app:
 
-**Database:**<br> 🔗 [mysql] - open-source relational database management system.<br>
+**Database:**
 
-**Backend:**<br> 🔗 [laravel] - php web application framework.
+<a href="https://twig.symfony.com">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/mysql.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+Mysql</a> - open-source relational database management system.
 
-**Frontend:**<br> 🔗 [vue] - progressive JavaScript Framework.<br> 🔗 [vuetify] - Open Source UI Library with
-beautifully handcrafted Vue Components.<br> 🔗 [vue-chartjs] - wrapper for Chart.js in Vue.<br> 🔗 [vue-keypress] -
-global keypress event handler component for Vue.js 2 applications.<br> 🔗 [vue-router] - expressive, configurable and
-convenient routing for Vue.js.<br> 🔗 [vuex] - state management pattern + library for Vue.js applications. <br> 🔗
-[vue-axios] - small wrapper for integrating axios to Vue.<br> 🔗 [howler.js] - audio library for the modern web.<br>
+**Backend:**
 
-## $\color{orange}{Usage}$
+<a href="https://laravel.com">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/laravel.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+Laravel</a> - web application framework with expressive, elegant syntax.
 
-### $\color{orange}{Practice\ Typing}$
+**Frontend:**
+
+<a href="https://vuejs.org">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/vue.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+Vue</a> - an approachable, performant and versatile framework for building web user interfaces.
+
+<a href="https://vuex.vuejs.org">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/vuex.png?raw=tru" width="30" height="30" style="vertical-align:middle"/>
+Vuex</a> - state management pattern + library for Vue.js applications.
+
+<a href="https://router.vuejs.org">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/vue-router.png?raw=tru" width="30" height="30" style="vertical-align:middle"/>
+Vue-router</a> - expressive, configurable and convenient routing for Vue.js.
+
+<a href="https://vuetifyjs.com">
+<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/289e0727706e12ff5296e4c0dd05cf5dbb4d62d2/vuetify.svg" width="30" height="30" style="vertical-align:middle"/>
+Vuetify</a> - open source UI library with beautifully handcrafted Vue Components.
+
+<a href="https://www.npmjs.com/package/vue-keypress">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/keypress.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+Vue-keypress</a> - global keypress event handler component for Vue.js 2 applications.
+
+<a href="https://vue-chartjs.org">
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/chart.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+Vue-chartjs</a> - wrapper for Chart.js in Vue.
+
+<a href="https://axios-http.com">
+<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/01135de0f10196248f5472ee79bb8a826a553b7f/axios.svg" width="30" height="30" style="vertical-align:middle"/>
+Axios</a> - promise-based HTTP Client for node.js and the browser.
+
+<a href="https://howlerjs.com">
+<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/f7293832f26dd3ae3c3315f3dc28e1970df304c4/howler.svg" width="30" height="30" style="vertical-align:middle"/>
+Howlerjs</a> - audio library for the modern web.
+
+## Usage
+
+### Practice Typing
 
 ![App Screenshot](./readme_images/keylearn_practice.png)
 
 App generates text to type. User by pressing ENTER on the keyboard can start the test. Time starts when user starts
 typing.
 
-### $\color{orange}{Registration\ and\ login}$
+### Registration and login
 
 ![App Screenshot](./readme_images/keylearn_register.png)
 
 To save practice results and statistics user has to create account and login.
 
-### $\color{orange}{Dashboard}$
+### Dashboard
 
 When logged user has access to dashboard, where he can see collected results and statistics.
 
-##### $\color{orange}{General\ Statistics}$
+##### General Statistics
 
 ![App Screenshot](./readme_images/keylearn_dashboard.png)
 
-##### $\color{orange}{Tests\ History}$
+##### Tests History
 
 ![App Screenshot](./readme_images/keylearn_test_history.png)
 
-##### $\color{orange}{Words\ Statistics}$
+##### Words Statistics
 
 ![App Screenshot](./readme_images/keylearn_words_statistics.png)
 
-### $\color{orange}{Managing\ Profiles}$
+### Managing Profiles
 
 User can create, update, remove profiles. Each profile can have different settings.Collected data is separated for each
 profile. Currently used profile can be changed in any moment.
@@ -83,7 +124,7 @@ should use words provided by user.
 
 ![App Screenshot](./readme_images/keylearn_creating_profile.png)
 
-## $\color{orange}{License}$
+## License
 
 MIT
 
