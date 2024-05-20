@@ -37,49 +37,39 @@ List of technologies used to build the app:
 
 **Database:**
 
-<a href="https://twig.symfony.com">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/mysql.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://www.mysql.com"><img src="https://github.com/rafJagCode/tech_icons/blob/main/mysql.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
 Mysql</a> - open-source relational database management system.
 
 **Backend:**
 
-<a href="https://laravel.com">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/laravel.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://laravel.com"><img src="https://github.com/rafJagCode/tech_icons/blob/main/laravel.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
 Laravel</a> - web application framework with expressive, elegant syntax.
 
 **Frontend:**
 
-<a href="https://vuejs.org">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/vue.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://vuejs.org"><img src="https://github.com/rafJagCode/tech_icons/blob/main/vue.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
 Vue</a> - an approachable, performant and versatile framework for building web user interfaces.
 
-<a href="https://vuex.vuejs.org">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/vuex.png?raw=tru" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://vuex.vuejs.org"><img src="https://github.com/rafJagCode/tech_icons/blob/main/vuex.png?raw=tru" width="30" height="30" style="vertical-align:middle"/>
 Vuex</a> - state management pattern + library for Vue.js applications.
 
-<a href="https://router.vuejs.org">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/vue-router.png?raw=tru" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://router.vuejs.org"><img src="https://github.com/rafJagCode/tech_icons/blob/main/vue-router.png?raw=tru" width="30" height="30" style="vertical-align:middle"/>
 Vue-router</a> - expressive, configurable and convenient routing for Vue.js.
 
-<a href="https://vuetifyjs.com">
-<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/289e0727706e12ff5296e4c0dd05cf5dbb4d62d2/vuetify.svg" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://vuetifyjs.com"><img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/289e0727706e12ff5296e4c0dd05cf5dbb4d62d2/vuetify.svg" width="30" height="30" style="vertical-align:middle"/>
 Vuetify</a> - open source UI library with beautifully handcrafted Vue Components.
 
-<a href="https://www.npmjs.com/package/vue-keypress">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/keypress.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
+<a href="https://www.npmjs.com/package/vue-keypress"><img src="https://github.com/rafJagCode/tech_icons/blob/main/keypress.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
 Vue-keypress</a> - global keypress event handler component for Vue.js 2 applications.
 
 <a href="https://vue-chartjs.org">
-<img src="https://github.com/rafJagCode/tech_icons/blob/main/chart.png?raw=true" width="30" height="30" style="vertical-align:middle"/>
-Vue-chartjs</a> - wrapper for Chart.js in Vue.
+<img src="https://github.com/rafJagCode/tech_icons/blob/main/chart.png?raw=true" width="30" height="30" style="vertical-align:middle"/> Vue-chartjs</a> - wrapper for Chart.js in Vue.
 
 <a href="https://axios-http.com">
-<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/01135de0f10196248f5472ee79bb8a826a553b7f/axios.svg" width="30" height="30" style="vertical-align:middle"/>
-Axios</a> - promise-based HTTP Client for node.js and the browser.
+<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/01135de0f10196248f5472ee79bb8a826a553b7f/axios.svg" width="30" height="30" style="vertical-align:middle"/> Axios</a> - promise-based HTTP Client for node.js and the browser.
 
 <a href="https://howlerjs.com">
-<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/f7293832f26dd3ae3c3315f3dc28e1970df304c4/howler.svg" width="30" height="30" style="vertical-align:middle"/>
-Howlerjs</a> - audio library for the modern web.
+<img src="https://raw.githubusercontent.com/rafJagCode/tech_icons/f7293832f26dd3ae3c3315f3dc28e1970df304c4/howler.svg" width="30" height="30" style="vertical-align:middle"/> Howlerjs</a> - audio library for the modern web.
 
 ## Usage
 
