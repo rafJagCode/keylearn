@@ -4,6 +4,7 @@ mix.webpackConfig({
     extensions: ['.js', '.vue'],
     alias: {
       '@': __dirname + '/resources',
+      vue$: 'vue/dist/vue.common.js',
     },
   },
 });
