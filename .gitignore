@@ -10,3 +10,4 @@ npm-debug.log
 yarn-error.log
 public/*
 !public/.htaccess
+!public/index.php
