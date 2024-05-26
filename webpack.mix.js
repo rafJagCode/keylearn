@@ -22,10 +22,11 @@ mix.webpackConfig({
 class Loader {
   webpackRules() {
     return {
-      test: /\.mp3$/,
+      test: /\.(mp3|ico)$/,
       loader: 'file-loader',
       options: {
         esModule: false,
+        name: '[name].[ext]',
       },
     };
   }

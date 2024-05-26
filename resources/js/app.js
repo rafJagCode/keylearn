@@ -1,4 +1,5 @@
 window.Vue = require('vue');
+require('../favicon.ico');
 import VueConfirmDialog from 'vue-confirm-dialog';
 import vuetify from '@/plugins/vuetify';
 import Route from '@/js/routes';
@@ -30,10 +31,9 @@ axios.interceptors.response.use(
         callback: (confirm) => {
           if (confirm) {
             Route.push('/login');
+          } else {
+            Route.push('/login');
           }
-		  else{
-			  Route.push('/login');
-		  }
         },
       });
       return Promise.reject(new Error('CSRF token mismatch'));
