@@ -114,6 +114,57 @@ should use words provided by user.
 
 ![App Screenshot](./readme_images/keylearn_creating_profile.png)
 
+## Build Setup
+
+- Clone repository
+
+  ```sh
+  git clone https://github.com/rafJagCode/keylearn.git
+  ```
+
+- Install dependencies
+
+  ```sh
+  cd keylearn
+  composer install
+  npm install
+  ```
+- Create and edit .env file
+
+  ```sh
+  cp .env.example .env
+  vim .env
+  ```
+- Run migrations
+
+   ```sh
+  php artisan migrate
+  ```
+
+- Seed db with set of words
+
+   ```sh
+  php artisan db:seed
+  ```
+
+- Build for development
+
+  ```sh
+  npm run dev
+  ```
+
+- Build for production
+
+  ```sh
+  npm run prod
+  ```
+
+- Serve at localhost:8000
+
+  ```sh
+  php artisan serve
+  ```
+
 ## License
 
 MIT
